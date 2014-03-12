@@ -31,7 +31,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> {{ Sentry::getUser()->email }} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -39,7 +39,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ url('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -55,7 +55,10 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> My Remunerations</a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Creare New</a>
                     </li>
                 </ul>
                 <!-- /#side-menu -->
@@ -68,18 +71,14 @@
 	  <!-- Collect the nav links, forms, and other content for toggling -->
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#">Link</a></li>
-	      <li><a href="#">Link</a></li>
+	      <li class="active"><a href="#">Data Entry</a></li>
+	      <li><a href="#">Report Summary</a></li>
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
 	</nav>
 
 
         <div id="page-wrapper">
-
-
-
-
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Blank</h1>

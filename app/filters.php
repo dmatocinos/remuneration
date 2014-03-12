@@ -39,7 +39,7 @@ Route::filter('auth', function()
 	if ( ! Sentry::check())
 	{
 		// Store the current uri in the session
-	//	Session::put('loginRedirect', Request::url());
+		Session::put('loginRedirect', Request::url());
 
 		// Redirect to the login page
 		return Redirect::route('signin');

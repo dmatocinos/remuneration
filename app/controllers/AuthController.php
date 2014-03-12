@@ -22,7 +22,6 @@ class AuthController extends BaseController {
 		if (Sentry::check()) {
 			return Redirect::to('home');
 		}
-
 		// Show the page
 		$this->layout->content = View::make('auth.signin');
 	}
