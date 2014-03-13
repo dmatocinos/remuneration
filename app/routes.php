@@ -12,11 +12,11 @@
 */
 
 Route::get('/', 'AuthController@getSignin');
-Route::get("home", "HomeController@index");
 
 Route::group(array('before' => 'auth'), function(){
 
-//	Route::get("home", "HomeController@index");
+	Route::get("home", "HomeController@index");
+	Route::get('report/download', array('uses' => 'ReportController@download', 'as' => 'report.download'));
 
 });
 

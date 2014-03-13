@@ -101,4 +101,10 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		return ! is_null($this->asClient());
 	}
 
+	public static function findPracticeProUser($email) 
+	{
+		return DB::table('users')->where('email', $email)->first();
+	}
+
+
 }

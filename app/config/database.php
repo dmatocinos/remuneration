@@ -83,6 +83,18 @@ return array(
 			'prefix'   => '',
 		),
 
+		'practicepro_users' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'practicepro_users',
+			'username'  => 'root',
+			'password'  => 'admin123',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+        	),
+
+
 	),
 
 	/*

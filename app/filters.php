@@ -36,8 +36,9 @@ App::after(function($request, $response)
 Route::filter('auth', function()
 {
 	// Check if the user is logged in
-	if ( ! Sentry::check())
-	{
+	if ( ! Sentry::check()) {
+
+		dd('dasda');
 		// Store the current uri in the session
 		Session::put('loginRedirect', Request::url());
 

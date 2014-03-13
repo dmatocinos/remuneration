@@ -47,10 +47,20 @@ class AuthController extends BaseController {
 			// Ooops.. something went wrong
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
+		
+		$practicepro_user = $this->_enrollUserToApp();
 
 		try {
-			// Try to log the user in
-			$user = Sentry::authenticate(Input::only('email', 'password'), Input::get('remember-me', 0));
+
+			$credentials = [
+				"email" => $practicepro_user[0]->mh2_email,
+				"password" => PracticeProUser::APP_PASSWORD
+			];
+				
+			Sentry::authenticate($credentials, Input::get('remember-me', 0));
+				
+			// save user info to the current session
+			Session::put('practicepro_user', $practicepro_user[0]);
 			
 			/*
 			if ( ! $this->isValid($user)) {
@@ -59,7 +69,6 @@ class AuthController extends BaseController {
 			}
 			*/
 
-			// Redirect to the users page
 			return Redirect::to('home');
 		}
 		catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
@@ -418,6 +427,31 @@ class AuthController extends BaseController {
 		}
 	}
 	
+	protected function _enrollUserToApp()
+	{
+		if ($practicepro_user = PracticeProUser::findByEmail(Input::get("email"), Input::get("password"))) {
+			// Try to log the user in
+			$app_user = User::findPracticeProUser($practicepro_user[0]->mh2_email);
+
+			if (!$app_user) {
+				// add the user
+				$user = Sentry::register(array(
+					'email'    	=> $practicepro_user[0]->mh2_email,
+					'password' 	=> PracticeProUser::APP_PASSWORD,
+					'first_name'	=> $practicepro_user[0]->mh2_fname,
+					'last_name'	=> $practicepro_user[0]->mh2_lname,
+				));
+				$user->attemptActivation($user->getActivationCode());
+				$user->save();
+			}
+
+			return $practicepro_user;
+		}
+		else {
+			$this->messageBag->add('email', 'No account in Practice Pro was associated with your email address.');
+			Redirect::route('sigin');
+		}
+	}
 
 }
 
