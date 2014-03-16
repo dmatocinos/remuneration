@@ -449,7 +449,7 @@ class AuthController extends BaseController {
 		}
 		else {
 			$this->messageBag->add('email', 'No account in Practice Pro was associated with your email address.');
-			Redirect::route('sigin');
+			Redirect::route('signin');
 		}
 	}
 
