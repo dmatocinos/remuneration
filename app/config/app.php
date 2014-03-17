@@ -178,7 +178,7 @@ return array(
 		'Asset' 	  => 'Dragonfire1119\Asset\Facades\Asset',
 		'Sentry' 	  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Carbon' 	  => 'Carbon\Carbon',
-
+		'JpGraphMod' 	  => 'JpGraph\JpGraph',
 	),
 
 );
