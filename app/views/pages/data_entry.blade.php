@@ -13,7 +13,7 @@ Data Entry
 	<ul class="nav navbar-nav">
 	  <li class="active"><a href="#">Data Entry</a></li>
 	  @if (isset($edit_remuneration))
-		<li><a href="#">Report Summary</a></li>
+		<li><a href="{{ url('/report/' . $data['remuneration_id'] ) }}">Report Summary</a></li>
 		@endif
 	</ul>
   </div><!-- /.navbar-collapse -->

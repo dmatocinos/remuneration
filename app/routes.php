@@ -16,11 +16,11 @@ Route::get('/', 'AuthController@getSignin');
 Route::group(array('before' => 'auth'), function(){
 
 	Route::get("home", "HomeController@index");
-	Route::get('report', array('uses' => 'ReportController@index', 'as' => 'report'));
-	Route::get('report/download', array('uses' => 'ReportController@download', 'as' => 'report.download'));
 	Route::get("create", "DataEntryController@create");
 	Route::get('edit/{remuneration_id}', "DataEntryController@edit");
 	Route::put("save", "DataEntryController@save");
+	Route::get('report/{remuneration_id}', array('uses' => 'ReportController@index', 'as' => 'report'));
+	Route::get('report/download/{remuneration_id}', array('uses' => 'ReportController@download', 'as' => 'report.download'));
 });
 
 /*

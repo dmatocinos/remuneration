@@ -327,6 +327,7 @@ class AuthController extends BaseController {
 	{
 		// Log the user out
 		Sentry::logout();
+		File::cleanDirectory(public_path() . '/images/cache');
 
 		// Redirect to the users page
 		return Redirect::route('signin');

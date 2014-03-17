@@ -1,5 +1,25 @@
+@section('title')
+Report Summary
+@stop
+
+@section('page_title')
+Report Summary
+@stop
 @section('content')
-    <div class="row" style="padding:20px;">
+<nav id="data-entry-nav" class="navbar navbar-default " role="navigation">
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="data-entry-collapse-bar">
+	<ul class="nav navbar-nav">
+	  <li><a href="{{ url('/edit/' . $data_entry['id']) }}">Data Entry</a></li>
+	  <li class="active"><a href="{{ url('/report/' . $data_entry['id'] ) }}">Report Summary</a></li>
+	</ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+  
+    <div class="bv-content" style="padding: 20px 20px 0;">
+	<legend><span class="text-left">Report Summary</span><span style="margin-top: -15px;" class="pull-right text-right"><a href="{{ url('/report/download/' . $data_entry['id']) }}" class="btn btn-info">Download Tax Saving Report</a></span></legend>
+    </div>
+    <div class="row" style="padding: 0 20px;">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
