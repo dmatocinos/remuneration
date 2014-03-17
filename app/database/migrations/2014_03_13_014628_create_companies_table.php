@@ -15,12 +15,13 @@ class CreateCompaniesTable extends Migration {
 		Schema::create('companies', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->string('company_name');
-			$table->string('telephone_no');
+			$table->string('name');
+			$table->text('address');
+			$table->string('telephone_number');
 			$table->string('email');
-			$table->string('website_address');
+			$table->string('website');
 			$table->string('contact_name');
-			$table->string('alt_telephone_no');
+			$table->string('contact_telephone_number');
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamps();
 		});

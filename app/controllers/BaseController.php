@@ -69,7 +69,15 @@ class BaseController extends Controller {
 			Asset::container('footer')->add('numeric-input-js', 'js/core/numericInput.min.js');
 		}
 		/** End adding javascripts  **/
+		$segment = Request::segment(1);
 
+		$side_nav_css_class = array(
+			'item' => ($segment == 'edit') ? 'active' : '',
+			'home' => ($segment == 'home') ? 'active' : '',
+			'create' => ($segment == 'create') ? 'active' : ''
+		);
+
+		View::share('side_nav_css_class', $side_nav_css_class);
 
 		$this->layout = View::make($this->layout);
 	}

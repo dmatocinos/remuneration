@@ -18,17 +18,15 @@
     padding: 0 15px;
     background-color: #fff;
     overflow: hidden;
-    margin-top: -60px;
 }
 
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
         margin: 0 0 0 250px;
-        padding: 30px;
+        padding: 0px;
         min-height: 885px;
         border-left: 1px solid #e7e7e7;
-        margin-top: -60px;
     }
 }
 
@@ -360,10 +358,19 @@ table.dataTable thead .sorting:after {
 
 #side-menu > li {
 	background-color: #B5CABA; 
+	padding: 0px;
 }
 
 #side-menu > li > a {
 	color: #496B4B;
+}
+
+#side-menu > li > a:hover{
+	background-color: #5b9930; 
+}
+
+#side-menu > li.active {
+	background-color: #5b9930;
 }
 
 .nav > li > a {

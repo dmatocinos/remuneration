@@ -6,7 +6,7 @@
  * @packaged default
  * @author Dixie Philamerah J. Atay <dixie.atay@gmail.com>
  **/
-class ReportController extends BaseController {
+class ReportController extends AuthorizedController {
 
 	public function index() 
 	{

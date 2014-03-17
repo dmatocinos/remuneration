@@ -1,12 +1,17 @@
 <?php
 
-class HomeController extends BaseController {
+class HomeController extends AuthorizedController {
 
 
 	public function index() 
 	{
-		$form_data = array();		
-		$this->layout->content = View::make("pages.data_entry", $form_data);
+		Asset::container('footer')->add('home-index-js', 'js/home/index.js');
+		
+		$form_data = array(
+			'remunerations' => Remuneration::getAll(Sentry::getUser()->id)
+		);
+		
+		$this->layout->content = View::make("pages.list", $form_data);
 	}
 
 }

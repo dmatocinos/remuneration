@@ -49,7 +49,12 @@ class AuthController extends BaseController {
 		}
 		
 		$practicepro_user = $this->_enrollUserToApp();
-
+		
+		if (!$practicepro_user) {
+			$this->messageBag->add('email', 'No account was associated with your email address.');
+			return Redirect::back()->withInput()->withErrors($this->messageBag);
+		}
+		
 		try {
 
 			$credentials = [
@@ -429,6 +434,8 @@ class AuthController extends BaseController {
 	
 	protected function _enrollUserToApp()
 	{
+		$practicepro_user = NULL;
+		
 		if ($practicepro_user = PracticeProUser::findByEmail(Input::get("email"), Input::get("password"))) {
 			// Try to log the user in
 			$app_user = User::findPracticeProUser($practicepro_user[0]->mh2_email);
@@ -444,13 +451,9 @@ class AuthController extends BaseController {
 				$user->attemptActivation($user->getActivationCode());
 				$user->save();
 			}
-
-			return $practicepro_user;
 		}
-		else {
-			$this->messageBag->add('email', 'No account in Practice Pro was associated with your email address.');
-			Redirect::route('signin');
-		}
+		
+		return $practicepro_user;
 	}
 
 }

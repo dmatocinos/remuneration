@@ -1,25 +1,19 @@
 <?php
 
 class Company extends \Eloquent {
-	protected $fillable = [];
+	protected $fillable = [
+		'user_id',
+		'name',
+		'address',
+		'telephone_number',
+		'email',
+		'website',
+		'contact_name',
+		'contact_telephone_number'
+	];
 
-	public function companyDirectors()
+	public function remuneration()
 	{
-		return $this->hasMany('CompanyDirector');
-	}
-
-	public function companyAccountant()
-	{
-		return $this->hasOne('CompanyAccountant');
-	}
-
-	public function companyTax()
-	{
-		return $this->hasOne('CompanyTax');
-	}
-
-	public function getNumberOfDirectorShareholdersAttribute()
-	{
-		return count($this->company_directors);
+		return $this->hasOne('Remuneration');
 	}
 }

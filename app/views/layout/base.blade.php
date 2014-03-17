@@ -54,11 +54,16 @@
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> My Remunerations</a>
+					@if (isset($edit_remuneration))
+						<li class="active">
+							<a href="#"><i class="fa fa-dashboard fa-fw"></i> {{ $edit_remuneration }}</a>
+						</li>
+					@endif
+                    <li class="{{ $side_nav_css_class['create'] }}">
+                        <a href="{{ url('create') }}"><i class="fa fa-dashboard fa-fw"></i> Creare New</a>
                     </li>
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Creare New</a>
+                    <li class="{{ $side_nav_css_class['home'] }}">
+                        <a href="{{ url('home') }}"><i class="fa fa-dashboard fa-fw"></i> My Remunerations</a>
                     </li>
                 </ul>
                 <!-- /#side-menu -->
@@ -67,27 +72,35 @@
         </nav>
         <!-- /.navbar-static-side -->
 
-	<nav id="app-nav" class="navbar navbar-default " role="navigation">
+	<!--nav id="app-nav" class="navbar navbar-default " role="navigation">
 	  <!-- Collect the nav links, forms, and other content for toggling -->
-	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  <!--div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="#">Data Entry</a></li>
 	      <li><a href="#">Report Summary</a></li>
 	    </ul>
 	  </div><!-- /.navbar-collapse -->
-	</nav>
+	<!--/nav-->
 
 
-        <div id="page-wrapper">
+        <!--div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Blank</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>
+            <!--/div-->
             <!-- /.row -->
-        </div>
+        <!--/div-->
         <!-- /#page-wrapper -->
+		
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					@yield('content')
+				</div>
+			</div>
+		</div><!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
