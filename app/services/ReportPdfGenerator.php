@@ -130,7 +130,7 @@ class ReportPdfGenerator extends TCPDF {
 		$this->lastPage();
 
 		//Close and output PDF document
-		$this->Output("Remuneration_tax_saving_report.pdf", 'I');
+		$this->Output("Remuneration_tax_saving_report.pdf", 'D');
 
 	}
 
