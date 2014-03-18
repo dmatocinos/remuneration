@@ -56,11 +56,11 @@
                 <ul class="nav" id="side-menu">
 			@if (isset($edit_remuneration))
 				<li class="active">
-					<a href="#"><i class="fa fa-dashboard fa-fw"></i> {{ $edit_remuneration }}</a>
+					<a href="#"><i class="fa fa-book fa-fw"></i> {{ $edit_remuneration }}</a>
 				</li>
 			@endif
                     <li class="{{ $side_nav_css_class['create'] }}">
-                        <a href="{{ url('create') }}"><i class="fa fa-dashboard fa-fw"></i> Creare New</a>
+                        <a href="{{ url('create') }}"><i class="fa fa-plus-square-o fa-fw"></i> Creare New</a>
                     </li>
                     <li class="{{ $side_nav_css_class['home'] }}">
                         <a href="{{ url('home') }}"><i class="fa fa-dashboard fa-fw"></i> My Remunerations</a>

@@ -42,7 +42,8 @@ Data Entry
 			{{ 	Form::hidden('remuneration_id', isset($data['remuneration_id']) ? $data['remuneration_id'] : 'new') }}
 			{{ 	Form::hidden('company_id', $company ? $company['id'] : 'new') }}
 			{{ 	Form::hidden('accountant_id', $accountant ? $accountant['id'] : 'new') }}
-				
+			
+			<div class="well">	
 			<legend>Remuneration</legend>
 			
 			<div class="row">
@@ -61,8 +62,9 @@ Data Entry
 					</div>
 				</div>
 			</div>
+			</div>
 			
-			<br /><br />
+			<div class="well">	
 			<legend>Company Details</legend>
 			
 			<div class="row">
@@ -151,8 +153,9 @@ Data Entry
 					</div>
 				</div> {{-- .col-lg-9 --}}
 			</div>{{-- .row --}}
+			</div>
 			
-			<br /><br />
+			<div class="well">
 			<legend>Company Tax</legend>
 			
 			<div class="row">
@@ -295,8 +298,9 @@ Data Entry
 					</div>
 				</div> {{-- .col-lg-9 --}}
 			</div>{{-- .row --}}
+			</div>
 			
-			<br /><br />
+			<div class="well">
 			<legend>Directors Details</legend>
 			
 			<div class="row">
@@ -398,8 +402,9 @@ Data Entry
 					</table>
 				</div>{{-- .col-lg-12 --}}
 			</div>{{-- .row --}}
+			</div>
 			
-			<br /><br />
+			<div class="well">
 			<legend>Accountant Details</legend>
 			
 			<div class="row">
@@ -488,9 +493,11 @@ Data Entry
 					</div>
 				</div> {{-- .col-lg-9 --}}
 			</div>{{-- .row --}}
+			</div>
 			
 			<hr>
 			
+			<div class="well">
 			<div class="row">
 				<div class="col-lg-1">
 					<input type="submit" class="btn btn-primary" style="width: 100px;" value="Save"/>
@@ -499,6 +506,7 @@ Data Entry
 					<a class="btn btn-default" style="width: 100px;" href="{{ $cancel_route }}">Cancel</a>
 				</div>
 			</div> {{-- .row --}}
+			</div>
 		{{ Form::close() }}
 	</div>
 </div>
