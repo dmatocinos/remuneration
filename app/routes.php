@@ -12,10 +12,6 @@ Route::get('install/{key?}',  array('as' => 'install', function($key = null)
        if($key == "where_are_the_cranberries"){
                try {
 					
-                       echo '<br>init migrate:install...';
-                       Artisan::call('migrate:install');
-                       echo 'done migrate:install';
-
                        echo '<br>init with app tables migrations...';
                        Artisan::call('migrate', [
                                '--package'     => "cartalyst/sentry"
