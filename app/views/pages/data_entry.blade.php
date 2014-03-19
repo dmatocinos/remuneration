@@ -273,7 +273,7 @@ Data Entry
 								$years = array();
 								$year = date("Y") - 20; 
 								for ($i = 0; $i <= 40; $i++) {
-									$years[] = $year + $i;
+									$years[$year + $i] = $year + $i;
 								}
 							?>
 							{{ 
