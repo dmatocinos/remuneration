@@ -48,6 +48,7 @@ class SummaryOfResultsCalculator {
 		'e33' => NULL,
 		'e34' => NULL,
 		'g34' => NULL,
+		'i33' => NULL,	
 		'i34' => NULL,	
 		'c38' => NULL,
 		'e38' => NULL,

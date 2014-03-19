@@ -48,8 +48,8 @@ class DataEntryController extends AuthorizedController {
 		echo '</pre>';
 		die;*/
 		
-		$company    = Company::find($this->remuneration->company_id);
-		$accountant = Accountant::find($this->remuneration->accountant_id);
+		$company    = $this->remuneration->company;
+		$accountant = $this->remuneration->accountant;
 		
 		$directors_data = array();
 		

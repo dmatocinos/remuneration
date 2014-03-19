@@ -5,7 +5,7 @@
 			<td class="text-left" style="width: 7%;">3.1</td>
 			<td style="width: 93%;">
 				If you do nothing (i.e. you do not take the money out of the business) then based upon 	
-the company profits of £200,000 the company tax will be £40,000.
+the company profits of {{ $profit_chargeable }} the company tax will be {{ $tax_cost }}.
 			</td>
 		</tr>
 		<tr>

@@ -30,7 +30,7 @@ Report Summary
 
     </div>
     <div class="row" style="padding: 0 20px;">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Summary of Results
@@ -228,7 +228,7 @@ Report Summary
 		</div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-10">
             <div class="row">
                     <div class="col-md-12">
 			    <div class="panel panel-default">
@@ -282,7 +282,8 @@ Report Summary
 							<td style="">{{ NumFormatter::money($calc->e15 + $calc->e23 + $calc->e33 + $calc->e34, '£') }}</td>
 							<td style="">{{ NumFormatter::money($calc->g15 + $calc->g23 + $calc->g34, '£') }}</td>
 							<td style="">{{ NumFormatter::money($calc->i17 + $calc->i23, '£') }}</td>
-							<tr>
+						</tr>
+						<tr>
 							<td style="" class="text-left" colspan="5">&nbsp; </td>
 						</tr>
 						<tr>
