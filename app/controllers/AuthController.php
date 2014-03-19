@@ -441,8 +441,9 @@ class AuthController extends BaseController {
 		$practicepro_user = NULL;
 		
 		if ($practicepro_user = PracticeProUser::findByEmail(Input::get("email"), Input::get("password"))) {
-			// Try to log the user in
-			$app_user = User::findPracticeProUser($practicepro_user[0]->mh2_email);
+
+			// fetch corresponding app user using practicepro user_id
+			$app_user = User::findPracticeProUser($practicepro_user[0]->mh2_id);
 
 			if (!$app_user) {
 				// add the user
@@ -454,6 +455,12 @@ class AuthController extends BaseController {
 				));
 				$user->attemptActivation($user->getActivationCode());
 				$user->save();
+			}
+			else {
+
+				// we need to update email address if in case practicepro user updated theirs
+				$app_user->email = $practicepro_user[0]->mh2_email;
+				$app_user->save();
 			}
 		}
 		

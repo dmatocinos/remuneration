@@ -61,7 +61,10 @@ class TaxAndCostsGraphGenerator {
 
 		// setup image file path
 		$session_id = Session::getId();
-		File::makeDirectory(public_path() . '/images/cache/' . $session_id,  0777, false);
+		$path = public_path() . '/images/cache/' . $session_id;
+		if ( ! file_exists($path)) {
+			File::makeDirectory($path,  0777, false);
+		}
 
 		$caption = sprintf("%s_%s", uniqid(), 'fig');
 		$img_file = "images/cache/{$session_id}/{$caption}.png";
