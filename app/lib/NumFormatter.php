@@ -36,11 +36,11 @@ class NumFormatter {
 		}
 		
 		if($amount >= 0) {
-			return $symbol . self::number($amount);
+			return $symbol . self::number($amount, 0);
 		}
 		else {
 			$amount = $amount * -1;
-			return '(' . $symbol . self::number($amount) . ')';
+			return '(' . $symbol . self::number($amount, 0) . ')';
 		}
 	}
 	

@@ -279,7 +279,7 @@ Report Summary
 						<tr>
 							<td style="" class="">Total Tax and Costs</td>
 							<td style="">{{ NumFormatter::money($calc->c23, '£') }}</td>
-							<td style="">{{ NumFormatter::money($calc->e15 + $calc->e23 + $calc->e33 + $calc->e34, '£') }}</td>
+							<td style="">{{ NumFormatter::money(($calc->e15 + $calc->e23) + ($calc->e33 + $calc->e34), '£') }}</td>
 							<td style="">{{ NumFormatter::money($calc->g15 + $calc->g23 + $calc->g34, '£') }}</td>
 							<td style="">{{ NumFormatter::money($calc->i17 + $calc->i23, '£') }}</td>
 						</tr>
@@ -331,7 +331,7 @@ Report Summary
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-5">
-							<table class="table" cellspacing="1" cellpadding="4" style="font-size 12px; width: 100%;">
+							<table class="table table-bordered" cellspacing="1" cellpadding="4" style="font-size 12px; width: 100%;">
 								<tr>
 									<td style="width: 30%;" class="text-left"></td>
 									<td style="" ><b>Net Personally Receivable</b></td>
@@ -344,7 +344,7 @@ Report Summary
 								</tr>
 								<tr>
 									<td style="" ><b>Salary/Bonus</b></td>
-									<td style="" >{{ NumFormatter::number($calc->e15 + $calc->e23 + $calc->e33 + $calc->e34) }}</td>
+									<td style="" >{{ NumFormatter::number(($calc->e15 + $calc->e23) + ($calc->e33 + $calc->e34)) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->e38) }}</td>
 								</tr>
 								<tr>
