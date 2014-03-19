@@ -248,7 +248,6 @@ Data Entry
 								Form::text('remuneration[number_of_associated_companies]', $number_of_associated_companies, array(
 									'class' => 'form-control', 
 									'ng-model' 	=> 'F', 
-									'ng-init' 	=> "F='{$number_of_associated_companies}'",
 									'numbers-only'	=> 'numbers-only'
 								)) 
 							}}
@@ -269,13 +268,19 @@ Data Entry
 					<div class="form-group">
 						{{ Form::label('remuneration[from_year]', 'Financial Year (From)', array('class' => 'col-lg-3 control-label')) }}
 						<div class="col-lg-5">
-							<?php $from_year = isset($remuneration['from_year']) ? $remuneration['from_year'] : ''; ?>
+							<?php 
+								$from_year = isset($remuneration['from_year']) ? $remuneration['from_year'] : ''; 
+								$years = array();
+								$year = date("Y") - 20; 
+								for ($i = 0; $i <= 40; $i++) {
+									$years[] = $year + $i;
+								}
+							?>
 							{{ 
-								Form::text('remuneration[from_year]', $from_year, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'H', 
-									'ng-init' 	=> "H='{$from_year}'",
-									'numbers-only'	=> 'numbers-only'
+								Form::select('remuneration[from_year]', $years, $from_year, array(
+									'class' => 'form-control year-select', 
+									'placeholder'	=> 'Year',
+									'required'	=> 'required'
 								)) 
 							}}
 							{{ $errors->first('remuneration[from_year]', '<span class="help-block">:message</span>') }}
@@ -286,11 +291,10 @@ Data Entry
 						<div class="col-lg-5">
 							<?php $to_year = isset($remuneration['to_year']) ? $remuneration['to_year'] : ''; ?>
 							{{ 
-								Form::text('remuneration[to_year]', $to_year, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'I', 
-									'ng-init' 	=> "I='{$to_year}'",
-									'numbers-only'	=> 'numbers-only'
+								Form::select('remuneration[to_year]', $years, $to_year, array(
+									'class' => 'form-control year-select', 
+									'placeholder'	=> 'Year',
+									'required'	=> 'required'
 								)) 
 							}}
 							{{ $errors->first('remuneration[to_year]', '<span class="help-block">:message</span>') }}

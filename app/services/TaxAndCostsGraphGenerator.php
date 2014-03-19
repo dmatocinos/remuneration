@@ -31,7 +31,7 @@ class TaxAndCostsGraphGenerator {
 				$this->_calc->i38 
 			]
 		];
-		 
+
 		// Create the graph. These two calls are always required
 		JpGraphMod::load();
 		JpGraphMod::module('bar');
