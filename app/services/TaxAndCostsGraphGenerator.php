@@ -59,9 +59,12 @@ class TaxAndCostsGraphGenerator {
 		$graph->yaxis->title->SetFont(FF_FONT1,FS_BOLD);
 		$graph->xaxis->title->SetFont(FF_FONT1,FS_BOLD);
 
-		// get unique file name
+		// setup image file path
+		$session_id = Session::getId();
+		File::makeDirectory(public_path() . '/images/cache/' . $session_id,  0777, false);
+
 		$caption = sprintf("%s_%s", uniqid(), 'fig');
-		$img_file = "images/cache/{$caption}.png";
+		$img_file = "images/cache/{$session_id}/{$caption}.png";
 		
 		// draw as image
 		$graph->Stroke($img_file);

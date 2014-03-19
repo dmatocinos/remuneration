@@ -325,9 +325,12 @@ class AuthController extends BaseController {
 	 */
 	public function getLogout()
 	{
+		// remove generated graph images first
+		$session_id = Session::getId();
+		File::deleteDirectory(public_path() . '/images/cache/' . $session_id);
+
 		// Log the user out
 		Sentry::logout();
-		File::cleanDirectory(public_path() . '/images/cache');
 
 		// Redirect to the users page
 		return Redirect::route('signin');
