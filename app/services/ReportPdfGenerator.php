@@ -232,7 +232,7 @@ class ReportPdfGenerator extends TCPDF {
 			array(
 				'company_name'         => $this->remuneration->company->name,
 				'amount_to_distribute' => NumFormatter::money($this->remuneration->amount_to_distribute, '£'),
-				'highest_tax_savings'  => NumFormatter::money(round(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23) - ($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23)), '£')
+				'highest_tax_savings'  => NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23) - ($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23), '£')
 			)
 		)->render();
 

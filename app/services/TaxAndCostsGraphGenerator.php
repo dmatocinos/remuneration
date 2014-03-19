@@ -15,7 +15,7 @@ class TaxAndCostsGraphGenerator {
 		$this->_calc = $calc;
 	}
 
-	public function generate()
+	public function generate($width = 750, $height = 335)
 	{
 		$datay = [
 			[
@@ -37,7 +37,7 @@ class TaxAndCostsGraphGenerator {
 		JpGraphMod::module('bar');
 		setlocale (LC_ALL, 'et_EE.ISO-8859-1');
 
-		$graph = new Graph(750,335,"auto");
+		$graph = new Graph($width, $height, 335,"auto");
 		$graph->img->SetMargin(60,10,20,40);
 		$graph->SetScale('textlin');
 

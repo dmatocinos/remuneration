@@ -30,7 +30,7 @@ Report Summary
 
     </div>
     <div class="row" style="padding: 0 20px;">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Summary of Results
@@ -80,7 +80,7 @@ Report Summary
 				</tr>
 				<tr>
 					<td></td>
-					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 				</tr>
 				<tr style="font-weight: bold;">
 					<td style="" class="text-left val">Existing profit chargeable to corporation tax</td>
@@ -125,7 +125,7 @@ Report Summary
 				</tr>
 				<tr>
 					<td></td>
-					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 				</tr>
 				<tr style="font-weight: bold;">
 					<td style="" class="text-left val">Revised profit chargeable to corporation tax</td>
@@ -156,7 +156,7 @@ Report Summary
 				</tr>
 				<tr>
 					<td></td>
-					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 				</tr>
 				<tr style="font-weight: bold;">
 					<td style="" class="text-left val">Retained profit</td>
@@ -167,7 +167,7 @@ Report Summary
 				</tr>
 				<tr>
 					<td></td>
-					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 				</tr>
 				<tr>
 					<td style="" class="text-left" colspan="5">&nbsp; </td>
@@ -204,7 +204,7 @@ Report Summary
 				</tr>
 				<tr>
 					<td></td>
-					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 				</tr>
 				<tr style="font-weight: bold;">
 					<td style="" class="text-left val">Net amount received</td>
@@ -215,7 +215,7 @@ Report Summary
 				</tr>
 				<tr>
 					<td></td>
-					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 				</tr>
 				<tr style="font-weight: bold;">
 					<td style="" class="text-left val">Effective tax rate on extraction (incl fees)</td>
@@ -228,7 +228,7 @@ Report Summary
 		</div>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="row">
                     <div class="col-md-12">
 			    <div class="panel panel-default">
@@ -274,7 +274,7 @@ Report Summary
 						</tr>
 						<tr>
 							<td></td>
-							<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+							<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 						</tr>
 						<tr>
 							<td style="" class="">Total Tax and Costs</td>
@@ -288,7 +288,7 @@ Report Summary
 						</tr>
 						<tr>
 							<td></td>
-							<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
+							<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 						</tr>
 						<tr>
 							<td style="" class="text-left;"><b>Extra tax/costs on distribution</b></td>
@@ -326,10 +326,43 @@ Report Summary
                     <div class="col-md-12">
 			    <div class="panel panel-default">
 				<div class="panel-heading">
-				    Tax and Costs and Benefits
+				    Total costs and Net personally receivable under each option
 				</div>
 				<div class="panel-body">
-					<img src="{{ asset($graph) }}" class="img-thumbnail"/>
+					<div class="row">
+						<div class="col-md-5">
+							<table class="table" cellspacing="1" cellpadding="4" style="font-size 12px; width: 100%;">
+								<tr>
+									<td style="width: 30%;" class="text-left"></td>
+									<td style="" ><b>Net Personally Receivable</b></td>
+									<td style="" ><b>Tax and Costs</b></td>
+								</tr>
+								<tr>
+									<td style="" ><b>Do Nothing</b></td>
+									<td style="" >{{ NumFormatter::number($calc->c23) }}</td>
+									<td style="" >{{ NumFormatter::number($calc->c38) }}</td>
+								</tr>
+								<tr>
+									<td style="" ><b>Salary/Bonus</b></td>
+									<td style="" >{{ NumFormatter::number($calc->e15 + $calc->e23 + $calc->e33 + $calc->e34) }}</td>
+									<td style="" >{{ NumFormatter::number($calc->e38) }}</td>
+								</tr>
+								<tr>
+									<td style="" ><b>Dividend</b></td>
+									<td style="" >{{ NumFormatter::number($calc->g15 + $calc->g23 + $calc->g34) }}</td>
+									<td style="" >{{ NumFormatter::number($calc->g38) }}</td>
+								</tr>
+								<tr>
+									<td style="" ><b>Darwin</b></td>
+									<td style="" >{{ NumFormatter::number($calc->i17 + $calc->i23) }}</td>
+									<td style="" >{{ NumFormatter::number($calc->i38) }}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-md-7">
+							<img src="{{ asset($graph) }}" class="img-thumbnail"/>
+						</div>
+					</div>
 				</div>
 			    </div>
                     </div>

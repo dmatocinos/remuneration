@@ -61,44 +61,44 @@
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Company</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->c23), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->e15 + $calc->e23), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->g15 + $calc->g23), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->i17 + $calc->i23), '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->c23, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->e15 + $calc->e23, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->g15 + $calc->g23, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->i17 + $calc->i23, '£') }}</td>
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Personally</td>
 			<td style="width: 17.5%;"></td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->e33 + $calc->e34), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->g34), '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->e33 + $calc->e34, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->g34, '£') }}</td>
 			<td style="width: 17.5%;"></td>
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Total Tax and Costs</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->c23), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->e15 + $calc->e23 + $calc->e33 + $calc->e34), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->g15 + $calc->g23 + $calc->g34), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->i17 + $calc->i23), '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->c23, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->e15 + $calc->e23 + $calc->e33 + $calc->e34, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->g15 + $calc->g23 + $calc->g34, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->i17 + $calc->i23, '£') }}</td>
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Extra tax/costs on distribution</td>
 			<td style="width: 17.5%;">{{ NumFormatter::money(0, '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->g34), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23), '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->g34, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23, '£') }}</td>
 		</tr>
 		<tr>
 			<td style="width: 30%;"  class="text-left">Amount available to spend personally</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->c38), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->e38), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->g38), '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->i38), '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->c38, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->e38, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->g38, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->i38, '£') }}</td>
 		</tr>
 		<tr>
 			<td style="width: 30%;"  class="text-left">Tax/costs saved against bonus option</td>
 				<td style="width: 17.5%;">-</td>
 				<td style="width: 17.5%;">-</td>
-				<td style="width: 17.5%;">{{ NumFormatter::money(round($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23 - $calc->g34), '£') }}</td>
-				<td style="width: 17.5%;">{{ NumFormatter::money(round(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23) - ($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23)), '£') }}</td>
+				<td style="width: 17.5%;">{{ NumFormatter::money($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23 - $calc->g34, '£') }}</td>
+				<td style="width: 17.5%;">{{ NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23) - ($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23), '£') }}</td>
 		</tr>
 	</table>

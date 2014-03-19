@@ -26,7 +26,7 @@
 		</tr>
 	</table>
 	
-	<p class="report-header">Graph 1 Total costs an Net personally receivable under each option</p>
+	<p class="report-header">Graph 1 Total costs and Net personally receivable under each option</p>
 	
 	<div class="panel-body">
 		<img src="{{ asset($graph) }}" class="img-thumbnail"/>

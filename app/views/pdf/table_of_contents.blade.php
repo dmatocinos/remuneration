@@ -1,4 +1,4 @@
-<div class="report-container">
+<div class="report-container" style="margin-bottom: 0px;">
 	<h2>Remuneration Strategies - Tax Saving Report</h2>
 	<div><h2>Contents</h2></div>
 	<table class="clear-border" style="font-size: 18px;" cellspacing="0" cellpadding="5">
@@ -20,5 +20,4 @@
 		@endforeach
 		</tbody>
 	</table>
-
 </div>

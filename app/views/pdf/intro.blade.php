@@ -37,4 +37,20 @@
 			</td>
 		</tr>
 	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 </div>
+	<p style="font-size: 10px; color: #992417;">
+		This report has been prepared solely for use by (ABC Ltd). No liability is accepted for any third parties who act upon its contents. No action should be taken without first seeking further professional advice.
+	</p>
