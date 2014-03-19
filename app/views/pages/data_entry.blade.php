@@ -187,10 +187,10 @@ Data Entry
 									'ng-init' 	=> "B='{$corporate_tax_rate}'",
 									'numbers-only'	=> 'numbers-only',
 									'required'	=> 'required',
-									'style'     => 'width: 90%; float: left;'
+									'style'     => 'width: 80%; float: left;'
 								)) 
 							}}
-							<span class="input-group-addon" style="width: 10%; float: right; background-color: #ffffff; border: 0;">%</span>
+							<span class="input-group-addon" style="display: inline; border: 0; padding: 0 0 0 7px;">%</span>
 							{{ $errors->first('remuneration[corporate_tax_rate]', '<span class="help-block">:message</span>') }}
 						</div>
 					</div>
@@ -259,7 +259,7 @@ Data Entry
 						{{ Form::label('remuneration[claim_ct_deduction]', 'Do you want to claim a CT deduction', array('class' => 'col-lg-3 control-label')) }}
 						<div class="col-lg-5">
 							{{ 
-								Form::text('remuneration[claim_ct_deduction]', isset($remuneration['claim_ct_deduction']) ? $remuneration['claim_ct_deduction'] : '', array(
+								Form::select('remuneration[claim_ct_deduction]', array('' => '', '1' => 'Yes', '2' => 'No'),isset($remuneration['claim_ct_deduction']) ? $remuneration['claim_ct_deduction'] : '', array(
 									'class' => 'form-control'
 								)) 
 							}}
@@ -335,7 +335,7 @@ Data Entry
 									$field_name  = "directors[{$i}][percentage_of_shares]";
 									$rows[0][$i + 1] = sprintf(
 										'<div class="input-group" style="%s">%s%s</div>',
-										'width: 90%; float: left;',
+										'width: 95%; float: left;',
 										Form::text($field_name, Input::old($field_name, $shares), array(
 											'class'        => 'form-control',
 											'ng-model' 	=> "DA{$prefix}", 
@@ -344,7 +344,7 @@ Data Entry
 											'id'		   => "directors_percentage_of_shares_{$prefix}",
 											'style'        => 'width: 80%; float: left;'
 										)),
-										'<span class="input-group-addon" style="width: 10%; float: right; background-color: #ffffff; border: 0;">%</span>'
+										'<span class="input-group-addon" style="display: inline; padding: 0 0 0 7px; border: 0;">%</span>'
 									);
 									
 									$field_name  = "directors[{$i}][salary_paid]";
@@ -405,7 +405,8 @@ Data Entry
 			</div>
 			
 			<div class="well">
-			<legend>Accountant Details</legend>
+			<legend style="margin-bottom: 5px;">Accountant Details</legend>
+			<div style="margin-bottom: 21px;" class="success">These details will be presented on the front cover of the report. </div>
 			
 			<div class="row">
 				<div class="col-lg-8">
@@ -499,7 +500,7 @@ Data Entry
 			
 			<div class="well">
 			<div class="row">
-				<div class="col-lg-1">
+				<div class="col-lg-1" style="width: 120px;">
 					<input type="submit" class="btn btn-primary" style="width: 100px;" value="Save"/>
 				</div>
 				<div class="col-lg-1">
