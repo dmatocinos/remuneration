@@ -224,6 +224,19 @@ Report Summary
 					<td style="">{{ NumFormatter::percent($calc->g41 * 100) }}</td>
 					<td style="">{{ NumFormatter::percent($calc->i41 * 100) }}</td>
 				</tr>
+				<tr>
+					<td style="" class="text-left" colspan="5">&nbsp; </td>
+				</tr>
+				<tr style="font-weight: bold;">
+					<td style="" class="text-left"><b>Tax/costs saved against bonus option</b></td>
+					<td style="">{{ NumFormatter::money(0, '£') }}</td>
+					<td style="">{{ NumFormatter::money(0, '£') }}</td>
+					<td style="">{{ NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23 - $calc->g34), '£') }}</td>
+					<td style="">{{ NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23) - ($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23), '£') }}</td>
+				</tr>
+				<tr>
+					<td style="" class="text-left" colspan="5">&nbsp; </td>
+				</tr>
 			</table>
 		</div>
             </div>
