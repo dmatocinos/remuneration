@@ -23,6 +23,7 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 	 * @var string
 	 */
 	protected $connection = 'mysql_practicepro_users';
+	CONST _CONNECTION = 'mysql_practicepro_users';
 	/**
 	 * The database table used by the model.
 	 *
@@ -40,11 +41,34 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 	public static function findByEmail($email, $password) {
 		// TODO: do we need to use restful?
 		// TODO: check also if the user has the permission to use biz val
-		return DB::connection('practicepro_users')
+		return DB::connection(self::_CONNECTION)
 			->select(DB::raw("SELECT * FROM practice_pro_login WHERE mh2_email = :email AND mh2_password = :password LIMIT 1"), array(
 				'email'    => $email,
 				'password' => md5($password)
 			));
+	}
+	
+	/**
+	 * L4 needs to be updated to 4.1.x for this to work. For now, let's use accessor
+	 *
+	public function pricing()
+	{
+		return $this->belongsTo('Pricing', 'membership_level', 'mh2_membership_level');
+	}
+	*/
+	public function getPricingAttribute()
+	{
+		return Pricing::where('membership_level', '=', $this->membership_level)->first();
+	}
+
+	/**
+	 * Alias to mh2_membership_level attribute
+	 *
+	 * @return string
+	 */
+	public function getMembershipLevelAttribute()
+	{
+		return (empty($this->mh2_membership_level) ? 'Pay as you go' : $this->mh2_membership_level);
 	}
 
 	/**

@@ -60,9 +60,20 @@ Route::get('install/migrate/{key?}',  array('as' => 'install.migrate', function(
 
 Route::get('/', 'AuthController@getSignin');
 
-Route::group(array('before' => 'auth'), function(){
+Route::group(["before" => "auth"], function()
+{
+	Route::get('subscribe', array('as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe'));
+	Route::get('start_payment', array('as' => 'start_payment', 'uses' => 'SubscriptionController@startPayment'));
+	Route::get('cancel_payment/{user_id}', array('as' => 'cancel_payment', 'uses' => 'SubscriptionController@cancelPayment'));
+	Route::get('complete_payment/{user_id}', array('as' => 'complete_payment', 'uses' => 'SubscriptionController@completePayment'));
+	Route::get('complete_subscription', array('as' => 'complete_subscription', 'uses' => 'SubscriptionController@completeSubscription'));
+	
+	Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@getLogout'));
+});
 
-	Route::get("home", "HomeController@index");
+Route::group(array('before' => 'auth', 'before' => 'subscribe'), function(){
+
+	Route::get("home", array('as' => 'home', 'uses' => "HomeController@index"));
 	Route::get("create", "DataEntryController@create");
 	Route::get('edit/{remuneration_id}', "DataEntryController@edit");
 	Route::put("save", "DataEntryController@save");
@@ -101,7 +112,7 @@ Route::group(array(), function() {
 	# Check Auth
 	Route::get('check', array('as' => 'check', 'uses' => 'AuthController@checkAuth'));
 
-	Route::get('paid{user_id}', array('as' => 'paid', 'uses' => 'AuthController@paid'));
-	Route::get('cancel_payment/{user_id}', array('as' => 'cancel_payment', 'uses' => 'AuthController@cancelPayment'));
+	//Route::get('paid{user_id}', array('as' => 'paid', 'uses' => 'AuthController@paid'));
+	//Route::get('cancel_payment/{user_id}', array('as' => 'cancel_payment', 'uses' => 'AuthController@cancelPayment'));
 });
 

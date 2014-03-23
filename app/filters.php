@@ -52,6 +52,21 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('subscribe', function()
+{
+	if ( ! Sentry::check()) {
+
+		// Store the current uri in the session
+		Session::put('loginRedirect', Request::url());
+
+		// Redirect to the login page
+		return Redirect::route('signin');
+	}
+	else if (!User::isSubscribed()) {
+		return Redirect::route('subscribe');
+	}
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
