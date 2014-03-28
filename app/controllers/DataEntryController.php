@@ -20,7 +20,9 @@ class DataEntryController extends AuthorizedController {
 		$data = Input::get();
 		
 		if (isset($data['s_timestamp'])) {
-			$data = SubscriptionController::getParamsFromSession($data['s_timestamp']);
+			$timestamp = $data['s_timestamp'];
+			$data = RemunerationSaver::getParamsFromSession($timestamp);
+			RemunerationSaver::forgetParams($timestamp);
 		}
 		
 		/*echo "<pre>";

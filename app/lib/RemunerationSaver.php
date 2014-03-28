@@ -9,7 +9,8 @@
 
 class RemunerationSaver 
 {
-	public static function save($input) {
+	public static function save($input) 
+	{
 		$remuneration_id = $input['remuneration_id'];
 		$company_id      = $input['company_id'];
 		$accountant_id   = $input['accountant_id'];
@@ -44,5 +45,29 @@ class RemunerationSaver
 		$remuneration->setDirectors($directors);
 		
 		return $remuneration;
+	}
+	
+	
+	public static function saveParamsToSession($data) 
+	{
+		$date = new DateTime();
+		$timestamp = $date->getTimestamp();
+		
+		Session::put('subscription_data_' . $timestamp, base64_encode(http_build_query($data)));
+		
+		return $timestamp;
+	}
+	
+	public static function getParamsFromSession($timestamp) 
+	{
+		$params = base64_decode(Session::get('subscription_data_' . $timestamp));
+		parse_str($params, $data);
+		
+		return $data;
+	}
+	
+	public static function forgetParams($timestamp) 
+	{
+		Session::forget('subscription_data_' . $timestamp);
 	}
 }

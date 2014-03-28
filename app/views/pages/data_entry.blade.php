@@ -248,6 +248,7 @@ Data Entry
 								Form::text('remuneration[number_of_associated_companies]', $number_of_associated_companies, array(
 									'class' => 'form-control', 
 									'ng-model' 	=> 'F', 
+									'ng-init' 	=> "F='{$number_of_associated_companies}'",
 									'numbers-only'	=> 'numbers-only'
 								)) 
 							}}

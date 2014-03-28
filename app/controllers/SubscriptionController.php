@@ -68,7 +68,7 @@ class SubscriptionController extends AuthorizedController {
 		unset($data['_method']);
 		unset($data['_token']);
 		
-		$timestamp = SubscriptionController::saveParamsToSession($data);
+		$timestamp = RemunerationSaver::saveParamsToSession($data);
 		
 		// TODO: why is user->practice_pro_user not working?
 		$practicepro_user = User::getPracticeProUser();
@@ -149,7 +149,7 @@ class SubscriptionController extends AuthorizedController {
 				try {
 					DB::beginTransaction();
 					
-					$data             = SubscriptionController::getParamsFromSession($timestamp);
+					$data             = RemunerationSaver::getParamsFromSession($timestamp);
 					$remuneration     = RemunerationSaver::save($data);
 					$transaction_data = $response->getData();
 					
@@ -164,6 +164,8 @@ class SubscriptionController extends AuthorizedController {
 					$payment->save();
 					
 					DB::commit();
+					
+					RemunerationSaver::forgetParams($timestamp);
 			
 					return Redirect::to('edit/' . $remuneration->id)
 						->with('message', 'Successfully saved remuneration');
@@ -187,23 +189,5 @@ class SubscriptionController extends AuthorizedController {
 	public function completeSubscription()
 	{
 		//
-	}
-	
-	public static function saveParamsToSession($data) 
-	{
-		$date = new DateTime();
-		$timestamp = $date->getTimestamp();
-		
-		Session::put('subscription_data_' . $timestamp, base64_encode(http_build_query($data)));
-		
-		return $timestamp;
-	}
-	
-	public static function getParamsFromSession($timestamp) 
-	{
-		$params = base64_decode(Session::get('subscription_data_' . $timestamp));
-		parse_str($params, $data);
-		
-		return $data;
 	}
 }
