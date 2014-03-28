@@ -18,8 +18,7 @@
 
     <div class="container">
       <div class="row">
-		<div class="col-md-6 pull-left">
-			<div class="main well">
+		<div class="col-lg-8 col-lg-offset-2 main well" style="text-align: center;">
 				@yield('content')
 			</div>
 		</div>

@@ -30,10 +30,10 @@ class SubscriptionController extends AuthorizedController {
 	}
 
 	// @todo move to service
-	protected function getPurchaseData()
+	protected function getPurchaseData($timestamp)
 	{
 		// TODO: why is user->practice_pro_user not working?
-		$practicepro_user = $this->getPracticeProUser();
+		$practicepro_user = User::getPracticeProUser();
 		$pricing          = $practicepro_user->pricing;
 		/*
 		var_dump(DB::connection('practicepro_users')->getQueryLog());
@@ -44,13 +44,13 @@ class SubscriptionController extends AuthorizedController {
 			throw new Exception("Unknown membership level: {$practicepro_user->membership_level}");
 		}
 
-		$expiration_date = $pricing->getNewSubscriptionExpiration(Sentry::getUser())->toFormattedDateString();
-
+		//$expiration_date = $pricing->getNewSubscriptionExpiration(Sentry::getUser())->toFormattedDateString();
+		
 		$paypal_data = array(
 			'amount' 	=> $pricing->getDiscountedAmount(),
-			'description'	=> Config::get('paypal.description') . " Payment Until {$expiration_date}",
-			'returnUrl'	=> route('complete_payment', array(Sentry::getUser()->id)),
-			'cancelUrl'	=> route('cancel_payment', array(Sentry::getUser()->id)),
+			'description'	=> Config::get('paypal.description') . " Payment for new Remuneration Report",
+			'returnUrl'	=> url('complete_payment', $timestamp),
+			'cancelUrl'	=> url('cancel_payment', $timestamp),
 			'currency'	=> Config::get('paypal.currency')
 		);
 
@@ -63,6 +63,13 @@ class SubscriptionController extends AuthorizedController {
 	 */
 	public function subscribe()
 	{
+		$data = Input::old();
+		
+		unset($data['_method']);
+		unset($data['_token']);
+		
+		$timestamp = SubscriptionController::saveParamsToSession($data);
+		
 		// TODO: why is user->practice_pro_user not working?
 		$practicepro_user = User::getPracticeProUser();
 		$pricing          = $practicepro_user->pricing;
@@ -70,6 +77,7 @@ class SubscriptionController extends AuthorizedController {
 		$discount         = $pricing->discount * 100;
 		$discounted       = $pricing->getDiscountedAmount();
 		$level            = $practicepro_user->membership_level;
+		$suffix           = "";
 		
 		switch ($level) {
 			case 'Tax Club':
@@ -83,7 +91,8 @@ class SubscriptionController extends AuthorizedController {
 			
 			case 'Pay as you go':
 			default:
-				$msg = "As a Pay as you go member of PracticePro";
+				$msg    = "As a Pay as you go member of PracticePro";
+				$suffix = "However you will get a full refund if you embark on a tax strategy.";
 				
 				break;
 		}
@@ -92,21 +101,25 @@ class SubscriptionController extends AuthorizedController {
 			$msg .= ", we are giving you a special " . $discount . "% discount.  You only have to pay &pound" . number_format(round($discounted, 2), 2) . ". Don't let this offer pass!";
 		}
 		else {
-			$msg = "You can subscribe for only &pound" . number_format(round($amount, 2), 2) . ".";
+			$msg = "You can continue creating this report for only &pound" . number_format(round($amount, 2), 2) . ".";
 		}
 		
+		$msg .= $suffix == "" ? "" : (" " . $suffix);
+		
 		$data = array(
-			'msg' => $msg
+			'msg'    => $msg,
+			'timestamp' => $timestamp
 		);
 		
 		$this->layout->content = View::make("subscribe.subscribe", $data);
 	}
 	
-	public function startPayment() {
+	public function startPayment($timestamp) {
 		$gateway = $this->getGateway();
-
+		
 		try {
-			$response = $gateway->purchase($this->getPurchaseData())->send();
+			$response = $gateway->purchase($this->getPurchaseData($timestamp))->send();
+			
 			if ($response->isRedirect()) {
 				// it should redirect to PayPal payment page
 				$response->redirect();
@@ -120,26 +133,47 @@ class SubscriptionController extends AuthorizedController {
 		}
 	}
 
-	public function cancelPayment()
+	public function cancelPayment($timestamp)
 	{
-		return Redirect::route("subscribe");
+		return Redirect::to("create?s_timestamp=" . $timestamp)->withInput();
 	}
 
-	public function completePayment($user_id)
+	public function completePayment($timestamp)
 	{
-		$user = User::findOrFail($user_id);
-
 		$gateway = $this->getGateway();
-
+		
 		try {
-			$response = $gateway->completePurchase($this->getPurchaseData())->send();
+			$response = $gateway->completePurchase($this->getPurchaseData($timestamp))->send();
+			
 			if ($response->isSuccessful()) {
-				$practicepro_user = User::getPracticeProUser();
-				$pricing = $practicepro_user->pricing;
-				$user->valid_until = $pricing->getNewSubscriptionExpiration($user);
-				$user->save();
-
-				return Redirect::route("home")->withMessage('You have successfully subscribed to BizValuation.');
+				try {
+					DB::beginTransaction();
+					
+					$data             = SubscriptionController::getParamsFromSession($timestamp);
+					$remuneration     = RemunerationSaver::save($data);
+					$transaction_data = $response->getData();
+					
+					$payment_data = array(
+						'remuneration_id' => $remuneration->id,
+						'amount'          => $transaction_data['PAYMENTINFO_0_AMT'],
+						'transaction_id'  => $transaction_data['PAYMENTINFO_0_TRANSACTIONID'],
+						'order_time'      => $transaction_data['PAYMENTINFO_0_ORDERTIME']
+					);
+					
+					$payment = Payment::create($payment_data);
+					$payment->save();
+					
+					DB::commit();
+			
+					return Redirect::to('edit/' . $remuneration->id)
+						->with('message', 'Successfully saved remuneration');
+				}
+				catch (Exception $e) {
+					DB::rollback();
+					//var_dump($remuneration);
+					//die;
+					throw $e;
+				}
 			} 
 			else {
 				throw new Exception($response->getMessage());
@@ -154,5 +188,22 @@ class SubscriptionController extends AuthorizedController {
 	{
 		//
 	}
-
+	
+	public static function saveParamsToSession($data) 
+	{
+		$date = new DateTime();
+		$timestamp = $date->getTimestamp();
+		
+		Session::put('subscription_data_' . $timestamp, base64_encode(http_build_query($data)));
+		
+		return $timestamp;
+	}
+	
+	public static function getParamsFromSession($timestamp) 
+	{
+		$params = base64_decode(Session::get('subscription_data_' . $timestamp));
+		parse_str($params, $data);
+		
+		return $data;
+	}
 }

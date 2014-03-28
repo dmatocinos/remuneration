@@ -40,8 +40,8 @@ Data Entry
 	<div ng-app="BvApp" id="bv-content" class="">
 		{{ Form::open(array('url' => $save_route, 'method' => 'PUT','class' => 'form-horizontal')) }}
 			{{ 	Form::hidden('remuneration_id', isset($data['remuneration_id']) ? $data['remuneration_id'] : 'new') }}
-			{{ 	Form::hidden('company_id', $company ? $company['id'] : 'new') }}
-			{{ 	Form::hidden('accountant_id', $accountant ? $accountant['id'] : 'new') }}
+			{{ 	Form::hidden('company_id', $company && isset($company['id']) ? $company['id'] : 'new') }}
+			{{ 	Form::hidden('accountant_id', $accountant && isset($accountant['id']) ? $accountant['id'] : 'new') }}
 			
 			<div class="well">	
 			<legend>Remuneration</legend>

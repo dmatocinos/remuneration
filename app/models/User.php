@@ -121,22 +121,12 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	 *
 	 * @return bool
 	 */
-	public static function isSubscribed()
+	public static function needSubscription()
 	{
 		$practicepro_user = User::getPracticeProUser();
 		$is_free = $practicepro_user->pricing->is_free;
-		$valid_until = Sentry::getUser()->valid_until;
 		
-		if (!empty($valid_until)) {
-			$now = Carbon::now();
-			$valid_until = new Carbon($valid_until);
-			$is_subscription_valid = $valid_until->gte($now);
-		}
-		else {
-			$is_subscription_valid = FALSE;
-		}
-
-		return $is_free || $is_subscription_valid;
+		return !$is_free;
 	}
 	
 	public static function getPracticeProUser() 

@@ -23,6 +23,14 @@ $(document).ready(function () {
 		enableDirectors($(this).val());
 	});
 	
+	$("#remuneration_directors_salary").change(function() {
+		enableDirectors($("#remuneration_number_of_director_shareholders").val());
+	});
+	
+	$("#remuneration_directors_salary").keyup(function() {
+		enableDirectors($("#remuneration_number_of_director_shareholders").val());
+	});
+	
 	enableDirectors($("#remuneration_number_of_director_shareholders").val());
 });
 
