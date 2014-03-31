@@ -71,6 +71,26 @@
             <!-- /.sidebar-collapse -->
         </nav>
         <!-- /.navbar-static-side -->
+		
+		<div class="notifications bottom-left">
+			<div style="float:left; width: 240px;">
+				<div class="form-group" style="width: 200px;">
+					<a href="http://app.bizvaluation.co.uk" target="_blank" title="Create a professional business valuation in just 15 minutes">
+						<img src="{{ url('images/logos/bizval.png') }}" style="margin-left:30px; width: 10%; margin-top:15px; width: 100%;">
+					</a>
+				</div>
+				<div class="form-group" style="width: 200px;">
+					<a href="http://virtualfdpro.practicepro.co.uk" target="_blank" title="Help your clients achieve their goals">
+						<img src="{{ url('images/logos/vfd.png') }}" style="margin-left:30px; width: 10%; margin-top: 15px; width: 100%;">
+					</a>
+				</div>
+				<div class="form-group" style="width: 200px;">
+					<a href="http://priceplannerpro.practicepro.co.uk" target="_blank" title="Price professionally and create additional fees">
+						<img src="{{ url('images/logos/priceplan.png') }}" style="margin-left:30px; width: 10%; margin-top: 15px; width: 100%;">
+					</a>
+				</div>
+			</div>
+		</div>
 
 	<div id="page-wrapper">
 		<div class="row">
