@@ -181,4 +181,5 @@ return array(
 		'JpGraphMod' 	  => 'JpGraph\JpGraph',
 	),
 
+	'application_key' => 'remuneration',
 );

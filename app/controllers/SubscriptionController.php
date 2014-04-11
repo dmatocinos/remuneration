@@ -77,25 +77,9 @@ class SubscriptionController extends AuthorizedController {
 		$discount         = $pricing->discount * 100;
 		$discounted       = $pricing->getDiscountedAmount();
 		$level            = $practicepro_user->membership_level;
-		$suffix           = "";
 		
-		switch ($level) {
-			case 'Tax Club':
-				$msg = "As a Tax Club Member of PracticePro";
-				break;
-				
-			case 'Elite Member':
-				$msg = "As an Elite Member of PracticePro";
-				
-				break;
-			
-			case 'Pay as you go':
-			default:
-				$msg    = "As a Pay as you go member of PracticePro";
-				$suffix = "However you will get a full refund if you embark on a tax strategy.";
-				
-				break;
-		}
+		$msg    = sprintf("As a %s Member of PracticePro", $practicepro_user->membership_level_display);
+		$suffix = "However you will get a full refund if you embark on a tax strategy.";
 		
 		if ($discount > 0) {
 			$msg .= ", we are giving you a special " . $discount . "% discount.  You only have to pay &pound" . number_format(round($discounted, 2), 2) . ". Don't let this offer pass!";

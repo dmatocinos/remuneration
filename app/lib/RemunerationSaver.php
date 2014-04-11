@@ -47,7 +47,6 @@ class RemunerationSaver
 		return $remuneration;
 	}
 	
-	
 	public static function saveParamsToSession($data) 
 	{
 		$date = new DateTime();
