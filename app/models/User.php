@@ -139,5 +139,19 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		return User::where('practicepro_user_id', $id)->first();
 	}
 
+	public function getRememberToken()
+	{
+
+	}
+
+	public function setRememberToken($value)
+	{
+
+	}
+
+	public function getRememberTokenName()
+	{
+
+	}
 
 }

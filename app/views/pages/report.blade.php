@@ -39,10 +39,10 @@ Report Summary
 			<table class="" cellspacing="1" cellpadding="4" style="font-size 12px; width: 100%;">
 				<tr>
 					<td style="width: 30%;" class="text-left"></td>
-					<td style="" ><b>Do Nothing</b></td>
+					<td style="" ><b>Salary</b></td>
 					<td style="" ><b>Salary/Bonus</b></td>
-					<td style="" ><b>Dividend</b></td>
-					<td style="" ><b>Darwin</b></td>
+					<td style="" ><b>Salary/Dividend</b></td>
+					<td style="" ><b>Salary/Darwin</b></td>
 				</tr>
 				<tr>
 					<td style="" class="text-left"></td>
@@ -193,13 +193,6 @@ Report Summary
 					<td style="">{{ NumFormatter::money($calc->i34, '£') }}</td>
 				</tr>
 				<tr>
-					<td style="" class="text-left">Personal fees</td>
-					<td style=""></td>
-					<td style=""></td>
-					<td style=""></td>
-					<td style=""></td>
-				</tr>
-				<tr>
 					<td style="" class="text-left" colspan="5">&nbsp; </td>
 				</tr>
 				<tr>
@@ -217,23 +210,17 @@ Report Summary
 					<td></td>
 					<td style="color: #691515; font-sie: 10px;" class="text-left" colspan="4">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</td>
 				</tr>
-				<tr style="font-weight: bold;">
-					<td style="" class="text-left val">Effective tax rate on extraction (incl fees)</td>
-					<td style=""></td>
-					<td style="">{{ NumFormatter::percent($calc->e41 * 100) }}</td>
-					<td style="">{{ NumFormatter::percent($calc->g41 * 100) }}</td>
-					<td style="">{{ NumFormatter::percent($calc->i41 * 100) }}</td>
-				</tr>
 				<tr>
 					<td style="" class="text-left" colspan="5">&nbsp; </td>
 				</tr>
 				<tr style="font-weight: bold;">
-					<td style="" class="text-left"><b>Tax/costs saved against bonus option</b></td>
-					<td style="">{{ NumFormatter::money(0, '£') }}</td>
-					<td style="">{{ NumFormatter::money(0, '£') }}</td>
-					<td style="">{{ NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23 - $calc->g34), '£') }}</td>
-					<td style="">{{ NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23) - ($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23), '£') }}</td>
+					<td style="" class="text-left"><b>Effective  tax rate on extraction (inc fees)</b></td>
+					<td style="">{{ NumFormatter::percent(0, '£') }}</td>
+					<td style="">{{ NumFormatter::percent($calc->e41 * 100) }}</td>
+					<td style="">{{ NumFormatter::percent($calc->g41 * 100) }}</td>
+					<td style="">{{ NumFormatter::percent($calc->i41 * 100) }}</td>
 				</tr>
+
 				<tr>
 					<td style="" class="text-left" colspan="5">&nbsp; </td>
 				</tr>
@@ -252,10 +239,10 @@ Report Summary
 					<table class="" cellspacing="1" cellpadding="4" style="font-size 12px; width: 100%;">
 						<tr>
 							<td style="width: 30%;" class="text-left"></td>
-							<td style="" ><b>Do Nothing</b></td>
+							<td style="" ><b>Salary</b></td>
 							<td style="" ><b>Salary/Bonus</b></td>
-							<td style="" ><b>Dividend</b></td>
-							<td style="" ><b>Darwin</b></td>
+							<td style="" ><b>Salary/Dividend</b></td>
+							<td style="" ><b>Salary/Darwin</b></td>
 						</tr>
 						<tr>
 							<td style="" class="text-left"></td>
@@ -347,11 +334,11 @@ Report Summary
 							<table class="table table-bordered" cellspacing="1" cellpadding="4" style="font-size 12px; width: 100%;">
 								<tr>
 									<td style="width: 30%;" class="text-left"></td>
-									<td style="" ><b>Net Personally Receivable</b></td>
 									<td style="" ><b>Tax and Costs</b></td>
+									<td style="" ><b>Net Personally Receivable</b></td>
 								</tr>
 								<tr>
-									<td style="" ><b>Do Nothing</b></td>
+									<td style="" ><b>Salary</b></td>
 									<td style="" >{{ NumFormatter::number($calc->c23) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->c38) }}</td>
 								</tr>
@@ -361,12 +348,12 @@ Report Summary
 									<td style="" >{{ NumFormatter::number($calc->e38) }}</td>
 								</tr>
 								<tr>
-									<td style="" ><b>Dividend</b></td>
+									<td style="" ><b>Salary/Dividend</b></td>
 									<td style="" >{{ NumFormatter::number($calc->g15 + $calc->g23 + $calc->g34) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->g38) }}</td>
 								</tr>
 								<tr>
-									<td style="" ><b>Darwin</b></td>
+									<td style="" ><b>Salary/Darwin</b></td>
 									<td style="" >{{ NumFormatter::number($calc->i17 + $calc->i23) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->i38) }}</td>
 								</tr>

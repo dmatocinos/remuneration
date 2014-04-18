@@ -1,11 +1,10 @@
 	<h2>3. Features of Each Option</h2>
-	<p class="report-header">Do nothing</p>
+	<p class="report-header">Salary</p>
 	<table class="clear-border" cellpadding="10">
 		<tr>
 			<td class="text-left" style="width: 7%;">3.1</td>
 			<td style="width: 93%;">
-				If you do nothing (i.e. you do not take the money out of the business) then based upon 	
-the company profits of {{ $profit_chargeable }} the company tax will be {{ $tax_cost }}.
+				If you only take a basic salary out of the business then based upon the company profits of {{ $profit_chargeable }} the company tax will be {{ $tax_cost }}.
 			</td>
 		</tr>
 		<tr>

@@ -2,10 +2,10 @@
 	<table class="clear-border" cellspacing="1" cellpadding="4" style="font-size 12px;">
 		<tr>
 			<td style="width: 42%;" class="text-left"></td>
-			<td style="width: 14.5%;" class="val">Do Nothing</td>
+			<td style="width: 14.5%;" class="val">Salary</td>
 			<td style="width: 14.5%;" class="val"><b>Salary/Bonus</b></td>
-			<td style="width: 14.5%;" class="val"><b>Dividend</b></td>
-			<td style="width: 14.5%;" class="val"><b>Darwin</b></td>
+			<td style="width: 14.5%;" class="val"><b>Salary/Dividend</b></td>
+			<td style="width: 14.5%;" class="val"><b>Salary/Darwin</b></td>
 		</tr>
 		<tr>
 			<td style="width: 42%;" class="text-left"></td>
@@ -160,13 +160,6 @@
 			<td style="width: 14.5%;">{{ NumFormatter::percent($calc->e41 * 100, 2) }}</td>
 			<td style="width: 14.5%;">{{ NumFormatter::percent($calc->g41 * 100, 2) }}</td>
 			<td style="width: 14.5%;">{{ NumFormatter::percent($calc->i41 * 100, 2) }}</td>
-		</tr>
-		<tr>
-			<td style="width: 42%" class="text-left val"><b>Tax/costs saved against bonus option</b></td>
-			<td style="">{{ NumFormatter::money(0, '£') }}</td>
-			<td style="">{{ NumFormatter::money(0, '£') }}</td>
-			<td style="">{{ NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23 - $calc->g34), '£') }}</td>
-			<td style="">{{ NumFormatter::money(($calc->e34 + $calc->e33 + $calc->e15 - $calc->c23 + $calc->e23) - ($calc->i34 + $calc->i33 + $calc->i17 - $calc->g23 + $calc->i23), '£') }}</td>
 		</tr>
 	</table>
 	

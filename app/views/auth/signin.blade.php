@@ -1,5 +1,5 @@
 @section('content')
-	<div class="form-group" style="text-align: center;"><img src="{{ url('images/logo.png') }}" style="width: 80%;"/></div>
+	<div class="form-group" style="text-align: center;"><img src="{{ asset('images/logo.png') }}" style="width: 80%;"/></div>
 	<legend><h3 class="text-center">Please Log In, or {{ HTML::link('signup', 'Register') }}</h3></legend>
 		{{ Form::open(array('url' => 'signin')) }}
 			<div class="form-group">

@@ -30,17 +30,17 @@
 					<div class="col-md-12 col-sm-12">
 						<div style="width: 290px; float: left; height: 80px; margin-right: 20px;">
 							<a href="http://bizvaluationpro.practicepro.co.uk" target="_blank" title="Create a professional business valuation in just 15 minutes" class="thumbnail" style="height: 60px">
-								<img src="{{ url('images/logos/bizval.png') }}" style="width: 60%; margin-top: 10px; padding-bottom: 5px;"/>
+								<img src="{{ asset('images/logos/bizval.png') }}" style="width: 60%; margin-top: 10px; padding-bottom: 5px;"/>
 							</a>
 						</div>
 						<div style="width: 290px; float: left; height: 80px; margin-right: 20px;">
 							<a href="http://virtualfdpro.practicepro.co.uk" target="_blank" title="Help your clients achieve their goals" class="thumbnail" style="height: 60px">
-								<img src="{{ url('images/logos/vfd.png') }}" style="width: 60%; margin-top: 10px;"/>
+								<img src="{{ asset('images/logos/vfd.png') }}" style="width: 60%; margin-top: 10px;"/>
 							</a>
 						</div>
 						<div style="width: 290px; float: left; height: 80px; margin-right: 20px;">
 							<a href="http://priceplannerpro.practicepro.co.uk" target="_blank" title="Price professionally and create additional fees"class="thumbnail" style="height: 60px">
-								<img src="{{ url('images/logos/priceplan.png') }}" style="width: 60%; margin-top: 10px;"/>
+								<img src="{{ asset('images/logos/priceplan.png') }}" style="width: 60%; margin-top: 10px;"/>
 							</a>
 						</div>
 					</div>
