@@ -33,7 +33,7 @@
 		<tr style="background-color: #992417; border: 1px solid #992417; color: white;">
 			<td class="text-left" style="width: 7%; border: 1px solid #992417;">1.5</td>
 			<td style="width: 93%; border: 1px solid #992417;">
-				As you can see from Section 2 of the report, if we look to take out {{ $amount_to_distribute }} from this year’s profits, <strong>significant tax savings of up to {{ round($highest_tax_savings) }}</strong> can be made against the most expensive strategy, which in this case is extracting profits by use of a Bonus. 
+				As you can see from Section 2 of the report, if we look to take out {{ $amount_to_distribute }} from this year’s profits, <strong>significant tax savings of up to {{ $highest_tax_savings }}</strong> can be made against the most expensive strategy, which in this case is extracting profits by use of a Bonus. 
 			</td>
 		</tr>
 	</table>

@@ -2,10 +2,10 @@
 	<table class="clear-border" cellspacing="1" cellpadding="4" style="font-size 12px;">
 		<tr>
 			<td style="width: 42%;" class="text-left"></td>
-			<td style="width: 14.5%;" class="val">Do Nothing</td>
+			<td style="width: 14.5%;" class="val">Salary</td>
 			<td style="width: 14.5%;" class="val"><b>Salary/Bonus</b></td>
-			<td style="width: 14.5%;" class="val"><b>Dividend</b></td>
-			<td style="width: 14.5%;" class="val"><b>Darwin</b></td>
+			<td style="width: 14.5%;" class="val"><b>Salary/Dividend</b></td>
+			<td style="width: 14.5%;" class="val"><b>Salary/Darwin</b></td>
 		</tr>
 		<tr>
 			<td style="width: 42%;" class="text-left"></td>
@@ -107,9 +107,6 @@
 			<td style="width: 14.5%;"></td>
 			<td style="width: 14.5%;">{{ NumFormatter::money($calc->g25, '£') }}</td>
 			<td style="width: 14.5%;"></td>
-		</tr>
-		<tr>
-			<td style="" class="text-left" colspan="5"></td>
 		</tr>
 		<tr>
 			<td style="width: 42%;" class="text-left val">Retained profit</td>

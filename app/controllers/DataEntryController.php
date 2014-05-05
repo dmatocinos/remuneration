@@ -17,12 +17,25 @@ class DataEntryController extends AuthorizedController {
 	
 	public function create() 
 	{
+		$data = Input::get();
+		
+		if (isset($data['s_timestamp'])) {
+			$timestamp = $data['s_timestamp'];
+			$data = RemunerationSaver::getParamsFromSession($timestamp);
+			RemunerationSaver::forgetParams($timestamp);
+		}
+		
+		/*echo "<pre>";
+		var_dump($data);
+		echo "</pre>";
+		die;*/
+		
 		$this->addAssets();
 		
 		$form_data = array(
 			'save_route' => url('save'),
 			'cancel_route' => url('create'),
-			'data' => array(),
+			'data' => $data,
 			
 		);
 		
@@ -91,34 +104,17 @@ class DataEntryController extends AuthorizedController {
 		$company_id      = $input['company_id'];
 		$accountant_id   = $input['accountant_id'];
 		
-		$remuneration_data = $input['remuneration'];
-		$directors         = $input['directors'];
-		$company_data      = $input['company'];
-		$accountant_data   = $input['accountant'];
-		
-		$company = $company_id == 'new' ? new Company() : Company::find($company_id);
-		$company_data['user_id'] = Sentry::getUser()->id;
-		$company->fill($company_data);
-		$company->save();
-		
-		$accountant = $accountant_id == 'new' ? new Accountant() : Accountant::find($accountant_id);
-		$accountant_data['user_id'] = Sentry::getUser()->id;
-		$accountant->fill($accountant_data);
-		$accountant->save();
-		
-		$remuneration_data['company_id']    = $company->id;
-		$remuneration_data['accountant_id'] = $accountant->id;
-		$remuneration_data['user_id']       = Sentry::getUser()->id;
-		
-		$remuneration = $remuneration_id == 'new' ? new Remuneration() : Remuneration::find($remuneration_id);
-		$remuneration->fill($remuneration_data);
-		$remuneration->save();
-		
-		for ($i = $remuneration_data['number_of_director_shareholders']; $i < 4; $i++) {
-			unset($directors[$i]);
+		if ($remuneration_id == 'new' && User::needSubscription()) {
+			// need to ask for payment
+			return Redirect::to(url('subscribe'))->withInput();
 		}
 		
-		$remuneration->setDirectors($directors);
+		/*echo '<pre>';
+		print_r($input);
+		echo '</pre>';
+		die;*/
+		
+		$remuneration = RemunerationSaver::save($input);
 		
 		return Redirect::to('edit/' . $remuneration->id)
 			->with('message', 'Successfully saved remuneration');

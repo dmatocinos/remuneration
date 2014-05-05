@@ -100,11 +100,58 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	{
 		return ! is_null($this->asClient());
 	}
+	
+	/**
+	 * Accessor for valid_until. Use user->valid_until
+	 * 
+	 * @return Carbon
+	 */
+	public function getValidUntilAttribute()
+	{
+		if ( ! $this->attributes['valid_until']) {
+			return NULL;
+		}
 
+		return $this->asDateTime($this->attributes['valid_until']);
+	}
+	
+	/**
+	 * Check if user is still subscribed. A user is subscribed if the discounted
+	 * amount is 0 (FREE) or subscription date is still valid
+	 *
+	 * @return bool
+	 */
+	public static function needSubscription()
+	{
+		$practicepro_user = User::getPracticeProUser();
+		$is_free = $practicepro_user->pricing->is_free;
+		
+		return !$is_free;
+	}
+	
+	public static function getPracticeProUser() 
+	{
+		return PracticeProUser::where('mh2_id', '=', Sentry::getUser()->practicepro_user_id)->first();
+	}
+	
 	public static function findPracticeProUser($id) 
 	{
 		return User::where('practicepro_user_id', $id)->first();
 	}
 
+	public function getRememberToken()
+	{
+
+	}
+
+	public function setRememberToken($value)
+	{
+
+	}
+
+	public function getRememberTokenName()
+	{
+
+	}
 
 }

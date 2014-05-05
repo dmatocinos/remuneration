@@ -39,7 +39,7 @@ class BaseController extends Controller {
 		Asset::container('header')->add('bootstrap-css', 'plugins/bootstrap/css/bootstrap.min.css');
 		Asset::container('header')->add('fontawesome-css', 'plugins/font-awesome/css/font-awesome.min.css');
 	
-		if ($this->layout != 'layout.auth') {
+		if ($this->layout != 'layout.auth' && $this->layout != 'layout.subscribe') {
 			Asset::container('header')->add('datepicker-css', 'plugins/datepicker/css/datepicker.css');
 			Asset::container('header')->add('sb-admin-css', 'css/base/sb-admin.css');
 			Asset::container('header')->add('bootstrap-notify-master-css', 'plugins/bootstrap-notify-master/css/bootstrap-notify.css');
@@ -61,7 +61,7 @@ class BaseController extends Controller {
 		Asset::container('footer')->add('jquery-ui-1.9.2-js', 'plugins/jquery-ui/js/jquery-ui-1.9.2.custom.min.js');
 		Asset::container('footer')->add('bootstrap-js', 'plugins/bootstrap/js/bootstrap.min.js');
 
-		if ($this->layout != 'layout.auth') {
+		if ($this->layout != 'layout.auth' && $this->layout != 'layout.subscribe') {
 			Asset::container('footer')->add('angular-js', 'js/core/angular.js');
 			Asset::container('footer')->add('datepicker-js', 'plugins/datepicker/js/bootstrap-datepicker.js');
 			Asset::container('footer')->add('bootstrap-notify-master-js', 'plugins/bootstrap-notify-master/js/bootstrap-notify.js');

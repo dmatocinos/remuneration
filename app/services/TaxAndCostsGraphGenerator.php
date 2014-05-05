@@ -31,7 +31,7 @@ class TaxAndCostsGraphGenerator {
 				$this->_calc->i38 
 			]
 		];
-		 
+
 		// Create the graph. These two calls are always required
 		JpGraphMod::load();
 		JpGraphMod::module('bar');
@@ -52,7 +52,7 @@ class TaxAndCostsGraphGenerator {
 		$graph->Add($accbplot);
 
 		// Setup labels
-		$labels = ['Do Nothing', 'Bonus', 'Dividend', 'Darwin'];
+		$labels = ['Salary', 'Salary/Bonus', 'Salary/Dividend', 'Salary/Darwin'];
 		$graph->xaxis->SetTickLabels($labels);
 
 		$graph->title->SetFont(FF_FONT1,FS_BOLD);

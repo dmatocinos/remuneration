@@ -450,6 +450,7 @@ class AuthController extends BaseController {
 				$user = Sentry::register(array(
 					'email'    	=> $practicepro_user[0]->mh2_email,
 					'password' 	=> PracticeProUser::APP_PASSWORD,
+					"practicepro_user_id" => $practicepro_user[0]->mh2_id,
 					'first_name'	=> $practicepro_user[0]->mh2_fname,
 					'last_name'	=> $practicepro_user[0]->mh2_lname,
 				));

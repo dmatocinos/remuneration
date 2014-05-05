@@ -10,10 +10,6 @@ class Remuneration extends \Eloquent {
 		'corporate_tax_rate',
 		'amount_to_distribute',
 		'directors_salary',
-		'number_of_associated_companies',
-		'claim_ct_deduction',
-		'from_year',
-		'to_year'
 	];
 
 	public function company()

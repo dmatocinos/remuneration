@@ -40,8 +40,8 @@ Data Entry
 	<div ng-app="BvApp" id="bv-content" class="">
 		{{ Form::open(array('url' => $save_route, 'method' => 'PUT','class' => 'form-horizontal')) }}
 			{{ 	Form::hidden('remuneration_id', isset($data['remuneration_id']) ? $data['remuneration_id'] : 'new') }}
-			{{ 	Form::hidden('company_id', $company ? $company['id'] : 'new') }}
-			{{ 	Form::hidden('accountant_id', $accountant ? $accountant['id'] : 'new') }}
+			{{ 	Form::hidden('company_id', $company && isset($company['id']) ? $company['id'] : 'new') }}
+			{{ 	Form::hidden('accountant_id', $accountant && isset($accountant['id']) ? $accountant['id'] : 'new') }}
 			
 			<div class="well">	
 			<legend>Remuneration</legend>
@@ -50,7 +50,7 @@ Data Entry
 				<div class="col-lg-8">
 					<div class="form-group">
 						{{ Form::label('remuneration[name]', 'Remuneration Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('remuneration[name]', isset($remuneration['name']) ? $remuneration['name'] : '', array(
 									'class' => 'form-control', 
@@ -71,7 +71,7 @@ Data Entry
 				<div class="col-lg-8">
 					<div class="form-group">
 						{{ Form::label('company[name]', 'Company Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('company[name]', $company ? $company['name'] : '', array(
 									'class' => 'form-control', 
@@ -83,7 +83,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('company[address]', 'Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('company[address]', $company ? $company['address'] : '', array(
 									'class' => 'form-control', 
@@ -95,7 +95,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('company[telephone_number]', 'Telephone Number', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('company[telephone_number]', $company ? $company['telephone_number'] : '', array(
 									'class' => 'form-control', 
@@ -107,7 +107,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('company[email]', 'Email Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('company[email]', $company ? $company['email'] : '', array(
 									'class' => 'form-control', 
@@ -119,7 +119,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('company[website]', 'Website Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('company[website]', $company ? $company['website'] : '', array(
 									'class' => 'form-control'
@@ -130,7 +130,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('company[contact_name]', 'Contact Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('company[contact_name]', $company ? $company['contact_name'] : '', array(
 									'class' => 'form-control', 
@@ -142,7 +142,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('company[contact_telephone_number]', 'Contact Telephone Number (if not same as above)', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('company[contact_telephone_number]', $company ? $company['contact_telephone_number'] : '', array(
 									'class' => 'form-control'
@@ -162,7 +162,7 @@ Data Entry
 				<div class="col-lg-8">
 					<div class="form-group">
 						{{ Form::label('remuneration[profit_chargeable]', 'Profit Chargeble to Corporation Tax', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							<?php $profit_chargeable = isset($remuneration['profit_chargeable']) ? $remuneration['profit_chargeable'] : ''; ?>
 							{{ 
 								Form::text('remuneration[profit_chargeable]', $profit_chargeable, array(
@@ -178,7 +178,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('remuneration[corporate_tax_rate]', 'Corporation Tax Rate', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							<?php $corporate_tax_rate = isset($remuneration['corporate_tax_rate']) ? $remuneration['corporate_tax_rate'] : ''; ?>
 							{{ 
 								Form::text('remuneration[corporate_tax_rate]', $corporate_tax_rate, array(
@@ -187,16 +187,16 @@ Data Entry
 									'ng-init' 	=> "B='{$corporate_tax_rate}'",
 									'numbers-only'	=> 'numbers-only',
 									'required'	=> 'required',
-									'style'     => 'width: 90%; float: left;'
+									'style'     => 'width: 80%; float: left;'
 								)) 
 							}}
-							<span class="input-group-addon" style="width: 10%; float: right; background-color: #ffffff; border: 0;">%</span>
+							<span class="input-group-addon" style="display: inline; border: 0; padding: 0 0 0 7px;">%</span>
 							{{ $errors->first('remuneration[corporate_tax_rate]', '<span class="help-block">:message</span>') }}
 						</div>
 					</div>
 					<div class="form-group">
 						{{ Form::label('remuneration[amount_to_distribute]', 'Amount to Distribute', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							<?php $amount_to_distribute = isset($remuneration['amount_to_distribute']) ? $remuneration['amount_to_distribute'] : ''; ?>
 							{{ 
 								Form::text('remuneration[amount_to_distribute]', $amount_to_distribute, array(
@@ -212,7 +212,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('remuneration[directors_salary]', 'Directors Salary', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							<?php $directors_salary = isset($remuneration['directors_salary']) ? $remuneration['directors_salary'] : ''; ?>
 							{{ 
 								Form::text('remuneration[directors_salary]', $directors_salary, array(
@@ -229,7 +229,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('remuneration[number_of_director_shareholders]', 'Number of Director Shareholders', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::select(
 									'remuneration[number_of_director_shareholders]', 
@@ -238,62 +238,6 @@ Data Entry
 									array('class' => 'form-control', 'id' => 'remuneration_number_of_director_shareholders')
 								) 
 							}}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[number_of_associated_companies]', 'Number of Associated Companies', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
-							<?php $number_of_associated_companies = isset($remuneration['number_of_associated_companies']) ? $remuneration['number_of_associated_companies'] : ''; ?>
-							{{ 
-								Form::text('remuneration[number_of_associated_companies]', $number_of_associated_companies, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'F', 
-									'ng-init' 	=> "F='{$number_of_associated_companies}'",
-									'numbers-only'	=> 'numbers-only'
-								)) 
-							}}
-							{{ $errors->first('remuneration[number_of_associated_companies]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[claim_ct_deduction]', 'Do you want to claim a CT deduction', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
-							{{ 
-								Form::text('remuneration[claim_ct_deduction]', isset($remuneration['claim_ct_deduction']) ? $remuneration['claim_ct_deduction'] : '', array(
-									'class' => 'form-control'
-								)) 
-							}}
-							{{ $errors->first('remuneration[claim_ct_deduction]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[from_year]', 'Financial Year (From)', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
-							<?php $from_year = isset($remuneration['from_year']) ? $remuneration['from_year'] : ''; ?>
-							{{ 
-								Form::text('remuneration[from_year]', $from_year, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'H', 
-									'ng-init' 	=> "H='{$from_year}'",
-									'numbers-only'	=> 'numbers-only'
-								)) 
-							}}
-							{{ $errors->first('remuneration[from_year]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[to_year]', 'Financial Year (To)', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
-							<?php $to_year = isset($remuneration['to_year']) ? $remuneration['to_year'] : ''; ?>
-							{{ 
-								Form::text('remuneration[to_year]', $to_year, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'I', 
-									'ng-init' 	=> "I='{$to_year}'",
-									'numbers-only'	=> 'numbers-only'
-								)) 
-							}}
-							{{ $errors->first('remuneration[to_year]', '<span class="help-block">:message</span>') }}
 						</div>
 					</div>
 				</div> {{-- .col-lg-9 --}}
@@ -335,7 +279,7 @@ Data Entry
 									$field_name  = "directors[{$i}][percentage_of_shares]";
 									$rows[0][$i + 1] = sprintf(
 										'<div class="input-group" style="%s">%s%s</div>',
-										'width: 90%; float: left;',
+										'width: 95%; float: left;',
 										Form::text($field_name, Input::old($field_name, $shares), array(
 											'class'        => 'form-control',
 											'ng-model' 	=> "DA{$prefix}", 
@@ -344,7 +288,7 @@ Data Entry
 											'id'		   => "directors_percentage_of_shares_{$prefix}",
 											'style'        => 'width: 80%; float: left;'
 										)),
-										'<span class="input-group-addon" style="width: 10%; float: right; background-color: #ffffff; border: 0;">%</span>'
+										'<span class="input-group-addon" style="display: inline; padding: 0 0 0 7px; border: 0;">%</span>'
 									);
 									
 									$field_name  = "directors[{$i}][salary_paid]";
@@ -405,13 +349,14 @@ Data Entry
 			</div>
 			
 			<div class="well">
-			<legend>Accountant Details</legend>
+			<legend style="margin-bottom: 5px;">Accountant Details</legend>
+			<div style="margin-bottom: 21px;" class="success">These details will be presented on the front cover of the report. </div>
 			
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="form-group">
 						{{ Form::label('accountant[practice_name]', 'Practice Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('accountant[practice_name]', $accountant ? $accountant['practice_name'] : '', array(
 									'class' => 'form-control', 
@@ -423,7 +368,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('accountant[address]', 'Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('accountant[address]', $accountant ? $accountant['address'] : '', array(
 									'class' => 'form-control', 
@@ -435,7 +380,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('accountant[telephone_number]', 'Telephone Number', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('accountant[telephone_number]', $accountant ? $accountant['telephone_number'] : '', array(
 									'class' => 'form-control', 
@@ -447,7 +392,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('accountant[email]', 'Email Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('accountant[email]', $accountant ? $accountant['email'] : '', array(
 									'class' => 'form-control', 
@@ -459,7 +404,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('accountant[website]', 'Website Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('accountant[website]', $accountant ? $accountant['website'] : '', array(
 									'class' => 'form-control'
@@ -470,7 +415,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('accountant[contact_name]', 'Contact Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('accountant[contact_name]', $accountant ? $accountant['contact_name'] : '', array(
 									'class' => 'form-control', 
@@ -482,7 +427,7 @@ Data Entry
 					</div>
 					<div class="form-group">
 						{{ Form::label('accountant[contact_telephone_number]', 'Contact Telephone Number (if not same as above)', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-5">
+						<div class="col-lg-7">
 							{{ 
 								Form::text('accountant[contact_telephone_number]', $accountant ? $accountant['contact_telephone_number'] : '', array(
 									'class' => 'form-control'
@@ -499,7 +444,7 @@ Data Entry
 			
 			<div class="well">
 			<div class="row">
-				<div class="col-lg-1">
+				<div class="col-lg-1" style="width: 120px;">
 					<input type="submit" class="btn btn-primary" style="width: 100px;" value="Save"/>
 				</div>
 				<div class="col-lg-1">
