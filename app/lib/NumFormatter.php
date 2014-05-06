@@ -85,10 +85,10 @@ class NumFormatter {
 		}
 	}
 	
-	public static function number($num, $places = 2) 
+	public static function number($num, $places = 0) 
 	{
 		//if (self::is_windows()) {
-			return number_format(round($num, $places), $places);
+			return number_format(round($num));
 		//}
 		//else {
 		//	return money_format('%i', $num);

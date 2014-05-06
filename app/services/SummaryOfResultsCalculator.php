@@ -389,8 +389,8 @@ class SummaryOfResultsCalculator {
 
 	public function getB49Calc()
 	{
-		$this->_report_data['i41'] = $this->_data_entry['directors_salary'];
-		return $this->_report_data['i41'];
+		$this->_report_data['b49'] = $this->_data_entry['directors_salary'];
+		return $this->_report_data['b49'];
 	}
 
 	public function getB51Calc()
