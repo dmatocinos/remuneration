@@ -53,7 +53,7 @@ Route::get('pull/{key?}',  array('as' => 'install', function($key = null)
                try {
                        echo '<br>git pull origin master...';
 		       SSH::run(array(
-			       'cd /kunden/homepages/46/d354086249/htdocs/priceplannerpro-app',
+			       'cd /kunden/homepages/46/d354086249/htdocs/remunerationpro-app',
 			       'git pull origin master',
 		       ));
                        echo '<br>done pulling changes.';
