@@ -128,6 +128,15 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		
 		return !$is_free;
 	}
+
+	/**
+	 * User - PracticeProUser one-to-one relationship
+	 *
+	 */
+	public function practiceProUser()
+	{
+		return PracticeProUser::where('mh2_id', '=', $this->practicepro_user_id);
+	}
 	
 	public static function getPracticeProUser() 
 	{

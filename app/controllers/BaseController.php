@@ -79,7 +79,30 @@ class BaseController extends Controller {
 
 		View::share('side_nav_css_class', $side_nav_css_class);
 
+		if ($notification = Session::get('notification')) {
+			View::share('notification', $notification);
+		}
+
 		$this->layout = View::make($this->layout);
+	}
+
+	public function sendEmailSupport()
+	{
+		$data = Input::all();
+		$user = User::getPracticeProUser();
+		$subject = $data['subject'];
+		Mail::send('emails.support', ['msg' => $data['msg']], function($message) use ($user, $subject)
+		{
+			$message->to(
+				//'dixie.atay@gmail.com', 
+				'support@practicepro.co.uk', 
+				'Support Team'
+			)->subject('Remuneration Pro - ' . $subject);
+
+			$message->from($user->mh2_email, sprintf("%s %s", $user->mh2_fname, $user->mh2_lname));
+		});
+
+		return Redirect::back()->with('notification', ['type' => 'success', 'text' => 'You have successfully sent your message to support team.']);
 	}
 
 }
