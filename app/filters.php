@@ -86,3 +86,13 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+Route::filter('paid', function($route)
+{
+	$user = Sentry::getUser();
+	
+	if ( $user->email == 'demo@test.com') {
+		return Redirect::to('restrictdownloads/' . $route->getParameter('remuneration_id'));
+	}
+});
+

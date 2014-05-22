@@ -102,16 +102,8 @@
 	<div id="page-wrapper">
 		<div class="row">
 			<div class="col-lg-12">
-				
-				@if (isset($notification))
-					<div class="alert alert-success alert-block" style="margin: 20px;">
-						<b>
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						{{ $notification['text'] }}
-						</b>
-					</div>
-				@endif
 				@yield('content')
+				
 			</div>
 		</div>
 	</div><!-- /#page-wrapper -->

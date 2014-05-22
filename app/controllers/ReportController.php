@@ -44,5 +44,12 @@ class ReportController extends AuthorizedController {
 		$generator->generate();
 	}
 
+	public function restrictDownloads($remuneration_id)
+	{
+		return Redirect::to('report/' . $remuneration_id)
+			->with('message', 'Sorry test accounnt cannot download a report. You may want to ' . link_to('http://registration.practicepro.co.uk/', 'register') . ' in one of our packages to fully use this application.');
+	}
+	
+
 }
 

@@ -95,7 +95,13 @@ Route::group(["before" => "auth"], function()
 	Route::get('edit/{remuneration_id}', "DataEntryController@edit");
 	Route::put("save", "DataEntryController@save");
 	Route::get('report/{remuneration_id}', array('uses' => 'ReportController@index', 'as' => 'report'));
-	Route::get('report/download/{remuneration_id}', array('uses' => 'ReportController@download', 'as' => 'report.download'));
+
+	Route::group(array('before' => 'paid'), function() {
+		# report 
+		Route::get('report/download/{remuneration_id}', array('uses' => 'ReportController@download', 'as' => 'report.download'));
+	});
+
+	Route::get("restrictdownloads/{remuneration_id}", array('as' => 'restrictdownloads', 'uses' => 'ReportController@restrictDownloads'));
 });
 
 /*

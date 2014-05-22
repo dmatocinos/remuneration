@@ -26,6 +26,16 @@ Report Summary
 		</div>
 	</div>
 	@endif
+	@if (Session::get('message'))
+		<div class="row">
+			<div class="alert alert-info alert-block">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{ Session::get('message') }}
+			</div>
+		</div>
+	@endif
+
+	
 	<legend><span class="text-left">Report Summary</span><span style="margin-top: -15px;" class="pull-right text-right"><a href="{{ url('/report/download/' . $data_entry['id']) }}" class="btn btn-info">Download Tax Saving Report</a></span></legend>
 
     </div>
