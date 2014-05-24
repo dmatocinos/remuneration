@@ -63,6 +63,21 @@ class AuthController extends BaseController {
 			];
 				
 			Sentry::authenticate($credentials, Input::get('remember-me', 0));
+			$user = Sentry::getUser();	
+
+			if (User::getPracticeProUser()->getMembershipLevelDisplayAttribute() == 'Free Trial') {
+				$date = strtotime($practicepro_user[0]->created_at);
+				$date_14th = strtotime("+14 day", $date);
+
+				if ($date_14th < time()) {
+					$user = User::find($user->id);
+					$user->remunerations()->delete();
+					Sentry::logout();
+
+					$this->messageBag->add('email', 'Your free trial membership has now expired. Please upgrade your membership to use the software in its entirety.');
+					return Redirect::back()->withInput()->withErrors($this->messageBag);
+				}
+			}
 				
 			// save user info to the current session
 			Session::put('practicepro_user', $practicepro_user[0]);

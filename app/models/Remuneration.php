@@ -1,6 +1,9 @@
 <?php
 
 class Remuneration extends \Eloquent {
+
+	protected $softDelete = true;
+
 	protected $fillable = [
 		'user_id',
 		'company_id',
@@ -71,6 +74,7 @@ class Remuneration extends \Eloquent {
 				FROM remunerations r 
 				JOIN companies c ON r.company_id = c.id
 				WHERE r.user_id = :user_id
+				AND deleted_at IS NULL
 			", 
 			array('user_id' => $user_id)
 		);

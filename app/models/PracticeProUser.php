@@ -51,11 +51,12 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 	/**
 	 * L4 needs to be updated to 4.1.x for this to work. For now, let's use accessor
 	 *
+	*/
 	public function pricing()
 	{
-		return $this->belongsTo('Pricing', 'membership_level', 'mh2_membership_level');
+		return $this->belongsTo('Pricing', 'mh2_membership_level', 'membership_level_id');
 	}
-	*/
+
 	public function getPricingAttribute()
 	{
 		return Pricing::where('membership_level_id', '=', $this->membership_level)

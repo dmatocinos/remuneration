@@ -85,10 +85,9 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		return $this->belongsTo('Client');
 	}
 
-	public function accountant()
+	public function remunerations()
 	{
-		// @todo does not work
-		return $this->belongsTo('Accountant');
+		return $this->hasMany('Remuneration');
 	}
 
 	public function isAccountant()
@@ -124,6 +123,10 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	public static function needSubscription()
 	{
 		$practicepro_user = User::getPracticeProUser();
+		if ($practicepro_user->getMembershipLevelDisplayAttribute() == 'Free Trial') {
+			return false;
+		}
+
 		$is_free = $practicepro_user->pricing->is_free;
 		
 		return !$is_free;

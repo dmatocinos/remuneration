@@ -87,11 +87,10 @@ Route::filter('csrf', function()
 	}
 });
 
-Route::filter('paid', function($route)
+Route::filter('free_trial', function($route)
 {
-	$user = Sentry::getUser();
-	
-	if ( $user->email == 'demo@test.com') {
+	$user = User::getPracticeProUser();
+	if ( $user->getMembershipLevelDisplayAttribute() == 'Free Trial') {
 		return Redirect::to('restrictdownloads/' . $route->getParameter('remuneration_id'));
 	}
 });

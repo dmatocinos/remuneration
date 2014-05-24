@@ -103,7 +103,7 @@ class DataEntryController extends AuthorizedController {
 		$remuneration_id = $input['remuneration_id'];
 		$company_id      = $input['company_id'];
 		$accountant_id   = $input['accountant_id'];
-		
+
 		if ($remuneration_id == 'new' && User::needSubscription()) {
 			// need to ask for payment
 			return Redirect::to(url('subscribe'))->withInput();
