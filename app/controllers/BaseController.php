@@ -94,8 +94,8 @@ class BaseController extends Controller {
 		Mail::send('emails.support', ['msg' => $data['msg']], function($message) use ($user, $subject)
 		{
 			$message->to(
-				'dixie.atay@gmail.com', 
-				//'support@practicepro.co.uk', 
+				//'dixie.atay@gmail.com', 
+				'support@practicepro.co.uk', 
 				'Support Team'
 			)->subject('Remuneration Pro - ' . $subject);
 
