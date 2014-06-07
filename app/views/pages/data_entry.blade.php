@@ -35,220 +35,141 @@ Data Entry
 		$company      = isset($data['company']) ? $data['company'] : NULL;
 		$directors    = isset($data['directors']) ? $data['directors'] : NULL;
 		$accountant   = isset($data['accountant']) ? $data['accountant'] : NULL;
+
+		if (isset($client_data['id'])) {
+			$route = 'update_client';
+			$client_data['period_start_date'] =  date('m/d/Y', strtotime($client_data['period_start_date']));
+			$client_data['period_end_date'] =  date('m/d/Y', strtotime($client_data['period_end_date']));
+			$country = $client_data['country'];
+		}
+		else {
+			$route = 'create_client';
+			$country = 'United Kingdom';
+		}
+		
 	?>
 				
 	<div ng-app="BvApp" id="bv-content" class="">
-		{{ Form::open(array('url' => $save_route, 'method' => 'PUT','class' => 'form-horizontal')) }}
-			{{ 	Form::hidden('remuneration_id', isset($data['remuneration_id']) ? $data['remuneration_id'] : 'new') }}
-			{{ 	Form::hidden('company_id', $company && isset($company['id']) ? $company['id'] : 'new') }}
-			{{ 	Form::hidden('accountant_id', $accountant && isset($accountant['id']) ? $accountant['id'] : 'new') }}
-			
-			<div class="well">	
-			<legend>Remuneration</legend>
-			
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="form-group">
-						{{ Form::label('remuneration[name]', 'Remuneration Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('remuneration[name]', isset($remuneration['name']) ? $remuneration['name'] : '', array(
-									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('remuneration[name]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
+		{{ Form::open(array('route' => $route, 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+			{{ Form::hidden('remuneration_id', isset($data['remuneration_id']) ? $data['remuneration_id'] : 'new') }}
+			{{ Form::hidden('company_id', $company && isset($company['id']) ? $company['id'] : 'new') }}
+			{{ Form::hidden('accountant_id', $accountant && isset($accountant['id']) ? $accountant['id'] : 'new') }}
+
+		<div class="row">	
+			<div class="col-lg-12">
+			    <div class="panel panel-default">
+				<div class="panel-heading">
+				    <i class="fa fa-money fa-fw"></i> Remuneration
 				</div>
-			</div>
-			</div>
-			
-			<div class="well">	
-			<legend>Company Details</legend>
-			
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="form-group">
-						{{ Form::label('company[name]', 'Company Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('company[name]', $company ? $company['name'] : '', array(
-									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('company[name]', '<span class="help-block">:message</span>') }}
+				<div class="panel-body">
+					
+				    <fieldset>
+						<div class="form-group">
+							{{ Form::label('remuneration[name]', 'Remuneration Name', array('class' => 'col-lg-3 control-label')) }}
+							<div class="col-lg-7">
+								{{ 
+									Form::text('remuneration[name]', isset($remuneration['name']) ? $remuneration['name'] : '', array(
+										'class' => 'form-control', 
+										'required'	=> 'required'
+									)) 
+								}}
+								{{ $errors->first('remuneration[name]', '<span class="help-block">:message</span>') }}
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('company[address]', 'Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('company[address]', $company ? $company['address'] : '', array(
-									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('company[address]', '<span class="help-block">:message</span>') }}
+						<div class="form-group">
+							{{ Form::label('remuneration[profit_chargeable]', 'Profit Chargeble to Corporation Tax', array('class' => 'col-lg-3 control-label')) }}
+							<div class="col-lg-7">
+								<?php $profit_chargeable = isset($remuneration['profit_chargeable']) ? $remuneration['profit_chargeable'] : ''; ?>
+								{{ 
+									Form::text('remuneration[profit_chargeable]', $profit_chargeable, array(
+										'class' => 'form-control', 
+										'ng-model' 	=> 'A', 
+										'ng-init' 	=> "A='{$profit_chargeable}'",
+										'numbers-only'	=> 'numbers-only',
+										'required'	=> 'required'
+									)) 
+								}}
+								{{ $errors->first('remuneration[profit_chargeable]', '<span class="help-block">:message</span>') }}
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('company[telephone_number]', 'Telephone Number', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('company[telephone_number]', $company ? $company['telephone_number'] : '', array(
-									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('company[telephone_number]', '<span class="help-block">:message</span>') }}
+						<div class="form-group">
+							{{ Form::label('remuneration[corporate_tax_rate]', 'Corporation Tax Rate', array('class' => 'col-lg-3 control-label')) }}
+							<div class="col-lg-7">
+								<?php $corporate_tax_rate = isset($remuneration['corporate_tax_rate']) ? $remuneration['corporate_tax_rate'] : ''; ?>
+								{{ 
+									Form::text('remuneration[corporate_tax_rate]', $corporate_tax_rate, array(
+										'class' => 'form-control', 
+										'ng-model' 	=> 'B', 
+										'ng-init' 	=> "B='{$corporate_tax_rate}'",
+										'numbers-only'	=> 'numbers-only',
+										'required'	=> 'required',
+										'style'     => 'width: 80%; float: left;'
+									)) 
+								}}
+								<span class="input-group-addon" style="display: inline; border: 0; padding: 0 0 0 7px;">%</span>
+								{{ $errors->first('remuneration[corporate_tax_rate]', '<span class="help-block">:message</span>') }}
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('company[email]', 'Email Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('company[email]', $company ? $company['email'] : '', array(
-									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('company[email]', '<span class="help-block">:message</span>') }}
+						<div class="form-group">
+							{{ Form::label('remuneration[amount_to_distribute]', 'Amount to Distribute', array('class' => 'col-lg-3 control-label')) }}
+							<div class="col-lg-7">
+								<?php $amount_to_distribute = isset($remuneration['amount_to_distribute']) ? $remuneration['amount_to_distribute'] : ''; ?>
+								{{ 
+									Form::text('remuneration[amount_to_distribute]', $amount_to_distribute, array(
+										'class' => 'form-control', 
+										'ng-model' 	=> 'C', 
+										'ng-init' 	=> "C='{$amount_to_distribute}'",
+										'numbers-only'	=> 'numbers-only',
+										'required'	=> 'required'
+									)) 
+								}}
+								{{ $errors->first('remuneration[amount_to_distribute]', '<span class="help-block">:message</span>') }}
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('company[website]', 'Website Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('company[website]', $company ? $company['website'] : '', array(
-									'class' => 'form-control'
-								)) 
-							}}
-							{{ $errors->first('company[website]', '<span class="help-block">:message</span>') }}
+						<div class="form-group">
+							{{ Form::label('remuneration[directors_salary]', 'Directors Salary', array('class' => 'col-lg-3 control-label')) }}
+							<div class="col-lg-7">
+								<?php $directors_salary = isset($remuneration['directors_salary']) ? $remuneration['directors_salary'] : ''; ?>
+								{{ 
+									Form::text('remuneration[directors_salary]', $directors_salary, array(
+										'class' => 'form-control', 
+										'ng-model' 	=> 'D', 
+										'ng-init' 	=> "D='{$directors_salary}'",
+										'numbers-only'	=> 'numbers-only',
+										'required'	=> 'required',
+										'id' => 'remuneration_directors_salary'
+									)) 
+								}}
+								{{ $errors->first('remuneration[directors_salary]', '<span class="help-block">:message</span>') }}
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('company[contact_name]', 'Contact Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('company[contact_name]', $company ? $company['contact_name'] : '', array(
-									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('company[contact_name]', '<span class="help-block">:message</span>') }}
+						<div class="form-group">
+							{{ Form::label('remuneration[number_of_director_shareholders]', 'Number of Director Shareholders', array('class' => 'col-lg-3 control-label')) }}
+							<div class="col-lg-7">
+								{{ 
+									Form::select(
+										'remuneration[number_of_director_shareholders]', 
+										array_combine($number_of_directors, $number_of_directors), 
+										$directors ? count($directors) : 1, 
+										array('class' => 'form-control', 'id' => 'remuneration_number_of_director_shareholders')
+									) 
+								}}
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('company[contact_telephone_number]', 'Contact Telephone Number (if not same as above)', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('company[contact_telephone_number]', $company ? $company['contact_telephone_number'] : '', array(
-									'class' => 'form-control'
-								)) 
-							}}
-							{{ $errors->first('company[contact_telephone_number]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-				</div> {{-- .col-lg-9 --}}
-			</div>{{-- .row --}}
-			</div>
-			
-			<div class="well">
-			<legend>Company Tax</legend>
-			
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="form-group">
-						{{ Form::label('remuneration[profit_chargeable]', 'Profit Chargeble to Corporation Tax', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							<?php $profit_chargeable = isset($remuneration['profit_chargeable']) ? $remuneration['profit_chargeable'] : ''; ?>
-							{{ 
-								Form::text('remuneration[profit_chargeable]', $profit_chargeable, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'A', 
-									'ng-init' 	=> "A='{$profit_chargeable}'",
-									'numbers-only'	=> 'numbers-only',
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('remuneration[profit_chargeable]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[corporate_tax_rate]', 'Corporation Tax Rate', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							<?php $corporate_tax_rate = isset($remuneration['corporate_tax_rate']) ? $remuneration['corporate_tax_rate'] : ''; ?>
-							{{ 
-								Form::text('remuneration[corporate_tax_rate]', $corporate_tax_rate, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'B', 
-									'ng-init' 	=> "B='{$corporate_tax_rate}'",
-									'numbers-only'	=> 'numbers-only',
-									'required'	=> 'required',
-									'style'     => 'width: 80%; float: left;'
-								)) 
-							}}
-							<span class="input-group-addon" style="display: inline; border: 0; padding: 0 0 0 7px;">%</span>
-							{{ $errors->first('remuneration[corporate_tax_rate]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[amount_to_distribute]', 'Amount to Distribute', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							<?php $amount_to_distribute = isset($remuneration['amount_to_distribute']) ? $remuneration['amount_to_distribute'] : ''; ?>
-							{{ 
-								Form::text('remuneration[amount_to_distribute]', $amount_to_distribute, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'C', 
-									'ng-init' 	=> "C='{$amount_to_distribute}'",
-									'numbers-only'	=> 'numbers-only',
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('remuneration[amount_to_distribute]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[directors_salary]', 'Directors Salary', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							<?php $directors_salary = isset($remuneration['directors_salary']) ? $remuneration['directors_salary'] : ''; ?>
-							{{ 
-								Form::text('remuneration[directors_salary]', $directors_salary, array(
-									'class' => 'form-control', 
-									'ng-model' 	=> 'D', 
-									'ng-init' 	=> "D='{$directors_salary}'",
-									'numbers-only'	=> 'numbers-only',
-									'required'	=> 'required',
-									'id' => 'remuneration_directors_salary'
-								)) 
-							}}
-							{{ $errors->first('remuneration[directors_salary]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('remuneration[number_of_director_shareholders]', 'Number of Director Shareholders', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::select(
-									'remuneration[number_of_director_shareholders]', 
-									array_combine($number_of_directors, $number_of_directors), 
-									$directors ? count($directors) : 1, 
-									array('class' => 'form-control', 'id' => 'remuneration_number_of_director_shareholders')
-								) 
-							}}
-						</div>
-					</div>
-				</div> {{-- .col-lg-9 --}}
-			</div>{{-- .row --}}
-			</div>
-			
-			<div class="well">
-			<legend>Directors Details</legend>
-			
-			<div class="row">
-				<div class="col-lg-12">
+
+					</fieldset>
+				   </div>
+			     </div>
+		       </div>
+		</div>
+		
+		<div class="row">	
+			<div class="col-lg-12">
+			    <div class="panel panel-default">
+				<div class="panel-heading">
+				    <i class="fa fa-group fa-fw"></i> Directors Details
+				</div>
+				<div class="panel-body">
 					<table class="table">
 						<thead>
 							<tr>
@@ -344,115 +265,417 @@ Data Entry
 							?>
 						</tbody>
 					</table>
-				</div>{{-- .col-lg-12 --}}
-			</div>{{-- .row --}}
+				 </div>
+			   </div>
+		     </div>
+		</div>
+
+		<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-user fa-fw"></i> Client Details
+                        </div>
+                        <div class="panel-body">
+				
+			    <fieldset>
+
+				    <div class="form-group">
+					@if(isset($client_data['id']))
+					<input type="hidden" name="id" value="{{ $client_data['id'] }}">
+					@endif
+				    	<label for="business_name" class="col-sm-2 control-label">Business Name</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('business_name', $client_data['business_name'], array(
+								'class' => 'form-control',
+								'required' => 'required'
+							)) 
+						}}
+						@if ($error = $errors->first("business_name"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="contact_name" class="col-sm-2 control-label">Contact Name</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('contact_name', $client_data['contact_name'], array(
+								'class' => 'form-control',
+								'required' => 'required'
+							)) 
+						}}
+						@if ($error = $errors->first("contact_name"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="contact_name" class="col-sm-2 control-label">Accounting Period</label>
+					<div class="col-sm-4">
+					    <div class="row">
+						<span class="col-sm-5">
+							{{ 
+								Form::text('period_start_date', $client_data['period_start_date'], array(
+									'class' => 'form-control', 
+									'id' => 'period_start_date',
+									'placeholder' => 'Period Start'
+								)) 
+							}}
+						</span>
+						<span class="col-md-1">
+							<b>&nbsp;_</b>
+						</span>
+						<span class="col-sm-5">
+							{{ 
+								Form::text('period_end_date', $client_data['period_end_date'], array(
+									'class' => 'form-control', 
+									'id' => 'period_end_date',
+									'placeholder' => 'Period End'
+								)) 
+							}}
+						</span>
+					    </div>
+				    	</div>
+				    </div>
+
+				</fieldset>
+
 			</div>
-			
-			<div class="well">
-			<legend style="margin-bottom: 5px;">Accountant Details</legend>
-			<div style="margin-bottom: 21px;" class="success">These details will be presented on the front cover of the report. </div>
-			
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="form-group">
-						{{ Form::label('accountant[practice_name]', 'Practice Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('accountant[practice_name]', $accountant ? $accountant['practice_name'] : '', array(
+		    </div>
+		</div>
+		</div>
+
+		<div class="row">	
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-suitcase fa-fw"></i> Business Details
+                        </div>
+                        <div class="panel-body">
+				
+			    <fieldset>
+
+				  <div class="form-group">
+				    	<label for="year_end" class="col-sm-2 control-label">Year End</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('year_end', $client_data['year_end'], array(
+								'class' => 'form-control input-sm', 
+								'id' => 'year_end', 
+								'placeholder' => 'day, Month',
+							))
+						}}
+						@if ($error = $errors->first("year_end"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				  </div>
+
+				  <div class="form-group">
+				    	<label for="business_status" class="col-sm-2 control-label">Business Status</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::select(
+								'business_status', ['' => '', 'Trading' => 'Trading', 'Investment' => 'Investment'], 
+								$client_data['business_status'],
+								array(
 									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('accountant[practice_name]', '<span class="help-block">:message</span>') }}
+							)) 
+						}}
+						@if ($error = $errors->first("business_status"))
+						<div class="alert alert-danger">
+							{{ $error }}
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('accountant[address]', 'Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('accountant[address]', $accountant ? $accountant['address'] : '', array(
+						@endif
+				    	</div>
+				  </div>
+
+				  <div class="form-group">
+				    	<label for="business_type" class="col-sm-2 control-label">Business Type</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::select(
+								'business_type', 
+								[
+									'' => '', 
+									'Limited Company' => 'Limited Company', 
+									'Partnership' => 'Partnership', 
+									'Sole Trader' => 'Sole Trader', 
+									'LLP' => 'LLP'
+								], 
+								$client_data['business_type'],
+								array(
 									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('accountant[address]', '<span class="help-block">:message</span>') }}
+							)) 
+						}}
+						@if ($error = $errors->first("business_status"))
+						<div class="alert alert-danger">
+							{{ $error }}
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('accountant[telephone_number]', 'Telephone Number', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('accountant[telephone_number]', $accountant ? $accountant['telephone_number'] : '', array(
+						@endif
+				    	</div>
+				  </div>
+
+				  <div class="form-group">
+				    	<label for="industry_sector" class="col-sm-2 control-label">Industry Sector</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::select(
+								'industry_sector', 
+								[
+									'' => '', 
+									'Accounting Practice' => 'Accounting Practice',
+									'Banking' => 'Banking',
+									'Business Services' => 'Business Services',
+									'Construction' => 'Construction',
+									'Education/Training' => 'Education/Training',
+									'Financial Services' => 'Financial Services',
+									'Health' => 'Health',
+									'Insurance' => 'Insurance',
+									'IT/Telecomms' => 'IT/Telecomms',
+									'Law' => 'Law',
+									'Logistics' => 'Logistics',
+									'Management Consultancy' => 'Management Consultancy',
+									'Manufacturing/Engineering' => 'Manufacturing/Engineering',
+									'Marketing/PR' => 'Marketing/PR',
+									'Media/Entertainment' => 'Media/Entertainment',
+									'Oil, Gas, Mining' => 'Oil, Gas, Mining',
+									'Other' => 'Other',
+									'Property' => 'Property',
+									'Public Sector/Charity' => 'Public Sector/Charity',
+									'Retail/Wholesale' => 'Retail/Wholesale',
+									'Utilities' => 'Utilities'
+								],
+								$client_data['industry_sector'],
+								array(
 									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('accountant[telephone_number]', '<span class="help-block">:message</span>') }}
+							)) 
+						}}
+						@if ($error = $errors->first("business_status"))
+						<div class="alert alert-danger">
+							{{ $error }}
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('accountant[email]', 'Email Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('accountant[email]', $accountant ? $accountant['email'] : '', array(
+						@endif
+				    	</div>
+				  </div>
+
+				  <div class="form-group">
+				    	<label for="currency" class="col-sm-2 control-label">Currency</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::select(
+								'currency', $currencies, 
+								$client_data['currency'],
+								array(
 									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('accountant[email]', '<span class="help-block">:message</span>') }}
+							)) 
+						}}
+						@if ($error = $errors->first("currency"))
+						<div class="alert alert-danger">
+							{{ $error }}
 						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('accountant[website]', 'Website Address', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('accountant[website]', $accountant ? $accountant['website'] : '', array(
-									'class' => 'form-control'
-								)) 
-							}}
-							{{ $errors->first('accountant[website]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('accountant[contact_name]', 'Contact Name', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('accountant[contact_name]', $accountant ? $accountant['contact_name'] : '', array(
-									'class' => 'form-control', 
-									'required'	=> 'required'
-								)) 
-							}}
-							{{ $errors->first('accountant[contact_name]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-					<div class="form-group">
-						{{ Form::label('accountant[contact_telephone_number]', 'Contact Telephone Number (if not same as above)', array('class' => 'col-lg-3 control-label')) }}
-						<div class="col-lg-7">
-							{{ 
-								Form::text('accountant[contact_telephone_number]', $accountant ? $accountant['contact_telephone_number'] : '', array(
-									'class' => 'form-control'
-								)) 
-							}}
-							{{ $errors->first('accountant[contact_telephone_number]', '<span class="help-block">:message</span>') }}
-						</div>
-					</div>
-				</div> {{-- .col-lg-9 --}}
-			</div>{{-- .row --}}
+						@endif
+				    	</div>
+				  </div>
+
+
+				</fieldset>
+
 			</div>
-			
-			<hr>
-			
-			<div class="well">
+		    </div>
+		</div>
+		</div>
+
+		<div class="row">	
+  		<div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-home fa-fw"></i> Contact Details
+                        </div>
+                        <div class="panel-body">
+				
+			    <fieldset>
+
+				    <div class="form-group">
+				    	<label for="address_1" class="col-sm-2 control-label">Street Address</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('address_1', $client_data['address_1'], array(
+								'class' => 'form-control',
+								'required' => 'required'
+							)) 
+						}}
+						@if ($error = $errors->first("address_1"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="city" class="col-sm-2 control-label">Town/City</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('city', $client_data['city'],
+								array(
+									'class' => 'form-control', 
+							)) 
+						}}
+						@if ($error = $errors->first("city"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="countty" class="col-sm-2 control-label">County</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::select('county', $counties,
+								$client_data['county'],
+								array(
+									'class' => 'form-control', 
+							)) 
+						}}
+						@if ($error = $errors->first("county"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="country" class="col-sm-2 control-label">Country</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::select('country', $countries,
+								$country,
+								array(
+									'class' => 'form-control', 
+							)) 
+						}}
+						@if ($error = $errors->first("country"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="postcode" class="col-sm-2 control-label">Postcode</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('postcode', $client_data['postcode'], array(
+								'class' => 'form-control',
+							)) 
+						}}
+						@if ($error = $errors->first("postcode"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('phone_number', $client_data['phone_number'], array(
+								'class' => 'form-control',
+								'required' => 'required'
+							)) 
+						}}
+						@if ($error = $errors->first("phone_number"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="mobile_number" class="col-sm-2 control-label">Mobile Number</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('mobile_number', $client_data['mobile_number'], array(
+								'class' => 'form-control',
+							)) 
+						}}
+						@if ($error = $errors->first("mobile_number"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="email" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('email', $client_data['email'], array(
+								'class' => 'form-control',
+								'required' => 'required'
+							)) 
+						}}
+						@if ($error = $errors->first("email"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="website" class="col-sm-2 control-label">Website</label>
+					<div class="col-sm-4">
+						{{ 
+							Form::text('website', $client_data['website'], array(
+								'class' => 'form-control',
+							)) 
+						}}
+						@if ($error = $errors->first("website"))
+						<div class="alert alert-danger">
+							{{ $error }}
+						</div>
+						@endif
+				    	</div>
+				    </div>
+
+
+				</fieldset>
+
+				</div>
+			    </div>
+			</div>
+
+                </div>
+
+		
+		<div class="well">
 			<div class="row">
-				<div class="col-lg-1" style="width: 120px;">
+				<div class="col-lg-1 pull-right" style="width: 120px;">
 					<input type="submit" class="btn btn-primary" style="width: 100px;" value="Save"/>
 				</div>
-				<div class="col-lg-1">
-					<a class="btn btn-default" style="width: 100px;" href="{{ $cancel_route }}">Cancel</a>
-				</div>
 			</div> {{-- .row --}}
-			</div>
-		{{ Form::close() }}
+		</div>
+	{{ Form::close() }}
 	</div>
 </div>
 

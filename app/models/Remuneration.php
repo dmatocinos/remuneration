@@ -13,6 +13,7 @@ class Remuneration extends \Eloquent {
 		'corporate_tax_rate',
 		'amount_to_distribute',
 		'directors_salary',
+		'client_id',
 	];
 
 	public function company()

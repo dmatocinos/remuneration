@@ -83,6 +83,10 @@ class BaseController extends Controller {
 			View::share('notification', $notification);
 		}
 
+		if (Sentry::check()) {
+			View::share('current_clients', Client::getAllCurrentClients());
+		}
+
 		$this->layout = View::make($this->layout);
 	}
 

@@ -22,8 +22,8 @@ class PracticeProUser extends Eloquent implements UserInterface, RemindableInter
 	 *
 	 * @var string
 	 */
-	protected $connection = 'mysql_practicepro_users';
-	CONST _CONNECTION = 'mysql_practicepro_users';
+	protected $connection = 'practicepro_users';
+	CONST _CONNECTION = 'practicepro_users';
 	/**
 	 * The database table used by the model.
 	 *

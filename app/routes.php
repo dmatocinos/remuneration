@@ -82,10 +82,10 @@ Route::get('/', 'AuthController@getSignin');
 
 Route::group(["before" => "auth"], function()
 {
-	Route::get('subscribe', array('as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe'));
-	Route::get('start_payment/{timestamp}', array('as' => 'start_payment', 'uses' => 'SubscriptionController@startPayment'));
-	Route::get('cancel_payment/{timestamp}', array('as' => 'cancel_payment', 'uses' => 'SubscriptionController@cancelPayment'));
-	Route::get('complete_payment/{timestamp}', array('as' => 'complete_payment', 'uses' => 'SubscriptionController@completePayment'));
+	Route::get('subscribe/{client_id}', array('as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe'));
+	Route::get('start_payment/{timestamp}/{client_id}', array('as' => 'start_payment', 'uses' => 'SubscriptionController@startPayment'));
+	Route::get('cancel_payment/{timestamp}/{client_id}', array('as' => 'cancel_payment', 'uses' => 'SubscriptionController@cancelPayment'));
+	Route::get('complete_payment/{timestamp}/{client_id}', array('as' => 'complete_payment', 'uses' => 'SubscriptionController@completePayment'));
 	Route::get('complete_subscription', array('as' => 'complete_subscription', 'uses' => 'SubscriptionController@completeSubscription'));
 	
 	Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@getLogout'));
@@ -95,6 +95,13 @@ Route::group(["before" => "auth"], function()
 	Route::get('edit/{remuneration_id}', "DataEntryController@edit");
 	Route::put("save", "DataEntryController@save");
 	Route::get('report/{remuneration_id}', array('uses' => 'ReportController@index', 'as' => 'report'));
+
+	Route::get('client_details/new', 'DataEntryController@newClient');
+	Route::get('client_details/existing/{client_id}', 'DataEntryController@existingClient');
+	Route::post('client_details/add', array('as' => 'add_client', 'uses' => 'DataEntryController@addClient'));
+	Route::put('client_details/create', array('as' => 'create_client', 'uses' => 'DataEntryController@createClient'));
+	Route::put('client_details/update', array('as' => 'update_client', 'uses' => 'DataEntryController@updateClient'));
+	
 
 	Route::group(array('before' => 'free_trial'), function() {
 		# report 

@@ -61,13 +61,13 @@
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
-			@if (isset($edit_remuneration))
-				<li class="active">
-					<a href="#"><i class="fa fa-book fa-fw"></i> {{ $edit_remuneration }}</a>
-				</li>
-			@endif
+		    @if (isset($edit_remuneration))
+			<li class="active">
+				<a href="#"><i class="fa fa-book fa-fw"></i> {{ $edit_remuneration }}</a>
+			</li>
+		    @endif
                     <li class="{{ $side_nav_css_class['create'] }}">
-                        <a href="{{ url('create') }}"><i class="fa fa-plus-square-o fa-fw"></i> Create New</a>
+			<a href="#" data-toggle="modal" data-target="#clientModal"><i class="fa fa-plus-square-o fa-fw"></i> Create New</a>
                     </li>
                     <li class="{{ $side_nav_css_class['home'] }}">
                         <a href="{{ url('home') }}"><i class="fa fa-dashboard fa-fw"></i> My Remunerations</a>
@@ -79,25 +79,25 @@
         </nav>
         <!-- /.navbar-static-side -->
 		
-		<div class="notifications bottom-left">
-			<div style="float:left; width: 240px;">
-				<div class="form-group" style="width: 200px;">
-					<a href="http://bizvaluationpro.practicepro.co.uk" target="_blank" title="Create a professional business valuation in just 15 minutes">
-						<img src="{{ asset('images/logos/bizval.png') }}" style="margin-left:30px; width: 10%; margin-top:15px; width: 100%;">
-					</a>
-				</div>
-				<div class="form-group" style="width: 200px;">
-					<a href="http://virtualfdpro.practicepro.co.uk" target="_blank" title="Help your clients achieve their goals">
-						<img src="{{ asset('images/logos/vfd.png') }}" style="margin-left:30px; width: 10%; margin-top: 15px; width: 100%;">
-					</a>
-				</div>
-				<div class="form-group" style="width: 200px;">
-					<a href="http://priceplannerpro.practicepro.co.uk" target="_blank" title="Price professionally and create additional fees">
-						<img src="{{ asset('images/logos/priceplan.png') }}" style="margin-left:30px; width: 10%; margin-top: 15px; width: 100%;">
-					</a>
-				</div>
+	<div class="notifications bottom-left">
+		<div style="float:left; width: 240px;">
+			<div class="form-group" style="width: 200px;">
+				<a href="http://bizvaluationpro.practicepro.co.uk" target="_blank" title="Create a professional business valuation in just 15 minutes">
+					<img src="{{ asset('images/logos/bizval.png') }}" style="margin-left:30px; width: 10%; margin-top:15px; width: 100%;">
+				</a>
+			</div>
+			<div class="form-group" style="width: 200px;">
+				<a href="http://virtualfdpro.practicepro.co.uk" target="_blank" title="Help your clients achieve their goals">
+					<img src="{{ asset('images/logos/vfd.png') }}" style="margin-left:30px; width: 10%; margin-top: 15px; width: 100%;">
+				</a>
+			</div>
+			<div class="form-group" style="width: 200px;">
+				<a href="http://priceplannerpro.practicepro.co.uk" target="_blank" title="Price professionally and create additional fees">
+					<img src="{{ asset('images/logos/priceplan.png') }}" style="margin-left:30px; width: 10%; margin-top: 15px; width: 100%;">
+				</a>
 			</div>
 		</div>
+	</div>
 
 	<div id="page-wrapper">
 		<div class="row">
@@ -138,6 +138,62 @@
 				</fieldset>
 			</div>
 		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" type="submit">Submit</button>
+      </div>
+      {{ Form::close() }}
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+<!-- Client Select Modal -->
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      {{ Form::open(array('route' => 'add_client')) }}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add Client Details</h4>
+      </div>
+      <div class="modal-body">
+	<div class="row">
+		<div class="col-lg-12" style="padding: 15px;">
+		<fieldset>
+			{{ Form::token() }}
+			  <div class="form-group">
+				    <label for="" class="col-lg-12 control-label">Add client details for the new remuneration. Choose which one you prefer to retrieve client details.</label>
+				    <div class="col-lg-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="select_by" id="existing" value="existing" checked>
+						From Existing Clients		
+						{{ 
+							Form::select(
+								'client_id', $current_clients, 
+								null,
+								array(
+									'class' => 'form-control', 
+							)) 
+						}}
+					  </label>
+					</div>
+				    </div>
+				    <br>
+				    <div class="col-lg-12">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="select_by" id="new_client" value="new_client">
+						Add New Client
+					  </label>
+					</div>
+				    </div>
+			  </div>
+		</fieldset>
+		</div>
+	</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

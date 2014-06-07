@@ -15,51 +15,12 @@ class DataEntryController extends AuthorizedController {
 		Asset::container('footer')->add('change-listener-js', 'js/core/change_listener.js');
 	}
 	
-	public function create() 
-	{
-		$data = Input::get();
-		
-		if (isset($data['s_timestamp'])) {
-			$timestamp = $data['s_timestamp'];
-			$data = RemunerationSaver::getParamsFromSession($timestamp);
-			RemunerationSaver::forgetParams($timestamp);
-		}
-		
-		/*echo "<pre>";
-		var_dump($data);
-		echo "</pre>";
-		die;*/
-		
-		$this->addAssets();
-		
-		$form_data = array(
-			'save_route' => url('save'),
-			'cancel_route' => url('create'),
-			'data' => $data,
-			
-		);
-		
-		$this->layout->content = View::make("pages.data_entry", $form_data);
-	}
-	
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function edit()
 	{
 		if (!$this->isRemunerationOwned($this->remuneration)) {
 			return Redirect::to('')
 				->with('message', 'You cannot make changes to this remuneration');
 		}
-		
-		$this->addAssets();
-		
-		/*echo '<pre>';
-		print_r($this->remuneration->company_id);
-		echo '</pre>';
-		die;*/
 		
 		$company    = $this->remuneration->company;
 		$accountant = $this->remuneration->accountant;
@@ -73,54 +34,186 @@ class DataEntryController extends AuthorizedController {
 				$directors_data[] = $director->toArray();
 			}
 		}
-		
+		$client = Client::on('practicepro_users')->find($this->remuneration->client_id);
+
 		$data = array(
-			'remuneration_id' => $this->remuneration->id,
-			'remuneration'    => $this->remuneration->toArray(),
-			'company'         => $company->toArray(),
-			'accountant'      => $accountant->toArray(),
-			'directors'       => $directors_data
+			'data' => [
+				'remuneration_id' => $this->remuneration->id,
+				'remuneration'    => $this->remuneration->toArray(),
+				'company'         => $company->toArray(),
+				'accountant'      => $accountant->toArray(),
+				'directors'       => $directors_data
+			],
+			'client_data'     => $client->getAttributes(),
 		);
-		
-		$form_data = array(
-			'save_route'        => url('save'),
-			'cancel_route'      => url('edit/' . $this->remuneration->id),
-			'data'              => $data
-		);
-		
-		View::share('edit_remuneration', $this->remuneration->name);
-		
-		$this->layout->content = View::make("pages.data_entry", $form_data);
+
+		$this->setupData($data + Input::get());
 	}
 
-	public function save() {
-		$input = array_except(Input::all(), '_method');
-		/*echo '<pre>';
-		print_r(Sentry::get());
-		echo '</pre>';
-		die;*/
-		
-		$remuneration_id = $input['remuneration_id'];
-		$company_id      = $input['company_id'];
-		$accountant_id   = $input['accountant_id'];
+	protected function isRemunerationOwned ($remuneration) 
+	{
+		return ($remuneration->user_id == Sentry::getUser()->id) ? true : false;
+	}
 
-		if ($remuneration_id == 'new' && User::needSubscription()) {
-			// need to ask for payment
-			return Redirect::to(url('subscribe'))->withInput();
+	public function addClient()
+	{
+		$input = Input::all();
+		if ($input['select_by'] == 'existing') {
+			return Redirect::to('client_details/existing/' . $input['client_id']);
+		}
+		else {
+			return Redirect::to('client_details/new');
+		}
+	}
+
+	private function setupData($data)
+	{
+		if (isset($data['s_timestamp'])) {
+			$timestamp = $data['s_timestamp'];
+			$data = RemunerationSaver::getParamsFromSession($timestamp);
+			RemunerationSaver::forgetParams($timestamp);
 		}
 		
-		/*echo '<pre>';
-		print_r($input);
-		echo '</pre>';
-		die;*/
+		$this->addAssets();
+		Asset::container('footer')->add('client-index-js', 'js/data_entry/client.js');
 		
-		$remuneration = RemunerationSaver::save($input);
+		$db = DB::connection('practicepro_users');
+		$data['currencies'] = $db->table('currencies')->lists('name', 'id');
+		$data['counties']   = ['' => ''] + $db->table('counties')->lists('county', 'county');
+		$data['countries']  = ['' => ''] + $db->table('countries')->lists('country_name', 'country_name');
+
+
+		$this->layout->content = View::make("pages.data_entry", $data);
+	}
+
+	public function newClient()
+	{
+		$client = new Client;
+		$this->setupData(['client_data' => array_fill_keys($client->getFillable(), null)]);
+	}
+
+	public function existingClient($client_id)
+	{
+		$client = Client::on('practicepro_users')->find($client_id);
+		$this->setupData(['client_data' => $client->getAttributes()]);
+	}
+
+
+	public function createClient() 
+	{
+		$input = Input::all();
+		$validator = Validator::make($input, Client::$rules);
+		if ($validator->passes()) {
+			$input['period_start_date'] = date('Y-m-d H:i:a', strtotime($input['period_start_date']));
+			$input['period_end_date'] = date('Y-m-d H:i:a', strtotime($input['period_end_date']));
+
+			$client = Client::create($input);	
+
+			$company_data = [
+				'name'	           => $input['business_name'],
+				'address'          => $input['address_1'],
+				'telephone_number' => $input['phone_number'],
+				'email'	           => $input['email'],
+				'website'          => $input['website'],
+				'contact_name'	   => $input['contact_name'],
+				'contact_telephone_number' => $input['mobile_number']
+			];
+
+			$pp_user = User::getPracticeProUser();
+			$accountant_data = [
+				'practice_name' 	   => $pp_user->mh2_company_name,
+				'address'		   => $pp_user->mh2_company_address,
+				'telephone_number' 	   => $pp_user->work_phone_number,
+				'email'		           => $pp_user->email_code,
+				'website'	   	   => $pp_user->web_url,	
+				'contact_name'	   	   => $pp_user->mh2_fname . ' ' . $pp_user->mh2_lname,
+				'contact_telephone_number' => $pp_user->mh2_lname
+			];
+
+			// save to existing app data
+			$data = $input + [
+				'company' => $company_data,
+				'accountant' => $accountant_data,
+			];
+
+			return $this->save($data, $client->id);
+
+		}
+		else {
+			return Redirect::to('client_details/existing' . $input['id'])
+				->withInput()
+				->withErrors($validator)
+				->with('message', 'There were validation errors.');
+		}
+	}
+
+	public function updateClient() 
+	{
+		$input = Input::all();
+
+		$validator = Validator::make($input, Client::$rules);
+		if ($validator->passes()) {
+			$input['period_start_date'] = date('Y-m-d H:i:a', strtotime($input['period_start_date']));
+			$input['period_end_date'] = date('Y-m-d H:i:a', strtotime($input['period_end_date']));
+
+			$client = Client::find($input['id']);
+			$client->update($input);
+
+			$company_data = [
+				'name'	           => $input['business_name'],
+				'address'          => $input['address_1'],
+				'telephone_number' => $input['phone_number'],
+				'email'	           => $input['email'],
+				'website'          => $input['website'],
+				'contact_name'	   => $input['contact_name'],
+				'contact_telephone_number' => $input['mobile_number']
+			];
+
+			$pp_user = User::getPracticeProUser();
+			$accountant_data = [
+				'practice_name' 	   => $pp_user->mh2_company_name,
+				'address'		   => $pp_user->mh2_company_address,
+				'telephone_number' 	   => $pp_user->work_phone_number,
+				'email'		           => $pp_user->email_code,
+				'website'	   	   => $pp_user->web_url,	
+				'contact_name'	   	   => $pp_user->mh2_fname . ' ' . $pp_user->mh2_lname,
+				'contact_telephone_number' => $pp_user->mh2_lname
+			];
+
+			// save to existing app data
+			$data = $input + [
+				'company' => $company_data,
+				'accountant' => $accountant_data,
+			];
+
+			return $this->save($data, $client->id);
+
+		}
+		else {
+			return Redirect::to('client_details/existing' . $input['id'])
+				->withInput()
+				->withErrors($validator)
+				->with('message', 'There were validation errors.');
+		}
+		
+	}
+
+	private function save($data, $client_id)
+	{
+		$remuneration_id = $data['remuneration_id'];
+		$company_id      = $data['company_id'];
+		$accountant_id   = $data['accountant_id'];
+
+		$data['remuneration']['client_id'] = $client_id;
+		if ($remuneration_id == 'new' && User::needSubscription()) {
+			// need to ask for payment
+			return Redirect::to('subscribe/' . $client_id)->withInput($data);
+		}
+
+		$remuneration = RemunerationSaver::save($data);
 		
 		return Redirect::to('edit/' . $remuneration->id)
 			->with('message', 'Successfully saved remuneration');
-	}
-	
-	protected function isRemunerationOwned ($remuneration) {
-		return ($remuneration->user_id == Sentry::getUser()->id) ? true : false;
+		
 	}
 }

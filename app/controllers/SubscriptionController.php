@@ -30,16 +30,11 @@ class SubscriptionController extends AuthorizedController {
 	}
 
 	// @todo move to service
-	protected function getPurchaseData($timestamp)
+	protected function getPurchaseData($timestamp, $client_id = null)
 	{
 		// TODO: why is user->practice_pro_user not working?
 		$practicepro_user = User::getPracticeProUser();
 		$pricing          = $practicepro_user->pricing;
-		/*
-		var_dump(DB::connection('practicepro_users')->getQueryLog());
-		var_dump(DB::connection()->getQueryLog());
-		die();
-		 */
 		if ( ! $pricing) {
 			throw new Exception("Unknown membership level: {$practicepro_user->membership_level}");
 		}
@@ -49,8 +44,8 @@ class SubscriptionController extends AuthorizedController {
 		$paypal_data = array(
 			'amount' 	=> $pricing->getDiscountedAmount(),
 			'description'	=> Config::get('paypal.description') . " Payment for new Remuneration Report",
-			'returnUrl'	=> url('complete_payment', $timestamp),
-			'cancelUrl'	=> url('cancel_payment', $timestamp),
+			'returnUrl'	=> url('complete_payment', array($timestamp, $client_id)),
+			'cancelUrl'	=> url('cancel_payment', array($timestamp, $client_id)),
 			'currency'	=> Config::get('paypal.currency')
 		);
 
@@ -61,10 +56,10 @@ class SubscriptionController extends AuthorizedController {
 	 * Show the PayPal payment screen
 	 *
 	 */
-	public function subscribe()
+	public function subscribe($client_id)
 	{
-		$data = Input::old();
-		
+		$data = Input::old() + Session::all();
+
 		unset($data['_method']);
 		unset($data['_token']);
 		
@@ -77,32 +72,39 @@ class SubscriptionController extends AuthorizedController {
 		$discount         = $pricing->discount * 100;
 		$discounted       = $pricing->getDiscountedAmount();
 		$level            = $practicepro_user->membership_level;
+		$display 	  = $practicepro_user->membership_level_display;
 		
-		$msg    = sprintf("As a %s Member of PracticePro", $practicepro_user->membership_level_display);
+		$msg = sprintf("As a %s Member of PracticePro", $display);
 		$suffix = "However you will get a full refund if you embark on a tax strategy.";
 		
 		if ($discount > 0) {
-			$msg .= ", we are giving you a special " . $discount . "% discount.  You only have to pay &pound" . number_format(round($discounted, 2), 2) . ". Don't let this offer pass!";
+			$msg .= ", you are entitled to a " . $discount . "% discount of all software, and therefore your {$display} preferential price is only &pound" . number_format(round($discounted, 2), 2) . " per valuation";
+
+			if ($display == 'Pro Active') {
+				$upgrade_link = link_to('http://www.practicepro.co.uk/package-comparison/', 'here');
+				$msg .= "<br><br> You can receive an even more generous discount of 25% off Business Valuations by upgrading to a Professional subscription. <br> Click {$upgrade_link} to learn more about the benefits of upgrading.”";
+			}
 		}
 		else {
-			$msg = "You can continue creating this report for only &pound" . number_format(round($amount, 2), 2) . ".";
+			$msg .= " you are required to pay an amount of &pound" . number_format(round($amount, 2), 2) . " to fully manage the report.";
 		}
 		
 		$msg .= $suffix == "" ? "" : (" " . $suffix);
 		
 		$data = array(
 			'msg'    => $msg,
-			'timestamp' => $timestamp
+			'timestamp' => $timestamp,
+			'client_id' => $client_id
 		);
 		
 		$this->layout->content = View::make("subscribe.subscribe", $data);
 	}
 	
-	public function startPayment($timestamp) {
+	public function startPayment($timestamp, $client_id) {
 		$gateway = $this->getGateway();
 		
 		try {
-			$response = $gateway->purchase($this->getPurchaseData($timestamp))->send();
+			$response = $gateway->purchase($this->getPurchaseData($timestamp, $client_id))->send();
 			
 			if ($response->isRedirect()) {
 				// it should redirect to PayPal payment page
@@ -117,12 +119,12 @@ class SubscriptionController extends AuthorizedController {
 		}
 	}
 
-	public function cancelPayment($timestamp)
+	public function cancelPayment($timestamp, $client_id)
 	{
-		return Redirect::to("create?s_timestamp=" . $timestamp)->withInput();
+		return Redirect::to("client_details/existing/{$client_id}?s_timestamp=" . $timestamp)->withInput();
 	}
 
-	public function completePayment($timestamp)
+	public function completePayment($timestamp, $client_id)
 	{
 		$gateway = $this->getGateway();
 		
