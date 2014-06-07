@@ -11,11 +11,13 @@ $(document).ready(function () {
 		change_listener.setChanged();
 	});
 	
+	/*
 	 $(window).bind('beforeunload', function() {
-			if (change_listener.isChanged()) {
-				return 'There are unsaved changes on this page. If you leave this page, the changes will be lost.';
-			}
-    }); 
+		if (change_listener.isChanged()) {
+			return 'There are unsaved changes on this page. If you leave this page, the changes will be lost.';
+		}
+	 }); 
+	*/
 });
 
 function ChangeListener() {

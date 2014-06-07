@@ -174,19 +174,21 @@ class ReportPdfGenerator extends TCPDF {
 		$this->MultiCell(190, 5, 'How to get your money out of your company tax efficiently', 0, 'L', 0, 0, '', 115, true);
 
 		$this->SetFont('frabk', '', 12, '', true);
-		/*$this->MultiCell(190, 5, 'Prepared on ' . date('F jS, Y', time())  . ' by ' . $this->user->mh2_fname . ', ' . $this->user->mh2_lname, 0, 'L', 0, 0, '', 138, true);*/
-		$this->MultiCell(190, 5, 'Prepared on ' . date('F jS, Y', time())  . ' by ' . $this->remuneration->accountant->practice_name, 0, 'L', 0, 0, '', 138, true);
+		$this->MultiCell(190, 5, 'Prepared on ' . date('F jS, Y', time())  . ' by ' . $this->user->mh2_fname . ', ' . $this->user->mh2_lname, 0, 'L', 0, 0, '', 138, true);
+		/*$this->MultiCell(190, 5, 'Prepared on ' . date('F jS, Y', time())  . ' by ' . $this->remuneration->accountant->practice_name, 0, 'L', 0, 0, '', 138, true);*/
 
-		/*$this->MultiCell(190, 5, $this->user->mh2_company_address, 0, 'L', 0, 0, '', 158, true);
+		$this->MultiCell(190, 5, $this->user->mh2_company_address, 0, 'L', 0, 0, '', 158, true);
 		$this->MultiCell(190, 5, $this->user->town_city_country . ' ' . $this->user->postcode, 0, 'L', 0, 0, '', 165, true);
 		$this->MultiCell(190, 5, $this->user->phone, 0, 'L', 0, 0, '', 172, true);
 		$this->MultiCell(190, 5, $this->user->mh2_email, 0, 'L', 0, 0, '', 180, true);
-		$this->MultiCell(190, 5, $this->user->web_url, 0, 'L', 0, 0, '', 188, true);*/
+		$this->MultiCell(190, 5, $this->user->web_url, 0, 'L', 0, 0, '', 188, true);
 		
+		/*
 		$this->MultiCell(190, 5, $this->remuneration->accountant->address, 0, 'L', 0, 0, '', 158, true);
 		$this->MultiCell(190, 5, $this->remuneration->accountant->telephone_number, 0, 'L', 0, 0, '', 172, true);
 		$this->MultiCell(190, 5, $this->remuneration->accountant->email, 0, 'L', 0, 0, '', 180, true);
 		$this->MultiCell(190, 5, $this->remuneration->accountant->website, 0, 'L', 0, 0, '', 188, true);
+		*/
 
 
 		$this->SetFont('frabk', '', 10, '', true);

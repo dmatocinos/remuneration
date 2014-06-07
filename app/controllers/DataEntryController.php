@@ -44,6 +44,7 @@ class DataEntryController extends AuthorizedController {
 				'accountant'      => $accountant->toArray(),
 				'directors'       => $directors_data
 			],
+			'edit_remuneration' => true,			
 			'client_data'     => $client->getAttributes(),
 		);
 
@@ -211,8 +212,10 @@ class DataEntryController extends AuthorizedController {
 		}
 
 		$remuneration = RemunerationSaver::save($data);
-		
-		return Redirect::to('edit/' . $remuneration->id)
+		$route = isset($data['save_next_page']) 
+		       ? 'report/' . $remuneration->id
+		       : 'edit/' . $remuneration->id;
+		return Redirect::to($route)
 			->with('message', 'Successfully saved remuneration');
 		
 	}
