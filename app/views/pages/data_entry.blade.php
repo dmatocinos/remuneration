@@ -14,7 +14,7 @@ Data Entry
 	  <li class="active"><a href="#">Data Entry</a></li>
 	  @if (isset($edit_remuneration))
 		<li><a href="{{ url('/report/' . $data['remuneration_id'] ) }}">Report Summary</a></li>
-		@endif
+	  @endif
 	</ul>
   </div><!-- /.navbar-collapse -->
 </nav>
@@ -668,12 +668,11 @@ Data Entry
                 </div>
 
 		
-		<div class="well">
-			<div class="row">
-				<div class="col-lg-1 pull-right" style="width: 120px;">
-					<input type="submit" class="btn btn-primary" style="width: 100px;" value="Save"/>
-				</div>
-			</div> {{-- .row --}}
+		<div class="col-lg-12 pull-right well">
+			<div class="pull-right">
+				<button  class="btn btn-primary btn-save" type="submit" name="save_next_page" id="save_next_page" >&nbsp;<i class="fa fa-save"></i> Save & Next </button>
+				<button  class="btn btn-primary btn-save" type="submit" name="save_page" id="save_page">&nbsp;<i class="fa fa-save"></i> Save </button>
+			</div>
 		</div>
 	{{ Form::close() }}
 	</div>
