@@ -1,9 +1,9 @@
 @section('title')
-Data Entry
+Client Details
 @stop
 
 @section('page_title')
-Data Entry
+Client Details
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@ Data Entry
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="data-entry-collapse-bar">
 	<ul class="nav navbar-nav">
-	  <li class="active"><a href="#">Data Entry</a></li>
+	  <li class="active"><a href="#">Client Details</a></li>
 	  @if (isset($edit_remuneration))
 		<li><a href="{{ url('/report/' . $data['remuneration_id'] ) }}">Report Summary</a></li>
 	  @endif
