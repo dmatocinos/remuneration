@@ -58,7 +58,7 @@ class SubscriptionController extends AuthorizedController {
 	 */
 	public function subscribe($client_id)
 	{
-		$data = Input::old() + Session::all();
+		$data = Input::old();
 
 		unset($data['_method']);
 		unset($data['_token']);

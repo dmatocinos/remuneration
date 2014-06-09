@@ -10,7 +10,7 @@ Report Summary
 	  <!-- Collect the nav links, forms, and other content for toggling -->
 	  <div class="collapse navbar-collapse" id="data-entry-collapse-bar">
 		<ul class="nav navbar-nav">
-		  <li><a href="{{ url("edit/{$data_entry['id']}")}}">Data Entry</a></li>
+		  <li><a href="{{ url("edit/{$data_entry['id']}")}}">Client Details</a></li>
 		  <li class="active"><a href="{{ url("report/{$data_entry['id']}")}}">Report Summary</a></li>
 		</ul>
 	  </div><!-- /.navbar-collapse -->

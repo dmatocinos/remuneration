@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'remunerationpro_live',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -46,66 +46,28 @@ return array(
 
 	'connections' => array(
 
-		'sqlite' => array(
-			'driver'   => 'sqlite',
-			'database' => __DIR__.'/../database/production.sqlite',
-			'prefix'   => '',
-		),
-
-		'mysql' => array(
+		'remunerationpro_live' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'remunerationpro',
-			'username'  => 'root',
-			'password'  => 'admin123',
+			'host'      => 'infongd11123:3316',
+			'database'  => 'db531228405',
+			'username'  => 'dbo531228405',
+			'password'  => '5xRTUBcf45',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-
-		'pgsql' => array(
-			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
-			'charset'  => 'utf8',
-			'prefix'   => '',
-			'schema'   => 'public',
-		),
-
-		'sqlsrv' => array(
-			'driver'   => 'sqlsrv',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
-			'prefix'   => '',
-		),
-
+		
+		
 		'practicepro_users' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'practicepro_users',
-			'username'  => 'root',
-			'password'  => 'admin123',
+			'host'      => 'infongd11123:3316',
+			'database'  => 'db530381104',
+			'username'  => 'dbo530381104',
+			'password'  => 'Q3uqA55fTB',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
         	),
-
-		'mysql_cc' => array(
-			'driver'    => 'mysql',
-			'host'      => 'mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com',
-			'database'  => 'depcuumb62u',
-			'username'  => 'depcuumb62u',
-			'password'  => 'K8bJuoIjcjyZ',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-			'port'	    => '3306'
-		),
-
 
 	),
 
