@@ -21,6 +21,7 @@ app.directive('numbersOnly', function() {
 $(document).ready(function () {
 	$("#remuneration_number_of_director_shareholders").change(function() {
 		enableDirectors($(this).val());
+		readOnlyPercentageShare();
 	});
 	
 	$("#remuneration_directors_salary").change(function() {
@@ -34,8 +35,26 @@ $(document).ready(function () {
 	enableDirectors($("#remuneration_number_of_director_shareholders").val());
 });
 
+function readOnlyPercentageShare()
+{
+	var val = $("#remuneration_number_of_director_shareholders").val();
+	
+	if (val == '1') {
+		$('#directors_percentage_of_shares_1')
+			.val('100')
+			.prop('readonly', true);
+	}
+	else {
+		$('#directors_percentage_of_shares_1')
+			.val('')
+			.prop('readonly', false);
+	}
+}
+
 function enableDirectors(i) {
 	var val = $("#remuneration_directors_salary").val();
+	
+	readOnlyPercentageShare();
 	
 	for (j = 0; j < i; j++) {
 		$("#directors_percentage_of_shares_" + (j + 1)).removeAttr('disabled');
