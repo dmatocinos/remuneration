@@ -81,9 +81,9 @@
 		
 	<div class="notifications bottom-left">
 		<div style="float:left; width: 240px;">
-			<div class="form-group" style="width: 200px;">
+			<div class="form-group" style="width: 220px;">
 				<a href="http://bizvaluationpro.practicepro.co.uk" target="_blank" title="Create a professional business valuation in just 15 minutes">
-					<img src="{{ asset('images/logos/bizval.png') }}" style="margin-left:30px; width: 10%; margin-top:15px; width: 100%;">
+					<img src="{{ asset('images/logos/bizval.png') }}" style="margin-left:20px; width: 10%; margin-top:15px; width: 100%;">
 				</a>
 			</div>
 			<div class="form-group" style="width: 200px;">
