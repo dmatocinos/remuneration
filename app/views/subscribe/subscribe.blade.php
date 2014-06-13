@@ -1,5 +1,4 @@
 @section('content')
-	<legend><h1>Remuneration</h1></legend>
 	<legend><h3>You are required to pay to continue creating a report.</a></h3></legend>
 	<div class="form-group">
 	  <!-- <a class="pull-right" href="#">Forgot password?</a> -->

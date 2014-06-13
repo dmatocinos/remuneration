@@ -82,11 +82,14 @@ class SubscriptionController extends AuthorizedController {
 
 			if ($display == 'Pro Active') {
 				$upgrade_link = link_to('http://www.practicepro.co.uk/package-comparison/', 'here');
-				$msg .= "<br><br> You can receive an even more generous discount of 25% off Business Valuations by upgrading to a Professional subscription. <br> Click {$upgrade_link} to learn more about the benefits of upgrading.”";
+				$msg .= "<br><br> You can receive an even more incentive with Remuneration by upgrading to a Professional subscription. <br> Click {$upgrade_link} to learn more about the benefits of upgrading.”";
 			}
 		}
 		else {
 			$msg .= " you are required to pay an amount of &pound" . number_format(round($amount, 2), 2) . " to fully manage the report.";
+
+			$upgrade_link = link_to('http://www.practicepro.co.uk/package-comparison/', 'here');
+			$msg .= "<br><br> You can receive more incentive Remuneration by upgrading your subscription. <br> Click {$upgrade_link} to learn more about the benefits of upgrading.”";
 		}
 		
 		$msg .= $suffix == "" ? "" : (" " . $suffix);
@@ -100,7 +103,8 @@ class SubscriptionController extends AuthorizedController {
 		$this->layout->content = View::make("subscribe.subscribe", $data);
 	}
 	
-	public function startPayment($timestamp, $client_id) {
+	public function startPayment($timestamp, $client_id) 
+	{
 		$gateway = $this->getGateway();
 		
 		try {
@@ -129,7 +133,7 @@ class SubscriptionController extends AuthorizedController {
 		$gateway = $this->getGateway();
 		
 		try {
-			$response = $gateway->completePurchase($this->getPurchaseData($timestamp))->send();
+			$response = $gateway->completePurchase($this->getPurchaseData($timestamp, $client_id))->send();
 			
 			if ($response->isSuccessful()) {
 				try {
