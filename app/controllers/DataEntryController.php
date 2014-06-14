@@ -141,7 +141,7 @@ class DataEntryController extends AuthorizedController {
 
 		}
 		else {
-			return Redirect::to('client_details/existing' . $input['id'])
+			return Redirect::to('client_details/new')
 				->withInput()
 				->withErrors($validator)
 				->with('message', 'There were validation errors.');
