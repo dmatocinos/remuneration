@@ -184,4 +184,6 @@ return array(
 	),
 
 	'application_key' => 'remuneration',
+	
+	'portal_url' => 'localhost/practicepro_regis/public/index.php/',
 );

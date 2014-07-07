@@ -81,6 +81,7 @@ class AuthController extends BaseController {
 				
 			// save user info to the current session
 			Session::put('practicepro_user', $practicepro_user[0]);
+			$this->logAccess($user->practicepro_user_id);
 			
 			/*
 			if ( ! $this->isValid($user)) {
@@ -481,6 +482,19 @@ class AuthController extends BaseController {
 		}
 		
 		return $practicepro_user;
+	}
+
+	protected function logAccess($user_id)
+	{
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, Config::get('app.portal_url') . '/log/' . $user_id . '/' . Config::get('app.application_key'));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		 
+		$output = curl_exec($ch);
+		 
+		curl_close($ch);
 	}
 
 }
