@@ -149,16 +149,6 @@ class DataEntryController extends AuthorizedController {
 			$client = Client::find($input['id']);
 			$client->update($input);
 
-			$company_data = [
-				'name'	           => $input['business_name'],
-				'address'          => $input['address_1'],
-				'telephone_number' => $input['phone_number'],
-				'email'	           => $input['email'],
-				'website'          => $input['website'],
-				'contact_name'	   => $input['contact_name'],
-				'contact_telephone_number' => $input['mobile_number']
-			];
-
 			$pp_user = User::getPracticeProUser();
 			$accountant_data = [
 				'practice_name' 	   => $pp_user->mh2_company_name,
@@ -172,7 +162,6 @@ class DataEntryController extends AuthorizedController {
 
 			// save to existing app data
 			$data = $input + [
-				'company' => $company_data,
 				'accountant' => $accountant_data,
 			];
 
