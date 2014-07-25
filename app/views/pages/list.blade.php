@@ -17,7 +17,7 @@
 					@foreach ($remunerations as $item)
 						<tr style="">
 							<td>{{ $item->name . ':::' . url('/edit/' . $item->id) }}</td>
-							<td>{{ $item->company_name }}</td>
+							<td>{{ $item->company->name }}</td>
 							<td>{{ $item->created_at }}</td>
 						</tr>
 					@endforeach

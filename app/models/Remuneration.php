@@ -69,15 +69,6 @@ class Remuneration extends \Eloquent {
 	
 	public static function getAll($user_id) 
 	{
-		return DB::select(
-			"
-				SELECT r.*, c.name as company_name
-				FROM remunerations r 
-				JOIN companies c ON r.company_id = c.id
-				WHERE r.user_id = :user_id
-				AND deleted_at IS NULL
-			", 
-			array('user_id' => $user_id)
-		);
+		return Remuneration::where('user_id', '=', $user_id)->get();
 	}
 }
