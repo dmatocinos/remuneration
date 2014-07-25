@@ -17,12 +17,10 @@ class RemunerationSaver
 		
 		$remuneration_data = $input['remuneration'];
 		$directors         = $input['directors'];
-		$company_data      = $input['company'];
 		$accountant_data   = $input['accountant'];
 		
 		$company = $company_id == 'new' ? new Company() : Company::find($company_id);
-		$company_data['user_id'] = Sentry::getUser()->id;
-		$company->fill($company_data);
+		$company->user_id = Sentry::getUser()->id;
 		$company->save();
 		
 		$accountant = $accountant_id == 'new' ? new Accountant() : Accountant::find($accountant_id);

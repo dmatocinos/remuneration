@@ -38,11 +38,13 @@ Client Details
 
 		if (isset($client_data['id'])) {
 			$route = 'update_client';
-			$client_data['period_start_date'] =  date('m/d/Y', strtotime($client_data['period_start_date']));
-			$client_data['period_end_date'] =  date('m/d/Y', strtotime($client_data['period_end_date']));
+			$client_data['period_start_date'] =  $client_data['period_start_date'] ? date('m/d/Y', strtotime($client_data['period_start_date'])) : '';
+			$client_data['period_end_date'] =  $client_data['period_end_date'] ? date('m/d/Y', strtotime($client_data['period_end_date'])) : '';
 			$country = $client_data['country'];
 		}
 		else {
+			$client_data['period_start_date'] = '';
+			$client_data['period_end_date'] = '';
 			$route = 'create_client';
 			$country = 'United Kingdom';
 		}
