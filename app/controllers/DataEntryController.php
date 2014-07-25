@@ -191,7 +191,7 @@ class DataEntryController extends AuthorizedController {
 
 		}
 		else {
-			return Redirect::to('client_details/existing' . $input['id'])
+			return Redirect::to('client_details/existing/' . $input['id'])
 				->withInput()
 				->withErrors($validator)
 				->with('message', 'There were validation errors.');
@@ -215,6 +215,7 @@ class DataEntryController extends AuthorizedController {
 		$route = isset($data['save_next_page']) 
 		       ? 'report/' . $remuneration->id
 		       : 'edit/' . $remuneration->id;
+
 		return Redirect::to($route)
 			->with('message', 'Successfully saved remuneration');
 		

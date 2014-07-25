@@ -39,7 +39,7 @@ Route::filter('auth', function()
 	if ( ! Sentry::check()) {
 
 		// Store the current uri in the session
-		Session::put('loginRedirect', Request::url());
+		//Session::put('loginRedirect', Request::url());
 
 		// Redirect to the login page
 		return Redirect::route('signin');
@@ -65,7 +65,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Sentry::check()) return Redirect::to('/');
 });
 
 /*
