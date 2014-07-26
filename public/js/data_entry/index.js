@@ -53,22 +53,23 @@ function readOnlyPercentageShare()
 
 function enableDirectors(i) {
 	var val = $("#remuneration_directors_salary").val();
+	var shareholders = $("#remuneration_number_of_director_shareholders").val();
 	
-	readOnlyPercentageShare();
-	
-	for (j = 0; j < i; j++) {
-		$("#directors_percentage_of_shares_" + (j + 1)).removeAttr('disabled');
-		$("#directors_salary_paid_" + (j + 1)).removeAttr('disabled');
-		$("#directors_salary_paid_" + (j + 1)).val(val);
-		$("#directors_other_taxable_income_" + (j + 1)).removeAttr('disabled');
-		$("#directors_balance_on_directors_loan_account_" + (j + 1)).removeAttr('disabled');
+
+	for (j = parseInt(shareholders) + 1; j <= 4; j++) {
+		$("#directors_percentage_of_shares_" + j).attr('disabled', 'disabled');
+		$("#directors_salary_paid_" + j).attr('disabled', 'disabled');
+		$("#directors_salary_paid_" + j).val('');
+		$("#directors_other_taxable_income_" + j).attr('disabled', 'disabled');
+		$("#directors_balance_on_directors_loan_account_" + j).attr('disabled', 'disabled');
+		$('#directors_percentage_of_shares_' + j).val('');
 	}
 	
-	for (i = j; i <= 4; i++) {
-		$("#directors_percentage_of_shares_" + (i + 1)).attr('disabled', 'disabled');
-		$("#directors_salary_paid_" + (i + 1)).attr('disabled', 'disabled');
-		$("#directors_salary_paid_" + (i + 1)).val('');
-		$("#directors_other_taxable_income_" + (i + 1)).attr('disabled', 'disabled');
-		$("#directors_balance_on_directors_loan_account_" + (i + 1)).attr('disabled', 'disabled');
+	for (i = parseInt(shareholders); i >= 1; i--) {
+		$("#directors_percentage_of_shares_" + i).removeAttr('disabled');
+		$("#directors_salary_paid_" + i).removeAttr('disabled');
+		$("#directors_salary_paid_" + i).val(val);
+		$("#directors_other_taxable_income_" + i).removeAttr('disabled');
+		$("#directors_balance_on_directors_loan_account_" + i).removeAttr('disabled');
 	}
 }

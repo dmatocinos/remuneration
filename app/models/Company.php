@@ -12,44 +12,58 @@ class Company extends \Eloquent {
 
 	public function getNameAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->business_name;
+		if ($client = $this->getClient()) {
+			return $client->business_name;
+		}
+		return null;
 	}
 
 	public function getAddressAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->address_1;
+		if ($client = $this->getClient()) {
+			return $client->address_1;
+		}
+		return null;
 	}
 
 	public function getTelephoneNumberAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->phone_number;
+		if ($client = $this->getClient()) {
+			return $client->phone_number;
+		}
+		return null;
 	}
 
 	public function getEmailAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->email;
+		if ($client = $this->getClient()) {
+			return $client->email;
+		}
+		return null;
 	}
 
 	public function getWebsiteAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->website;
+		if ($client = $this->getClient()) {
+			return $client->website;
+		}
+		return null;
 	}
 
 	public function getContactNameAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->contact_name;
+		if ($client = $this->getClient()) {
+			return $client->contact_name;
+		}
+		return null;
 	}
 
 	public function getContactTelephoneNumberAttribute($value)
 	{
-		$client = $this->getClient();
-		return $client->mobile_number;
+		if ($client = $this->getClient()) {
+			return $client->mobile_number;
+		}
+		return null;
 	}
 
 	public function getClient()
