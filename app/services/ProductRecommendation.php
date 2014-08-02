@@ -7,7 +7,8 @@ class ProductRecommendation {
 	{
 		$db = DB::connection('practicepro_users');
 		$client = $remuneration->company->getClient();
-		$email_to = $db->table('counties')->where('county', '=', $client->county);
+		$email_to = $db->table('counties')->where('county', '=', $client->county)->limit(1)->pluck('relationship_manager');
+
 		if ( ! $email_to) {
 			return null;
 		}
