@@ -194,8 +194,7 @@ class DataEntryController extends AuthorizedController {
 		       ? 'report/' . $remuneration->id
 		       : 'edit/' . $remuneration->id;
 
-		return Redirect::to($route)
-			->with('message', 'Successfully saved remuneration');
-		
+		return Redirect::to($route)->with('message', 'Successfully saved changes.');
+
 	}
 }

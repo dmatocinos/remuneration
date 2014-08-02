@@ -60,6 +60,7 @@ class BaseController extends Controller {
 		Asset::container('footer')->add('jquery', 'js/core/jquery-1.10.2.min.js');
 		Asset::container('footer')->add('jquery-ui-1.9.2-js', 'plugins/jquery-ui/js/jquery-ui-1.9.2.custom.min.js');
 		Asset::container('footer')->add('bootstrap-js', 'plugins/bootstrap/js/bootstrap.min.js');
+		Asset::container('footer')->add('base-js', 'js/base/base.js');
 
 		if ($this->layout != 'layout.auth' && $this->layout != 'layout.subscribe') {
 			Asset::container('footer')->add('angular-js', 'js/core/angular.js');

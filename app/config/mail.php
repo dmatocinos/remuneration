@@ -121,4 +121,6 @@ return array(
 
 	'pretend' => false,
 
+	'admin_email' => array('address' => 'admin@practicepro.co.uk', 'name' => 'PracticePro Admin'),
+
 );

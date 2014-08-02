@@ -33,6 +33,7 @@ class RemunerationSaver
 		$remuneration_data['user_id']       = Sentry::getUser()->id;
 		
 		$remuneration = $remuneration_id == 'new' ? new Remuneration() : Remuneration::find($remuneration_id);
+		$prev_net_profit = $remuneration->profit_chargeable;
 		$remuneration->fill($remuneration_data);
 		$remuneration->save();
 		
@@ -41,6 +42,12 @@ class RemunerationSaver
 		}
 		
 		$remuneration->setDirectors($directors);
+
+		if ($remuneration->profit_chargeable >= '100000' && $prev_net_profit < $remuneration->profit_chargeable) {
+			$product_recommendation = new ProductRecommendation();
+			$product_recommendation->recommend($remuneration, User::getPracticeproUser());
+			Session::put('has_recommendation', true);
+		}
 		
 		return $remuneration;
 	}
