@@ -133,7 +133,7 @@ class DataEntryController extends AuthorizedController {
 			return Redirect::to('client_details/new')
 				->withInput()
 				->withErrors($validator)
-				->with('message', 'There were validation errors.');
+				->with('message', 'Please correct the field(s) below marked in red');
 		}
 	}
 
@@ -172,7 +172,7 @@ class DataEntryController extends AuthorizedController {
 			return Redirect::to('client_details/existing/' . $input['id'])
 				->withInput()
 				->withErrors($validator)
-				->with('message', 'There were validation errors.');
+				->with('message', 'Please correct the field(s) below marked in red');
 		}
 		
 	}
