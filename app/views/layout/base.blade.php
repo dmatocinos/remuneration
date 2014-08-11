@@ -205,6 +205,7 @@
 </div>
 <!-- Modal -->
 
+<?php if($net_profit >= 100000) ?>
 
 <!-- Product Recommendation -->
 @if(Session::get('has_recommendation'))
@@ -231,13 +232,15 @@
 		</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 <?php Session::forget('has_recommendation'); ?>
 @endif
+
+<?php endif; ?>
 
     {{ Asset::container('footer')->scripts() }}
 
