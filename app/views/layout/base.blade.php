@@ -205,7 +205,6 @@
 </div>
 <!-- Modal -->
 
-<?php if($net_profit >= 100000) ?>
 
 <!-- Product Recommendation -->
 @if(Session::get('has_recommendation'))
@@ -239,8 +238,6 @@
 </div>
 <?php Session::forget('has_recommendation'); ?>
 @endif
-
-<?php endif; ?>
 
     {{ Asset::container('footer')->scripts() }}
 
