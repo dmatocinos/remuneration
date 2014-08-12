@@ -23,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Remuneration Pro</a>
+                <a class="navbar-brand" href="{{ url() }}">Remuneration Pro</a>
             </div>
             <!-- /.navbar-header -->
 
