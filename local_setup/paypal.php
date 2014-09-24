@@ -86,7 +86,7 @@ return array(
         |
         */
 
-        'test_mode' => 'true'
+        'test_mode' => true
         /*'test_mode' => false*/
 );
 
