@@ -51,6 +51,19 @@ class DataEntryController extends AuthorizedController {
 		$this->setupData($data + Input::get());
 	}
 
+    public function delete()
+	{
+		if (!$this->isRemunerationOwned($this->remuneration)) {
+			return Redirect::to('home')
+				->with('message', 'You cannot make changes to this remuneration');
+		}
+
+        $this->remuneration->delete();
+		
+		return Redirect::to('home')
+				->with('message', 'Successfully deleted remuneration');
+	}
+
 	protected function isRemunerationOwned ($remuneration) 
 	{
 		return ($remuneration->user_id == Sentry::getUser()->id) ? true : false;

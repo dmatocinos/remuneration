@@ -93,6 +93,7 @@ Route::group(["before" => "auth"], function()
 	Route::get("home", array('as' => 'home', 'uses' => "HomeController@index"));
 	Route::get("create", "DataEntryController@create");
 	Route::get('edit/{remuneration_id}', "DataEntryController@edit");
+    Route::get('delete/{remuneration_id}', "DataEntryController@delete");
 	Route::put("save", "DataEntryController@save");
 	Route::get('report/{remuneration_id}', array('uses' => 'ReportController@index', 'as' => 'report'));
 

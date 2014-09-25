@@ -86,7 +86,9 @@ Client Details
 									Form::text('remuneration[profit_chargeable]', $profit_chargeable, array(
 										'class' => 'form-control', 
 										'numbers-only'	=> 'numbers-only',
-										'required'	=> 'required'
+										'required'	=> 'required',
+                                        'ng-init' => "profit_chargeable=" . ($profit_chargeable ? $profit_chargeable : "''"),
+                                        'ng-model' => 'profit_chargeable'
 									)) 
 								}}
 								{{ $errors->first('remuneration[profit_chargeable]', '<span class="help-block">:message</span>') }}
@@ -100,6 +102,8 @@ Client Details
 									Form::text('remuneration[corporate_tax_rate]', $corporate_tax_rate, array(
 										'class' => 'form-control', 
 										'numbers-only'	=> 'numbers-only',
+                                        'ng-model' => 'corporate_tax_rate',
+                                        'ng-init' => "corporate_tax_rate=" . ($corporate_tax_rate ? $corporate_tax_rate : "''"),
 										'required'	=> 'required',
 										'style'     => 'width: 80%; float: left;'
 									)) 
@@ -116,6 +120,8 @@ Client Details
 									Form::text('remuneration[amount_to_distribute]', $amount_to_distribute, array(
 										'class' => 'form-control', 
 										'numbers-only'	=> 'numbers-only',
+                                        'ng-model' => 'amount_to_distribute',
+                                        'ng-init' => "amount_to_distribute=" . ($amount_to_distribute ? $amount_to_distribute : "''"),
 										'required'	=> 'required'
 									)) 
 								}}
@@ -131,6 +137,8 @@ Client Details
 										'class' => 'form-control', 
 										'numbers-only'	=> 'numbers-only',
 										'required'	=> 'required',
+                                        'ng-model' => 'directors_salary',
+                                        'ng-init' => "directors_salary=" . ($directors_salary ? $directors_salary : "''"),
 										'id' => 'remuneration_directors_salary'
 									)) 
 								}}
@@ -192,12 +200,15 @@ Client Details
 									$prefix  = $i + 1;
 									
 									$field_name  = "directors[{$i}][percentage_of_shares]";
+                                    $val = Input::old($field_name, $shares);
 									$rows[0][$i + 1] = sprintf(
 										'<div class="input-group" style="%s">%s%s</div>',
 										'width: 95%; float: left;',
-										Form::text($field_name, Input::old($field_name, $shares), array(
+										Form::text($field_name, $val, array(
 											'class'        => 'form-control',
 											'numbers-only' => 'numbers-only',
+                                            'ng-model'     => "directors_percentage_of_shares_{$prefix}",
+                                            'ng-init'      => "directors_percentage_of_shares_{$prefix}=" . ($val ? $val : "''"),
 											'id'		   => "directors_percentage_of_shares_{$prefix}",
 											'style'        => 'width: 80%; float: left;'
 										)),
@@ -205,31 +216,40 @@ Client Details
 									);
 
 									$field_name  = "directors[{$i}][salary_paid]";
+                                    $val = Input::old($field_name, $salary);
 									$rows[1][$i + 1] = sprintf(
 										'<div class="input-group">%s</div>',
-										Form::text($field_name, Input::old($field_name, $salary), array(
+										Form::text($field_name, $val, array(
 											'class'        => 'form-control',
 											'numbers-only' => 'numbers-only',
+                                            'ng-model'     => "directors_salary_paid_{$prefix}",
+                                            'ng-init'      => "directors_salary_paid_{$prefix}=" . ($val ? $val : "''"),
 											'id'		   => "directors_salary_paid_{$prefix}"
 										)) 
 									);
 									
 									$field_name  = "directors[{$i}][other_taxable_income]";
+                                    $val = Input::old($field_name, $taxable);
 									$rows[2][$i + 1] = sprintf(
 										'<div class="input-group">%s</div>',
-										Form::text($field_name, Input::old($field_name, $taxable), array(
+										Form::text($field_name, $val, array(
 											'class'        => 'form-control',
 											'numbers-only' => 'numbers-only',
+                                            'ng-model'     => "directors_other_taxable_income_{$prefix}",
+                                            'ng-init'      => "directors_other_taxable_income_{$prefix}=" . ($val ? $val : "''"),
 											'id'		   => "directors_other_taxable_income_{$prefix}"
 										)) 
 									);
 									
 									$field_name  = "directors[{$i}][balance_on_directors_loan_account]";
+                                    $val = Input::old($field_name, $balance);
 									$rows[3][$i + 1] = sprintf(
 										'<div class="input-group">%s</div>',
-										Form::text($field_name, Input::old($field_name, $balance), array(
+										Form::text($field_name, $val, array(
 											'class'        => 'form-control',
 											'numbers-only' => 'numbers-only',
+                                            'ng-model'     => "directors_balance_on_directors_loan_account_{$prefix}",
+                                            'ng-init'      => "directors_balance_on_directors_loan_account_{$prefix}=" . ($val ? $val : "''"),
 											'id'		   => "directors_balance_on_directors_loan_account_{$prefix}"
 										)) 
 									);

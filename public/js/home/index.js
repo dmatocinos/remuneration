@@ -1,6 +1,10 @@
 $(document).ready(function () {
 	$("#remunerations-list").dataTable({
-		"aaSorting": [[ 0, "asc" ]],
+		"aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [ 3 ] },
+            { 'bSearchable': false, 'aTargets': [ 3 ] }
+        ],
+        "aaSorting": [[ 0, "asc" ]],
 		"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
             /* Append the grade to the default row class name */
 			var str = aData[0];
@@ -16,12 +20,18 @@ $(document).ready(function () {
 			
 			$(nRow).show();
         },
-        "aoColumnDefs": [ {
-                "sClass": "center",
-                "aTargets": [ -1, -2 ]
-        } ],
 		"fnFooterCallback": function() {
 			$("#remunerations-list").show();
 		}
 	});
+
+    $(".delete-item").click( function () {
+        if (confirm("Do you want to continue deleting this remuneration report?"))
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
 });

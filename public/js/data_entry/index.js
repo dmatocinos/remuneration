@@ -5,12 +5,44 @@ app.directive('numbersOnly', function() {
      require: 'ngModel',
      link: function(scope, element, attrs, modelCtrl) {
        modelCtrl.$parsers.push(function (inputValue) {
-           if (inputValue == undefined) return '' 
-           var transformedInput = inputValue.replace(/[^\.0-9]/g, ''); 
-           if (transformedInput!=inputValue) {
-              modelCtrl.$setViewValue(transformedInput);
-              modelCtrl.$render();
-           }         
+			if (inputValue == undefined) return '';
+			
+			var arr = String(inputValue).split("");
+			var transformedInput = inputValue;
+			
+			if (arr.length === 1 && arr[0] == '-') return '';
+			
+			if (arr.length === 2 && inputValue == '00') {
+				// do not allow user to type more than 1 zero
+				transformedInput = "0";
+			}
+			else if (arr.length === 2 && inputValue == '-0') {
+				// a negative number should not start with 0
+				transformedInput = "-";
+			}
+			else {
+				var zer = false;
+				var neg = (arr.length > 1 && arr[0] == '-') ? true : false;
+				
+				if (arr.length === 2 && arr[0] == '0' && arr[1] != '.') {
+					testValue = arr[1];
+					zer = true;
+				}
+				else {
+					testValue = inputValue;
+				}
+				
+				transformedInput = (neg == true ? '-' : '') + testValue.replace(/[^\.0-9]/g, '');
+				
+				if (transformedInput === '' && zer == true) {
+					transformedInput = '0';
+				}
+			}
+			
+			if (transformedInput!=inputValue) {
+				modelCtrl.$setViewValue(transformedInput);
+				modelCtrl.$render();
+			}         
 
            return transformedInput;         
        });

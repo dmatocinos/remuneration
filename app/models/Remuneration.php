@@ -61,6 +61,12 @@ class Remuneration extends \Eloquent {
 			}
 		}
 	}
+
+    public function delete()
+    {
+        $this->deleteDirectors();
+        parent::delete();
+    }
 	
 	public function deleteDirectors() 
 	{
