@@ -166,22 +166,37 @@ class ReportPdfGenerator extends TCPDF {
 		$this->MultiCell(190, 5, 'Strictly Private and Confidential', 0, 'L', 0, 0, '', 6, true);
 
 		$this->SetFont('helveticaB', '', 35, '', true);
-		$this->MultiCell(190, 5, $this->remuneration->company->name, 0, 'L', 0, 0, '', 65, true);
-		$this->MultiCell(190, 5, 'REMUNERATION PLANNING', 0, 'L', 0, 0, '', 80, true);
-		$this->MultiCell(190, 5, 'Tax Saving Report', 0, 'L', 0, 0, '', 93, true);
+
+        $line_pos = 65;
+
+        if (strlen($this->remuneration->company->name) < 30) {
+    		$this->MultiCell(190, 5, $this->remuneration->company->name, 0, 'L', 0, 0, '', 65, true);
+            $line_pos += 15;
+        }
+        else {
+            $company_names = $this->breakString($this->remuneration->company->name, 30);
+            
+            foreach ($company_names as $company_name_part) {
+                $this->MultiCell(190, 5, $company_name_part, 0, 'L', 0, 0, '', $line_pos, true);
+                $line_pos += 15;
+            }
+        }
+
+		$this->MultiCell(190, 5, 'REMUNERATION PLANNING', 0, 'L', 0, 0, '', $line_pos, true);
+		$this->MultiCell(190, 5, 'Tax Saving Report', 0, 'L', 0, 0, '', $line_pos + 13, true);
 
 		$this->SetFont('frabk', '', 16, '', true);
-		$this->MultiCell(190, 5, 'How to get your money out of your company tax efficiently', 0, 'L', 0, 0, '', 115, true);
+		$this->MultiCell(190, 5, 'How to get your money out of your company tax efficiently', 0, 'L', 0, 0, '', $line_pos + 35, true);
 
 		$this->SetFont('frabk', '', 12, '', true);
-		$this->MultiCell(190, 5, 'Prepared on ' . date('F jS, Y', time())  . ' by ' . $this->user->mh2_fname . ', ' . $this->user->mh2_lname, 0, 'L', 0, 0, '', 138, true);
+		$this->MultiCell(190, 5, 'Prepared on ' . date('F jS, Y', time())  . ' by ' . $this->user->mh2_fname . ', ' . $this->user->mh2_lname, 0, 'L', 0, 0, '', $line_pos + 58, true);
 		/*$this->MultiCell(190, 5, 'Prepared on ' . date('F jS, Y', time())  . ' by ' . $this->remuneration->accountant->practice_name, 0, 'L', 0, 0, '', 138, true);*/
 
-		$this->MultiCell(190, 5, $this->user->mh2_company_address, 0, 'L', 0, 0, '', 158, true);
-		$this->MultiCell(190, 5, $this->user->town_city_country . ' ' . $this->user->postcode, 0, 'L', 0, 0, '', 165, true);
-		$this->MultiCell(190, 5, $this->user->phone, 0, 'L', 0, 0, '', 172, true);
-		$this->MultiCell(190, 5, $this->user->mh2_email, 0, 'L', 0, 0, '', 180, true);
-		$this->MultiCell(190, 5, $this->user->web_url, 0, 'L', 0, 0, '', 188, true);
+		$this->MultiCell(190, 5, $this->user->mh2_company_address, 0, 'L', 0, 0, '', $line_pos + 78, true);
+		$this->MultiCell(190, 5, $this->user->town_city_country . ' ' . $this->user->postcode, 0, 'L', 0, 0, '', $line_pos + 85, true);
+		$this->MultiCell(190, 5, $this->user->phone, 0, 'L', 0, 0, '', $line_pos + 92, true);
+		$this->MultiCell(190, 5, $this->user->mh2_email, 0, 'L', 0, 0, '', $line_pos + 100, true);
+		$this->MultiCell(190, 5, $this->user->web_url, 0, 'L', 0, 0, '', $line_pos + 108, true);
 		
 		/*
 		$this->MultiCell(190, 5, $this->remuneration->accountant->address, 0, 'L', 0, 0, '', 158, true);
@@ -194,7 +209,7 @@ class ReportPdfGenerator extends TCPDF {
 		$this->SetFont('frabk', '', 10, '', true);
 
 
-		$this->MultiCell(0, 5, $this->user->town_city_country . ' ' . $this->user->postcode, 0, 'L', 0, 0, '', 260, true); 
+		$this->MultiCell(0, 5, $this->user->town_city_country . ' ' . $this->user->postcode, 0, 'L', 0, 0, '', $line_pos + 180, true); 
 
 		//reset true to include header and footer for succeeding pages
 		$this->setPrintHeader(true);
@@ -203,6 +218,36 @@ class ReportPdfGenerator extends TCPDF {
 		$this->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 	}
+
+    protected function breakString($longString, $max_chars) 
+    {
+        $arrayWords = explode(' ', $longString);
+
+        // Max size of each line
+        $maxLineLength = $max_chars;
+
+        // Auxiliar counters, foreach will use them
+        $currentLength = 0;
+        $index = 0;
+        $arrayOutput = [0 => ""];
+
+        foreach($arrayWords as $word) {
+            // +1 because the word will receive back the space in the end that it loses in explode()
+            $wordLength = strlen($word) + 1;
+
+            if( ( $currentLength + $wordLength ) <= $maxLineLength ) {
+                $arrayOutput[$index] .= $word . ' ';
+                $currentLength += $wordLength;
+            }
+            else {
+                $index += 1;
+                $currentLength = $wordLength;
+                $arrayOutput[$index] = $word;
+            }
+        }
+
+        return $arrayOutput;
+    }
 
 	public function buildTableOfContentsPage()
 	{
