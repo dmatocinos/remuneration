@@ -79,7 +79,7 @@ Report Summary
 					<td style="">{{ NumFormatter::money($calc->i8, '£') }}</td>
 				</tr>
 				<tr>
-					<td style="" class="text-left">Less: Employers NIC was</td>
+					<td style="" class="text-left">Less: Employees NIC was</td>
 					<td style="">{{ NumFormatter::money($calc->c10, '£') }}</td>
 					<td style="">{{ NumFormatter::money($calc->e10, '£') }}</td>
 					<td style="">{{ NumFormatter::money($calc->g10, '£') }}</td>

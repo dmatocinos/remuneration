@@ -32,7 +32,7 @@
 			<td style="width: 14.5%;">{{ NumFormatter::money($calc->i8, '£') }}</td>
 		</tr>
 		<tr>
-			<td style="width: 42%;" class="text-left">Less: Employers NIC was</td>
+			<td style="width: 42%;" class="text-left">Less: Employees NIC was</td>
 			<td style="width: 14.5%;">{{ NumFormatter::money($calc->c10, '£') }}</td>
 			<td style="width: 14.5%;">{{ NumFormatter::money($calc->e10, '£') }}</td>
 			<td style="width: 14.5%;">{{ NumFormatter::money($calc->g10, '£') }}</td>
