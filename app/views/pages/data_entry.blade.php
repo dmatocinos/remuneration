@@ -200,7 +200,7 @@ Client Details
 									$prefix  = $i + 1;
 									
 									$field_name  = "directors[{$i}][percentage_of_shares]";
-                                    $val = Input::old($field_name, $shares);
+                                    $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $shares;
 									$rows[0][$i + 1] = sprintf(
 										'<div class="input-group" style="%s">%s%s</div>',
 										'width: 95%; float: left;',
@@ -216,7 +216,7 @@ Client Details
 									);
 
 									$field_name  = "directors[{$i}][salary_paid]";
-                                    $val = Input::old($field_name, $salary);
+                                    $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $salary;
 									$rows[1][$i + 1] = sprintf(
 										'<div class="input-group">%s</div>',
 										Form::text($field_name, $val, array(
@@ -229,7 +229,7 @@ Client Details
 									);
 									
 									$field_name  = "directors[{$i}][other_taxable_income]";
-                                    $val = Input::old($field_name, $taxable);
+                                    $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $taxable;
 									$rows[2][$i + 1] = sprintf(
 										'<div class="input-group">%s</div>',
 										Form::text($field_name, $val, array(
@@ -242,7 +242,7 @@ Client Details
 									);
 									
 									$field_name  = "directors[{$i}][balance_on_directors_loan_account]";
-                                    $val = Input::old($field_name, $balance);
+                                    $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $balance;
 									$rows[3][$i + 1] = sprintf(
 										'<div class="input-group">%s</div>',
 										Form::text($field_name, $val, array(
