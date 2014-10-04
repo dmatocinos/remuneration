@@ -49,7 +49,7 @@ class NumFormatter {
 	 * @param float $percent
 	 * @return string
 	 */
-	public static function percent($percent)
+	public static function percent($percent, $places = 0)
 	{
 		if (is_null($percent)) {
 			return NULL;
@@ -58,13 +58,13 @@ class NumFormatter {
 		if (!is_numeric($percent)) {
 			$percent = 0;
 		}
-		
-		if($percent >= 0) {
-			return self::number($percent) . "%";
+
+        if($percent >= 0) {
+			return self::number($percent, $places) . "%";
 		}
 		else {
 			$percent = $percent * -1;
-			return '(' . self::number($percent) . "%)";
+			return '(' . self::number($percent, $places) . "%)";
 		}
 	}
 	
@@ -87,8 +87,8 @@ class NumFormatter {
 	
 	public static function number($num, $places = 0) 
 	{
-		//if (self::is_windows()) {
-			return number_format(round($num));
+        //if (self::is_windows()) {
+			return number_format(round($num, $places), $places);
 		//}
 		//else {
 		//	return money_format('%i', $num);

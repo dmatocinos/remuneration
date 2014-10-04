@@ -58,6 +58,8 @@ class SummaryOfResultsCalculator {
 		'g41' => NULL,
 		'i41' => NULL,
 		'b49' => NULL,
+        'b51' => NULL,
+        'b53' => NULL,
 		'b55' => NULL,
 		'b57' => NULL,
 		'b66' 		=> 10000,
@@ -347,25 +349,25 @@ class SummaryOfResultsCalculator {
 
 	public function getC38Calc()
 	{
-		$this->_report_data['c38'] = $this->c8 - ($this->b55 + $this->b57 * $this->_data_entry['number_of_director_shareholders']);
+        $this->_report_data['c38'] = $this->c8 - (($this->b55 + $this->b57) * $this->_data_entry['number_of_director_shareholders']);
 		return $this->_report_data['c38'];
 	}
 
 	public function getE38Calc()
 	{
-		$this->_report_data['e38'] = $this->e8 - ($this->b55 + $this->b57 * $this->_data_entry['number_of_director_shareholders']) + $this->e14 - $this->e33 - $this->e34;
+		$this->_report_data['e38'] = $this->e8 - (($this->b55 + $this->b57) * $this->_data_entry['number_of_director_shareholders']) + $this->e14 - $this->e33 - $this->e34;
 		return $this->_report_data['e38'];
 	}
 
 	public function getG38Calc()
 	{
-		$this->_report_data['g38'] = $this->g8 + $this->g25 - $this->g34 - ($this->b55 + $this->b57 * $this->_data_entry['number_of_director_shareholders']);
+		$this->_report_data['g38'] = $this->g8 + $this->g25 - $this->g34 - (($this->b55 + $this->b57) * $this->_data_entry['number_of_director_shareholders']);
 		return $this->_report_data['g38'];
 	}
 
 	public function getI38Calc()
 	{
-		$this->_report_data['i38'] = $this->i8 - ($this->b55 + $this->b57 * $this->_data_entry['number_of_director_shareholders']) + $this->i19 - $this->i33 - $this->i34;
+		$this->_report_data['i38'] = $this->i8 - (($this->b55 + $this->b57) * $this->_data_entry['number_of_director_shareholders']) + $this->i19 - $this->i33 - $this->i34;
 		return $this->_report_data['i38'];
 	}
 
@@ -401,14 +403,14 @@ class SummaryOfResultsCalculator {
 
 	public function getB53Calc()
 	{
-		$this->_report_data['b53'] = $this->b49 - $this->b51; 
+        $this->_report_data['b53'] = $this->b49 - $this->b51; 
 		return $this->_report_data['b53'];
 	}
 
 	public function getB55Calc()
 	{
-		$this->_report_data['b55'] = $this->b53 < $this->b68 
-			? $this->b53 * $this->b72
+        $this->_report_data['b55'] = $this->b53 < $this->b68 
+			? ($this->b53 * $this->b72)
 			: ($this->b53 - $this->b68) * $this->b74 + ($this->b68 * $this->b72); 
 		return $this->_report_data['b55'];
 	}

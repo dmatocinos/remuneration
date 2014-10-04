@@ -10,7 +10,7 @@ class ReportController extends AuthorizedController {
 
 	public function index() 
 	{
-		Asset::container('header')->add('data_entry-index-css', 'css/data_entry/index.css');
+		Asset::container('header')->add('report-index-css', 'css/report/index.css');
 
 		$data_entry = $this->remuneration->getAttributes();
 		$data_entry['corporate_tax_rate'] = $data_entry['corporate_tax_rate'] / 100;
