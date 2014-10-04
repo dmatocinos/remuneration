@@ -26,12 +26,6 @@ $(document).ready(function () {
 	});
 
     $(".delete-item").click( function () {
-        if (confirm("Do you want to continue deleting this remuneration report?"))
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return confirm("Do you want to continue deleting this remuneration report?");
     });
 });

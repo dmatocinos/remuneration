@@ -17,7 +17,7 @@
 						<th>Remuneration Name</th>
 						<th>Company Name</th>
 						<th>Date Created</th>
-                        <th style="width: 50px;">Delete</th>
+                        <th style="width: 80px;">Delete</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,7 +26,7 @@
 							<td>{{ $item->name . ':::' . url('/edit/' . $item->id) }}</td>
 							<td>{{ $item->company->name }}</td>
 							<td>{{ $item->created_at }}</td>
-                            <td><a href="{{ url('delete/' . $item->id) }}" class="delete-item" style="width: 45px;">
+                            <td><a href="{{ url('delete/' . $item->id) }}" class="delete-item btn btn-danger btn-sm">
                                 <i class="fa fa-times"></i>
                             </a></td>
 						</tr>
