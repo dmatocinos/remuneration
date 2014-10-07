@@ -67,7 +67,11 @@
 			</li>
 		    @endif
                     <li class="{{ $side_nav_css_class['create'] }}">
-			<a href="#" data-toggle="modal" data-target="#clientModal"><i class="fa fa-plus-square-o fa-fw"></i> Create New</a>
+                        @if (empty($current_clients))
+			                <a href="{{ url('client_details/new') }}"><i class="fa fa-plus-square-o fa-fw"></i> Create New</a>
+                        @else
+			                <a href="#" data-toggle="modal" data-target="#clientModal"><i class="fa fa-plus-square-o fa-fw"></i> Create New</a>
+                        @endif
                     </li>
                     <li class="{{ $side_nav_css_class['home'] }}">
                         <a href="{{ url('home') }}"><i class="fa fa-dashboard fa-fw"></i> My Remunerations</a>
