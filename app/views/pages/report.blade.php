@@ -259,7 +259,7 @@ Report Summary
                         <td style="" class="text-right">{{ NumFormatter::money(0, '£') }}</td>
                         <td style="" class="text-right">{{ NumFormatter::money($calc->e33 + $calc->e34, '£') }}</td>
                         <td style="" class="text-right">{{ NumFormatter::money($calc->g34, '£') }}</td>
-                        <td style="" class="text-right"></td>
+                        <td style="" class="text-right">{{ NumFormatter::money($calc->i33 + $calc->i34, '£') }}</td>
                     </tr>
                     <tr>
                         <td style="" class="text-left" colspan="5">&nbsp; </td>
@@ -273,7 +273,7 @@ Report Summary
                         <td style="" class="text-right">{{ NumFormatter::money($calc->c23, '£') }}</td>
                         <td style="" class="text-right">{{ NumFormatter::money(($calc->e15 + $calc->e23) + ($calc->e33 + $calc->e34), '£') }}</td>
                         <td style="" class="text-right">{{ NumFormatter::money($calc->g15 + $calc->g23 + $calc->g34, '£') }}</td>
-                        <td style="" class="text-right">{{ NumFormatter::money($calc->i17 + $calc->i23, '£') }}</td>
+                        <td style="" class="text-right">{{ NumFormatter::money($calc->i17 + $calc->i23 + $calc->i33 + $calc->i34, '£') }}</td>
                     </tr>
                     <tr>
                         <td style="" class="text-left" colspan="5">&nbsp; </td>
@@ -344,7 +344,7 @@ Report Summary
 								</tr>
 								<tr>
 									<td style="" ><b>Salary/Darwin</b></td>
-									<td style="" >{{ NumFormatter::number($calc->i17 + $calc->i23) }}</td>
+									<td style="" >{{ NumFormatter::number($calc->i17 + $calc->i23 + $calc->i33 + $calc->i34) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->i38) }}</td>
 								</tr>
 							</table>

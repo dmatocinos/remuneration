@@ -22,7 +22,7 @@ class TaxAndCostsGraphGenerator {
 				$this->_calc->c23, 
 				$this->_calc->e15 + $this->_calc->e23 + $this->_calc->e33 + $this->_calc->e34, 
 				$this->_calc->g15 + $this->_calc->g23 + $this->_calc->g34, 
-				$this->_calc->i17 + $this->_calc->i23
+				$this->_calc->i17 + $this->_calc->i23 + $this->_calc->i33 + $this->_calc->i34
 			],
 			[
 				$this->_calc->c38, 

@@ -283,7 +283,7 @@ class SummaryOfResultsCalculator {
 
 	public function getG25Calc()
 	{
-		$this->_report_data['g25'] = $this->g21 - $this->g23 - $this->g28;
+		$this->_report_data['g25'] = $this->_data_entry['amount_to_distribute'];
 		return $this->_report_data['g25'];
 	}
 
@@ -301,7 +301,7 @@ class SummaryOfResultsCalculator {
 
 	public function getG28Calc()
 	{
-		$this->_report_data['g28'] = $this->e28; 
+		$this->_report_data['g28'] = $this->g21 - $this->g23 - $this->g25; 
 		return $this->_report_data['g28'];
 	}
 

@@ -68,17 +68,17 @@
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Personally</td>
-			<td style="width: 17.5%;"></td>
+			<td style="width: 17.5%;">{{ NumFormatter::money(0, '£') }}</td>
 			<td style="width: 17.5%;">{{ NumFormatter::money($calc->e33 + $calc->e34, '£') }}</td>
 			<td style="width: 17.5%;">{{ NumFormatter::money($calc->g34, '£') }}</td>
-			<td style="width: 17.5%;"></td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->i33 + $calc->i34, '£') }}</td>
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Total Tax and Costs</td>
 			<td style="width: 17.5%;">{{ NumFormatter::money($calc->c23, '£') }}</td>
 			<td style="width: 17.5%;">{{ NumFormatter::money($calc->e15 + $calc->e23 + $calc->e33 + $calc->e34, '£') }}</td>
 			<td style="width: 17.5%;">{{ NumFormatter::money($calc->g15 + $calc->g23 + $calc->g34, '£') }}</td>
-			<td style="width: 17.5%;">{{ NumFormatter::money($calc->i17 + $calc->i23, '£') }}</td>
+			<td style="width: 17.5%;">{{ NumFormatter::money($calc->i17 + $calc->i23 + $calc->i33 + $calc->i34, '£') }}</td>
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Extra tax/costs on distribution</td>
