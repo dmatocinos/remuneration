@@ -82,10 +82,17 @@ class DataEntryController extends AuthorizedController {
 
 	private function setupData($data)
 	{
-		if (isset($data['s_timestamp'])) {
-			$timestamp = $data['s_timestamp'];
+        $input = Input::all();
+
+		if (isset($input['s_timestamp'])) {
+			$timestamp = $input['s_timestamp'];
 			$data = RemunerationSaver::getParamsFromSession($timestamp);
 			RemunerationSaver::forgetParams($timestamp);
+
+            $client_data = $data['client_data'];
+            unset($data['client_data']);
+
+            $data = ['data' => $data, 'client_data' => $client_data];
 		}
 		
 		$this->addAssets();
@@ -118,30 +125,8 @@ class DataEntryController extends AuthorizedController {
 		$input = Input::all();
 		$validator = Validator::make($input, Client::$rules);
 		if ($validator->passes()) {
-			$input['period_start_date'] = date('Y-m-d H:i:a', strtotime($input['period_start_date']));
-			$input['period_end_date'] = date('Y-m-d H:i:a', strtotime($input['period_end_date']));
-
-			$client = Client::create($input);	
-
-			$pp_user = User::getPracticeProUser();
-			$accountant_data = [
-				'practice_name' 	   => $pp_user->mh2_company_name,
-				'address'		   => $pp_user->mh2_company_address,
-				'telephone_number' 	   => $pp_user->work_phone_number,
-				'email'		           => $pp_user->email_code,
-				'website'	   	   => $pp_user->web_url,	
-				'contact_name'	   	   => $pp_user->mh2_fname . ' ' . $pp_user->mh2_lname,
-				'contact_telephone_number' => $pp_user->mh2_lname
-			];
-
-			// save to existing app data
-			$data = $input + [
-				'accountant' => $accountant_data,
-			];
-
-			return $this->save($data, $client->id);
-
-		}
+			return $this->save($input);
+        }
 		else {
 			return Redirect::to('client_details/new')
 				->withInput()
@@ -156,30 +141,7 @@ class DataEntryController extends AuthorizedController {
 
 		$validator = Validator::make($input, Client::$rules);
 		if ($validator->passes()) {
-			$input['period_start_date'] = date('Y-m-d H:i:a', strtotime($input['period_start_date']));
-			$input['period_end_date'] = date('Y-m-d H:i:a', strtotime($input['period_end_date']));
-
-			$client = Client::find($input['id']);
-			$client->update($input);
-
-			$pp_user = User::getPracticeProUser();
-			$accountant_data = [
-				'practice_name' 	   => $pp_user->mh2_company_name,
-				'address'		   => $pp_user->mh2_company_address,
-				'telephone_number' 	   => $pp_user->work_phone_number,
-				'email'		           => $pp_user->email_code,
-				'website'	   	   => $pp_user->web_url,	
-				'contact_name'	   	   => $pp_user->mh2_fname . ' ' . $pp_user->mh2_lname,
-				'contact_telephone_number' => $pp_user->mh2_lname
-			];
-
-			// save to existing app data
-			$data = $input + [
-				'accountant' => $accountant_data,
-			];
-
-			return $this->save($data, $client->id);
-
+			return $this->save($input);
 		}
 		else {
 			return Redirect::to('client_details/existing/' . $input['id'])
@@ -190,20 +152,72 @@ class DataEntryController extends AuthorizedController {
 		
 	}
 
-	private function save($data, $client_id)
+	private function save($input)
 	{
+        $start_date = $input['period_start_date'];
+        $end_date   = $input['period_end_date'];
+
+        if (! empty($start_date)) {
+            $start_date = date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $start_date)));
+        }
+        
+        if (! empty($end_date)) {
+            $end_date = date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $end_date)));
+        }
+
+        $input['period_start_date'] = $start_date;
+        $input['period_end_date']   = $end_date;
+        
+        if (isset($input['id'])) {
+            $client = Client::find($input['id']);
+        	$client->update($input);
+        }
+        else {
+            $client = Client::create($input);
+        }
+
+        $pp_user = User::getPracticeProUser();
+        $accountant_data = [
+            'practice_name'            => $pp_user->mh2_company_name,
+            'address'                  => $pp_user->mh2_company_address,
+            'telephone_number'         => $pp_user->work_phone_number,
+            'email'                    => $pp_user->email_code,
+            'website'                  => $pp_user->web_url,	
+            'contact_name' 	           => $pp_user->mh2_fname . ' ' . $pp_user->mh2_lname,
+            'contact_telephone_number' => $pp_user->mh2_lname
+        ];
+
+        // save to existing app data
+        $data = $input + [
+            'accountant' => $accountant_data,
+        ];
+
 		$remuneration_id = $data['remuneration_id'];
 		$company_id      = $data['company_id'];
 		$accountant_id   = $data['accountant_id'];
 
-		$data['remuneration']['client_id'] = $client_id;
+		$data['remuneration']['client_id'] = $client->id;
+
 		if ($remuneration_id == 'new' && User::needSubscription()) {
 			// need to ask for payment
-			return Redirect::to('subscribe/' . $client_id)->withInput($data);
+            $client_fields = array_merge($client->getFillable(), ['id']);
+            $client_data   = array();
+
+            foreach ($client_fields as $field_name) {
+                if (isset($data[$field_name])) {
+                    $client_data[$field_name] = $data[$field_name];
+                    unset($data[$field_name]);
+                }
+            }
+
+            $data['client_data'] = $client_data;
+
+            return Redirect::to('subscribe/' . $client->id)->withInput($data);
 		}
 
 		$remuneration = RemunerationSaver::save($data);
-		$route = isset($data['save_next_page']) 
+		
+        $route = isset($data['save_next_page']) 
 		       ? 'report/' . $remuneration->id
 		       : 'edit/' . $remuneration->id;
 

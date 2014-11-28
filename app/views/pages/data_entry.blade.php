@@ -36,10 +36,10 @@ Client Details
 		$directors    = isset($data['directors']) ? $data['directors'] : NULL;
 		$accountant   = isset($data['accountant']) ? $data['accountant'] : NULL;
 
-		if (isset($client_data['id'])) {
+        if (isset($client_data['id'])) {
 			$route = 'update_client';
-			$client_data['period_start_date'] =  $client_data['period_start_date'] ? date('m/d/Y', strtotime($client_data['period_start_date'])) : '';
-			$client_data['period_end_date'] =  $client_data['period_end_date'] ? date('m/d/Y', strtotime($client_data['period_end_date'])) : '';
+			$client_data['period_start_date'] =  $client_data['period_start_date'] ? date('d/m/Y', strtotime($client_data['period_start_date'])) : '';
+			$client_data['period_end_date'] =  $client_data['period_end_date'] ? date('d/m/Y', strtotime($client_data['period_end_date'])) : '';
 			$country = $client_data['country'];
 		}
 		else {
@@ -67,11 +67,11 @@ Client Details
 					
 				    <fieldset>
 						<div class="form-group">
-							{{ Form::label('remuneration[name]', 'Remuneration Name', array('class' => 'col-lg-3 control-label')) }}
-							<div class="col-lg-7">
+							{{ Form::label('remuneration[name]', 'Remuneration Name', array('class' => 'col-sm-3 control-label')) }}
+							<div class="col-sm-6">
 								{{ 
 									Form::text('remuneration[name]', isset($remuneration['name']) ? $remuneration['name'] : '', array(
-										'class' => 'form-control', 
+										'class' => 'form-control input-sm', 
 										'required'	=> 'required'
 									)) 
 								}}
@@ -79,12 +79,12 @@ Client Details
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('remuneration[profit_chargeable]', 'Profit Chargeble to Corporation Tax', array('class' => 'col-lg-3 control-label')) }}
-							<div class="col-lg-7">
+							{{ Form::label('remuneration[profit_chargeable]', 'Profit Chargeble to Corporation Tax', array('class' => 'col-sm-3 control-label')) }}
+							<div class="col-sm-6">
 								<?php $profit_chargeable = isset($remuneration['profit_chargeable']) ? $remuneration['profit_chargeable'] : ''; ?>
 								{{ 
 									Form::text('remuneration[profit_chargeable]', $profit_chargeable, array(
-										'class' => 'form-control', 
+										'class' => 'form-control input-sm', 
 										'numbers-only'	=> 'numbers-only',
 										'required'	=> 'required',
                                         'ng-init' => "profit_chargeable=" . ($profit_chargeable ? $profit_chargeable : "''"),
@@ -95,30 +95,30 @@ Client Details
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('remuneration[corporate_tax_rate]', 'Corporation Tax Rate', array('class' => 'col-lg-3 control-label')) }}
-							<div class="col-lg-7">
-								<?php $corporate_tax_rate = isset($remuneration['corporate_tax_rate']) ? $remuneration['corporate_tax_rate'] : ''; ?>
-								{{ 
-									Form::text('remuneration[corporate_tax_rate]', $corporate_tax_rate, array(
-										'class' => 'form-control', 
-										'numbers-only'	=> 'numbers-only',
-                                        'ng-model' => 'corporate_tax_rate',
-                                        'ng-init' => "corporate_tax_rate=" . ($corporate_tax_rate ? $corporate_tax_rate : "''"),
-										'required'	=> 'required',
-										'style'     => 'width: 80%; float: left;'
-									)) 
-								}}
-								<span class="input-group-addon" style="display: inline; border: 0; padding: 0 0 0 7px;">%</span>
-								{{ $errors->first('remuneration[corporate_tax_rate]', '<span class="help-block">:message</span>') }}
+							{{ Form::label('remuneration[corporate_tax_rate]', 'Corporation Tax Rate', array('class' => 'col-sm-3 control-label')) }}
+							<div class="col-sm-6">
+								<div class="col-lg-10" style="padding: 0px;">
+                                    <?php $corporate_tax_rate = isset($remuneration['corporate_tax_rate']) ? $remuneration['corporate_tax_rate'] : '20'; ?>
+                                    {{ 
+                                        Form::text('remuneration[corporate_tax_rate]', $corporate_tax_rate, array(
+                                            'class' => 'form-control input-sm', 
+                                            'numbers-only'	=> 'numbers-only',
+                                            'ng-model' => 'corporate_tax_rate',
+                                            'ng-init' => "corporate_tax_rate=" . ($corporate_tax_rate ? $corporate_tax_rate : "'20'"),
+                                            'required'	=> 'required'
+                                        )) 
+                                    }}
+                                </div>
+								<span class="input-group-addon input-sm">%</span>
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('remuneration[amount_to_distribute]', 'Amount to Distribute', array('class' => 'col-lg-3 control-label')) }}
-							<div class="col-lg-7">
+							{{ Form::label('remuneration[amount_to_distribute]', 'Amount to Distribute', array('class' => 'col-sm-3 control-label')) }}
+							<div class="col-sm-6">
 								<?php $amount_to_distribute = isset($remuneration['amount_to_distribute']) ? $remuneration['amount_to_distribute'] : ''; ?>
 								{{ 
 									Form::text('remuneration[amount_to_distribute]', $amount_to_distribute, array(
-										'class' => 'form-control', 
+										'class' => 'form-control input-sm', 
 										'numbers-only'	=> 'numbers-only',
                                         'ng-model' => 'amount_to_distribute',
                                         'ng-init' => "amount_to_distribute=" . ($amount_to_distribute ? $amount_to_distribute : "''"),
@@ -129,12 +129,12 @@ Client Details
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('remuneration[directors_salary]', 'Directors Salary', array('class' => 'col-lg-3 control-label')) }}
-							<div class="col-lg-7">
+							{{ Form::label('remuneration[directors_salary]', 'Directors Salary', array('class' => 'col-sm-3 control-label')) }}
+							<div class="col-sm-6">
 								<?php $directors_salary = isset($remuneration['directors_salary']) ? $remuneration['directors_salary'] : ''; ?>
 								{{ 
 									Form::text('remuneration[directors_salary]', $directors_salary, array(
-										'class' => 'form-control', 
+										'class' => 'form-control input-sm', 
 										'numbers-only'	=> 'numbers-only',
 										'required'	=> 'required',
                                         'ng-model' => 'directors_salary',
@@ -146,14 +146,14 @@ Client Details
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('remuneration[number_of_director_shareholders]', 'Number of Director Shareholders', array('class' => 'col-lg-3 control-label')) }}
-							<div class="col-lg-7">
+							{{ Form::label('remuneration[number_of_director_shareholders]', 'Number of Director Shareholders', array('class' => 'col-sm-3 control-label')) }}
+							<div class="col-sm-6">
 								{{ 
 									Form::select(
 										'remuneration[number_of_director_shareholders]', 
 										array_combine($number_of_directors, $number_of_directors), 
 										$directors ? count($directors) : 1, 
-										array('class' => 'form-control', 'id' => 'remuneration_number_of_director_shareholders')
+										array('class' => 'form-control input-sm', 'id' => 'remuneration_number_of_director_shareholders')
 									) 
 								}}
 							</div>
@@ -175,7 +175,7 @@ Client Details
 					<table class="table">
 						<thead>
 							<tr>
-								<th style="border-style: none;" class="col-lg-3"></th>
+								<th style="border-style: none;" class="col-sm-3"></th>
 								<th style="border-style: none;">Director 1</th>
 								<th style="border-style: none;">Director 2</th>
 								<th style="border-style: none;">Director 3</th>
@@ -185,10 +185,10 @@ Client Details
 						<tbody>
 							<?php 
 								$rows = array(
-									array('Percentages of Shares'),
-									array('Salary already paid in present financial Year'),
-									array('Other taxable income in present financial year'),
-									array('Balance on Directors Loan Account'),
+									array('<div style="width: 100%; text-align: right;" class="col-sm-3"><label class="control-label">Percentages of Shares</label></div>'),
+									array('<div style="width: 100%; text-align: right;" class="col-sm-3"><label class="control-label">Salary already paid in present financial Year</label></div>'),
+									array('<div style="width: 100%; text-align: right;" class="col-sm-3"><label class="control-label">Other taxable income in present financial year</label></div>'),
+									array('<div style="width: 100%; text-align: right;" class="col-sm-3"><label class="control-label">Balance on Directors Loan Account</label></div>'),
 								);
 								
 								for ($i = 0; $i < 4; $i++) {
@@ -202,25 +202,23 @@ Client Details
 									$field_name  = "directors[{$i}][percentage_of_shares]";
                                     $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $shares;
 									$rows[0][$i + 1] = sprintf(
-										'<div class="input-group" style="%s">%s%s</div>',
-										'width: 95%; float: left;',
-										Form::text($field_name, $val, array(
-											'class'        => 'form-control',
-											'numbers-only' => 'numbers-only',
-                                            'ng-model'     => "directors_percentage_of_shares_{$prefix}",
-                                            'ng-init'      => "directors_percentage_of_shares_{$prefix}=" . ($val ? $val : "''"),
-											'id'		   => "directors_percentage_of_shares_{$prefix}",
-											'style'        => 'width: 80%; float: left;'
-										)),
-										'<span class="input-group-addon" style="display: inline; padding: 0 0 0 7px; border: 0;">%</span>'
+										'<div class="col-sm-12" style="padding-left: 0px;"><div class="col-sm-10" style="padding: 0px;">%s</div>%s</div>',
+                                            Form::text($field_name, $val, array(
+                                                'class'        => 'form-control input-sm',
+                                                'numbers-only' => 'numbers-only',
+                                                'ng-model'     => "directors_percentage_of_shares_{$prefix}",
+                                                'ng-init'      => "directors_percentage_of_shares_{$prefix}=" . ($val ? $val : "''"),
+                                                'id'		   => "directors_percentage_of_shares_{$prefix}"
+                                            )),
+										'<span class="input-group-addon input-sm">%</span>'
 									);
 
 									$field_name  = "directors[{$i}][salary_paid]";
                                     $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $salary;
 									$rows[1][$i + 1] = sprintf(
-										'<div class="input-group">%s</div>',
+										'<div class="col-sm-12" style="padding-left: 0px;">%s</div>',
 										Form::text($field_name, $val, array(
-											'class'        => 'form-control',
+											'class'        => 'form-control input-sm',
 											'numbers-only' => 'numbers-only',
                                             'ng-model'     => "directors_salary_paid_{$prefix}",
                                             'ng-init'      => "directors_salary_paid_{$prefix}=" . ($val ? $val : "''"),
@@ -231,9 +229,9 @@ Client Details
 									$field_name  = "directors[{$i}][other_taxable_income]";
                                     $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $taxable;
 									$rows[2][$i + 1] = sprintf(
-										'<div class="input-group">%s</div>',
+										'<div class="col-sm-12" style="padding-left: 0px;">%s</div>',
 										Form::text($field_name, $val, array(
-											'class'        => 'form-control',
+											'class'        => 'form-control input-sm',
 											'numbers-only' => 'numbers-only',
                                             'ng-model'     => "directors_other_taxable_income_{$prefix}",
                                             'ng-init'      => "directors_other_taxable_income_{$prefix}=" . ($val ? $val : "''"),
@@ -244,9 +242,9 @@ Client Details
 									$field_name  = "directors[{$i}][balance_on_directors_loan_account]";
                                     $val = isset($old_data[$field_name]) ? $old_data[$field_name] : $balance;
 									$rows[3][$i + 1] = sprintf(
-										'<div class="input-group">%s</div>',
+										'<div class="col-sm-12" style="padding-left: 0px;">%s</div>',
 										Form::text($field_name, $val, array(
-											'class'        => 'form-control',
+											'class'        => 'form-control input-sm',
 											'numbers-only' => 'numbers-only',
                                             'ng-model'     => "directors_balance_on_directors_loan_account_{$prefix}",
                                             'ng-init'      => "directors_balance_on_directors_loan_account_{$prefix}=" . ($val ? $val : "''"),
@@ -290,11 +288,11 @@ Client Details
 					@if(isset($client_data['id']))
 					<input type="hidden" name="id" value="{{ $client_data['id'] }}">
 					@endif
-				    	<label for="business_name" class="col-sm-2 control-label">Business Name</label>
-					<div class="col-sm-4">
+				    	<label for="business_name" class="col-sm-3 control-label">Business Name</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('business_name', $client_data['business_name'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -307,11 +305,11 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="contact_name" class="col-sm-2 control-label">Contact Name</label>
-					<div class="col-sm-4">
+				    	<label for="contact_name" class="col-sm-3 control-label">Contact Name</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('contact_name', $client_data['contact_name'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -324,25 +322,25 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="contact_name" class="col-sm-2 control-label">Accounting Period</label>
-					<div class="col-sm-7">
+				    	<label for="contact_name" class="col-sm-3 control-label">Accounting Period</label>
+					<div class="col-sm-6">
 					    <div class="row">
-						<span class="col-sm-4">
+						<span class="col-sm-6">
 							{{ 
 								Form::text('period_start_date', $client_data['period_start_date'], array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 									'id' => 'period_start_date',
 									'placeholder' => 'Period Start'
 								)) 
 							}}
 						</span>
-						<span class="col-md-1">
-							<b>&nbsp;_</b>
+						<span style="position: absolute;">
+							<b>_</b>
 						</span>
-						<span class="col-sm-4">
+						<span class="col-sm-6">
 							{{ 
 								Form::text('period_end_date', $client_data['period_end_date'], array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 									'id' => 'period_end_date',
 									'placeholder' => 'Period End'
 								)) 
@@ -370,8 +368,8 @@ Client Details
 			    <fieldset>
 
 				  <div class="form-group">
-				    	<label for="year_end" class="col-sm-2 control-label">Year End</label>
-					<div class="col-sm-4">
+				    	<label for="year_end" class="col-sm-3 control-label">Year End</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('year_end', $client_data['year_end'], array(
 								'class' => 'form-control input-sm', 
@@ -388,14 +386,14 @@ Client Details
 				  </div>
 
 				  <div class="form-group">
-				    	<label for="business_status" class="col-sm-2 control-label">Business Status</label>
-					<div class="col-sm-4">
+				    	<label for="business_status" class="col-sm-3 control-label">Business Status</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'business_status', ['' => '', 'Trading' => 'Trading', 'Investment' => 'Investment'], 
 								$client_data['business_status'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("business_status"))
@@ -407,13 +405,12 @@ Client Details
 				  </div>
 
 				  <div class="form-group">
-				    	<label for="business_type" class="col-sm-2 control-label">Business Type</label>
-					<div class="col-sm-4">
+				    	<label for="business_type" class="col-sm-3 control-label">Business Type</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'business_type', 
 								[
-									'' => '', 
 									'Limited Company' => 'Limited Company', 
 									'Partnership' => 'Partnership', 
 									'Sole Trader' => 'Sole Trader', 
@@ -421,7 +418,7 @@ Client Details
 								], 
 								$client_data['business_type'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("business_status"))
@@ -433,8 +430,8 @@ Client Details
 				  </div>
 
 				  <div class="form-group">
-				    	<label for="industry_sector" class="col-sm-2 control-label">Industry Sector</label>
-					<div class="col-sm-4">
+				    	<label for="industry_sector" class="col-sm-3 control-label">Industry Sector</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'industry_sector', 
@@ -464,7 +461,7 @@ Client Details
 								],
 								$client_data['industry_sector'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("business_status"))
@@ -476,14 +473,14 @@ Client Details
 				  </div>
 
 				  <div class="form-group">
-				    	<label for="currency" class="col-sm-2 control-label">Currency</label>
-					<div class="col-sm-4">
+				    	<label for="currency" class="col-sm-3 control-label">Currency</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::select(
 								'currency', $currencies, 
 								$client_data['currency'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("currency"))
@@ -513,11 +510,11 @@ Client Details
 			    <fieldset>
 
 				    <div class="form-group">
-				    	<label for="address_1" class="col-sm-2 control-label">Street Address</label>
-					<div class="col-sm-4">
+				    	<label for="address_1" class="col-sm-3 control-label">Street Address</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('address_1', $client_data['address_1'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -530,12 +527,12 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="city" class="col-sm-2 control-label">Town/City</label>
-					<div class="col-sm-4">
+				    	<label for="city" class="col-sm-3 control-label">Town/City</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('city', $client_data['city'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("city"))
@@ -547,13 +544,13 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="countty" class="col-sm-2 control-label">County</label>
-					<div class="col-sm-4">
+				    	<label for="countty" class="col-sm-3 control-label">County</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::select('county', $counties,
 								$client_data['county'],
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("county"))
@@ -565,13 +562,13 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="country" class="col-sm-2 control-label">Country</label>
-					<div class="col-sm-4">
+				    	<label for="country" class="col-sm-3 control-label">Country</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::select('country', $countries,
 								$country,
 								array(
-									'class' => 'form-control', 
+									'class' => 'form-control input-sm', 
 							)) 
 						}}
 						@if ($error = $errors->first("country"))
@@ -583,11 +580,11 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="postcode" class="col-sm-2 control-label">Postcode</label>
-					<div class="col-sm-4">
+				    	<label for="postcode" class="col-sm-3 control-label">Postcode</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('postcode', $client_data['postcode'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 							)) 
 						}}
 						@if ($error = $errors->first("postcode"))
@@ -599,11 +596,11 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
-					<div class="col-sm-4">
+				    	<label for="phone_number" class="col-sm-3 control-label">Phone Number</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('phone_number', $client_data['phone_number'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -616,11 +613,11 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="mobile_number" class="col-sm-2 control-label">Mobile Number</label>
-					<div class="col-sm-4">
+				    	<label for="mobile_number" class="col-sm-3 control-label">Mobile Number</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('mobile_number', $client_data['mobile_number'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 							)) 
 						}}
 						@if ($error = $errors->first("mobile_number"))
@@ -632,11 +629,11 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="email" class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-4">
+				    	<label for="email" class="col-sm-3 control-label">Email</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('email', $client_data['email'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 								'required' => 'required'
 							)) 
 						}}
@@ -649,11 +646,11 @@ Client Details
 				    </div>
 
 				    <div class="form-group">
-				    	<label for="website" class="col-sm-2 control-label">Website</label>
-					<div class="col-sm-4">
+				    	<label for="website" class="col-sm-3 control-label">Website</label>
+					<div class="col-sm-6">
 						{{ 
 							Form::text('website', $client_data['website'], array(
-								'class' => 'form-control',
+								'class' => 'form-control input-sm',
 							)) 
 						}}
 						@if ($error = $errors->first("website"))

@@ -73,7 +73,7 @@ Report Summary
                         <td style="" class="text-right">{{ NumFormatter::money($calc->i8, '£') }}</td>
                     </tr>
                     <tr>
-                        <td style="" class="text-left">Less: Employees NIC was</td>
+                        <td style="" class="text-left">Less: Employers NIC</td>
                         <td style="" class="text-right">{{ NumFormatter::money($calc->c10, '£') }}</td>
                         <td style="" class="text-right">{{ NumFormatter::money($calc->e10, '£') }}</td>
                         <td style="" class="text-right">{{ NumFormatter::money($calc->g10, '£') }}</td>
@@ -101,7 +101,7 @@ Report Summary
                         <td style="" class="text-right"></td>
                     </tr>
                     <tr>
-                        <td style="" class="text-left">Less: Employees NIC was</td>
+                        <td style="" class="text-left">Less: Employers NIC</td>
                         <td style="" class="text-right"></td>
                         <td style="" class="text-right">{{ NumFormatter::money($calc->e15, '£') }}</td>
                         <td style="" class="text-right"></td>
@@ -230,7 +230,7 @@ Report Summary
 		</div>
         <div class="col-md-12 panel-default">
             <div class="panel-heading">
-                <label>Tax and Costs and Benefits</label>
+                <label>Total Tax, NIC and Costs and Benefits</label>
             </div>
             <table class="table table-striped table-bordered" cellspacing="1" cellpadding="4" style="font-size 12px; width: 100%;">
                 <thead>
