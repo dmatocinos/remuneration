@@ -79,7 +79,7 @@ Client Details
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('remuneration[profit_chargeable]', 'Profit Chargeble to Corporation Tax', array('class' => 'col-sm-3 control-label')) }}
+							{{ Form::label('remuneration[profit_chargeable]', 'Profit Chargeable to Corporation Tax', array('class' => 'col-sm-3 control-label')) }}
 							<div class="col-sm-6">
 								<?php $profit_chargeable = isset($remuneration['profit_chargeable']) ? $remuneration['profit_chargeable'] : ''; ?>
 								{{ 

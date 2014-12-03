@@ -123,11 +123,14 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	public static function needSubscription()
 	{
 		$practicepro_user = User::getPracticeProUser();
-		if ($practicepro_user->getMembershipLevelDisplayAttribute() == 'Free Trial') {
+        $membership_level = $practicepro_user->getMembershipLevelKeyAttribute();
+        $free_levels      = ['trial', 'demo'];
+
+		if (in_array($membership_level, $free_levels)) {
 			return false;
 		}
-
-		$is_free = $practicepro_user->pricing->is_free;
+        
+        $is_free = $practicepro_user->pricing && $practicepro_user->pricing->is_free;
 		
 		return !$is_free;
 	}
