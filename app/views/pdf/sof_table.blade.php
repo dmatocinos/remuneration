@@ -3,9 +3,9 @@
 		<tr>
 			<td style="width: 42%;" class="text-left"></td>
 			<td style="width: 14.5%;" class="val">Salary</td>
-			<td style="width: 14.5%;" class="val"><b>Salary/Bonus</b></td>
-			<td style="width: 14.5%;" class="val"><b>Salary/Dividend</b></td>
-			<td style="width: 14.5%;" class="val"><b>Salary/Darwin</b></td>
+			<td style="width: 14.5%;" class="val"><b>Salary vs Bonus</b></td>
+			<td style="width: 14.5%;" class="val"><b>Salary vs Dividend</b></td>
+			<td style="width: 14.5%;" class="val"><b>Salary vs Darwin</b></td>
 		</tr>
 		<tr>
 			<td style="width: 42%;" class="text-left"></td>

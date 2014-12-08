@@ -52,7 +52,7 @@ class TaxAndCostsGraphGenerator {
 		$graph->Add($accbplot);
 
 		// Setup labels
-		$labels = ['Salary', 'Salary/Bonus', 'Salary/Dividend', 'Salary/Darwin'];
+		$labels = ['Salary', 'Salary vs Bonus', 'Salary vs Dividend', 'Salary vs Darwin'];
 		$graph->xaxis->SetTickLabels($labels);
 
 		$graph->title->SetFont(FF_FONT1,FS_BOLD);

@@ -48,9 +48,9 @@
 		<tr>
 			<td style="width: 30%;" class="text-left"></td>
 			<td style="width: 17.5%;">Salary</td>
-			<td style="width: 17.5%;">Salary/Bonus</td>
-			<td style="width: 17.5%;">Salary/Dividend</td>
-			<td style="width: 17.5%;">Salary/Darwin</td>
+			<td style="width: 17.5%;">Salary vs Bonus</td>
+			<td style="width: 17.5%;">Salary vs Dividend</td>
+			<td style="width: 17.5%;">Salary vs Darwin</td>
 		</tr>
 		<tr>
 			<td style="width: 30%;" class="text-left">Total Tax and Costs</td>

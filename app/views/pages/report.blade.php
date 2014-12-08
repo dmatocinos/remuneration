@@ -49,9 +49,9 @@ Report Summary
                     <tr>
                         <th style="width: 30%;" class="text-left">&nbsp;</th>
                         <th style="" class="text-center"><b>Salary</b></th>
-                        <th style="" class="text-center"><b>Salary/Bonus</b></th>
-                        <th style="" class="text-center"><b>Salary/Dividend</b></th>
-                        <th style="" class="text-center"><b>Salary/Darwin</b></th>
+                        <th style="" class="text-center"><b>Salary vs Bonus</b></th>
+                        <th style="" class="text-center"><b>Salary vs Dividend</b></th>
+                        <th style="" class="text-center"><b>Salary vs Darwin</b></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -237,9 +237,9 @@ Report Summary
                     <tr>
                         <th style="width: 30%;" class="text-left"></th>
                         <th style="" class="text-center"><b>Salary</b></th>
-                        <th style="" class="text-center"><b>Salary/Bonus</b></th>
-                        <th style="" class="text-center"><b>Salary/Dividend</b></th>
-                        <th style="" class="text-center"><b>Salary/Darwin</b></th>
+                        <th style="" class="text-center"><b>Salary vs Bonus</b></th>
+                        <th style="" class="text-center"><b>Salary vs Dividend</b></th>
+                        <th style="" class="text-center"><b>Salary vs Darwin</b></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -333,17 +333,17 @@ Report Summary
 									<td style="" >{{ NumFormatter::number($calc->c38) }}</td>
 								</tr>
 								<tr>
-									<td style="" ><b>Salary/Bonus</b></td>
+									<td style="" ><b>Salary vs Bonus</b></td>
 									<td style="" >{{ NumFormatter::number(($calc->e15 + $calc->e23) + ($calc->e33 + $calc->e34)) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->e38) }}</td>
 								</tr>
 								<tr>
-									<td style="" ><b>Salary/Dividend</b></td>
+									<td style="" ><b>Salary vs Dividend</b></td>
 									<td style="" >{{ NumFormatter::number($calc->g15 + $calc->g23 + $calc->g34) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->g38) }}</td>
 								</tr>
 								<tr>
-									<td style="" ><b>Salary/Darwin</b></td>
+									<td style="" ><b>Salary vs Darwin</b></td>
 									<td style="" >{{ NumFormatter::number($calc->i17 + $calc->i23 + $calc->i33 + $calc->i34) }}</td>
 									<td style="" >{{ NumFormatter::number($calc->i38) }}</td>
 								</tr>
