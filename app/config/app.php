@@ -109,8 +109,6 @@ return array(
 		'Dragonfire1119\Asset\AssetServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
-		'Webpatser\Countries\CountriesServiceProvider',
-
 	),
 
 	/*
@@ -180,7 +178,6 @@ return array(
 		'Sentry' 	  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Carbon' 	  => 'Carbon\Carbon',
 		'JpGraphMod' 	  => 'JpGraph\JpGraph',
-		'Countries'	  => 'Webpatser\Countries\CountriesFacade',
 	),
 
 	'application_key' => 'remuneration',

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'remunerationpro_live',
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -46,29 +46,27 @@ return array(
 
 	'connections' => array(
 
-		'remunerationpro_live' => array(
+		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'infongd11123:3316',
-			'database'  => 'db531228405',
-			'username'  => 'dbo531228405',
-			'password'  => '5xRTUBcf45',
+			'host'      => 'localhost',
+			'database'  => 'remuneration',
+			'username'  => 'root',
+			'password'  => '*******4321',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
 		
-		
-		'practicepro_users' => array(
+        'practicepro_users' => array(
 			'driver'    => 'mysql',
-			'host'      => 'infongd11123:3316',
-			'database'  => 'db530381104',
-			'username'  => 'dbo530381104',
-			'password'  => 'Q3uqA55fTB',
+			'host'      => 'localhost',
+			'database'  => 'practicepro_users',
+			'username'  => 'root',
+			'password'  => '*******4321',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-        	),
-
+     	),
 	),
 
 	/*
