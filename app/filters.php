@@ -87,7 +87,7 @@ Route::filter('csrf', function()
 	}
 });
 
-Route::filter('free_trial', function($route)
+Route::filter('can_download', function($route)
 {
 	$user = User::getPracticeProUser();
 	if ( $user->getMembershipLevelDisplayAttribute() == 'Free Trial') {

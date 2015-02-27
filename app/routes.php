@@ -83,10 +83,8 @@ Route::get('/', 'AuthController@getSignin');
 Route::group(["before" => "auth"], function()
 {
 	Route::get('subscribe/{client_id}', array('as' => 'subscribe', 'uses' => 'SubscriptionController@subscribe'));
-	Route::get('start_payment/{timestamp}/{client_id}', array('as' => 'start_payment', 'uses' => 'SubscriptionController@startPayment'));
 	Route::get('cancel_payment/{timestamp}/{client_id}', array('as' => 'cancel_payment', 'uses' => 'SubscriptionController@cancelPayment'));
-	Route::get('complete_payment/{timestamp}/{client_id}', array('as' => 'complete_payment', 'uses' => 'SubscriptionController@completePayment'));
-	Route::get('complete_subscription', array('as' => 'complete_subscription', 'uses' => 'SubscriptionController@completeSubscription'));
+	Route::post('subscribe/{id}', 'SubscriptionController@completePayment');
 	
 	Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@getLogout'));
 
@@ -104,7 +102,7 @@ Route::group(["before" => "auth"], function()
 	Route::put('client_details/update', array('as' => 'update_client', 'uses' => 'DataEntryController@updateClient'));
 	
 
-	Route::group(array('before' => 'free_trial'), function() {
+	Route::group(array('before' => 'can_download'), function() {
 		# report 
 		Route::get('report/download/{remuneration_id}', array('uses' => 'ReportController@download', 'as' => 'report.download'));
 	});
