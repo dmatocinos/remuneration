@@ -1,9 +1,9 @@
-/bootstrap/compiled.php
-/vendor
-composer.phar
-composer.lock
+/main/bootstrap/compiled.php
+/main/vendor
+/main/composer.phar
+/main/composer.lock
 .env.local.php
 .env.php
 .DS_Store
 Thumbs.db
-/public/images/cache
+/assets/images/cache
